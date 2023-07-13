@@ -20,7 +20,7 @@ class StructureSeeder extends Seeder
             'email' => 'contact@vibecro-corp.com',
             'ifu' => '020211355864',
             'rccm' => 'RB/ABY/21 A 12297',
-            'logo' => 'vibecro.jpeg',
+            'logo' => 'logos/vibecro.jpg',
         ]);
     }
 }

@@ -11,7 +11,7 @@ class StoreAbsenceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreAbsenceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'absence_date' => ['required', 'date'],
+            'cause' => ['required', 'string', 'max:255', 'min:2'],
         ];
     }
 }

@@ -11,7 +11,7 @@ class StoreConflictRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreConflictRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'users' => ['required'],
+            'conflict_date' => ['required', 'date'],
+            'cause' => ['required', 'string', 'min:2', 'max:255'],
         ];
     }
 }

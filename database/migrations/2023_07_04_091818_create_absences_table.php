@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('absences', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('structure_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->date('absence_date');
             $table->string('cause');
+            $table->string('status');
             $table->timestamps();
         });
     }

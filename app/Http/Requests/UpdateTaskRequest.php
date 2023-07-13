@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTaskRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,18 @@ class UpdateTaskRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        if (Auth::user()->role == 'admin') {
+            return [
+                'user' => ['required'],
+                'due_date' => ['required', 'date'],
+                'task' => ['required', 'string', 'min:3', 'max:255'],
+            ];
+        } else {
+            return [
+                'status' => ['required'],
+                'report' => ['string', 'max:255', 'min:2'],
+            ];
+        }
+        
     }
 }

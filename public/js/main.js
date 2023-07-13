@@ -1,16 +1,16 @@
 // LIVEWIRE & SELECT2
-// $(document).ready(function () {
-//     $(".simple-select").select2();
-//     $(".multiple-select").select2();
-//     $(".parent-select").select2();
-//     $(".parent-select").on("change", function (e) {
-//         let $elt = $(".parent-select").select2("val");
-//         Livewire.emit("updateChildList", $elt);
-//     });
-//     document.addEventListener("modelsUpdated", (evt) => {
-//         $(".child-select").select2();
-//     });
-// });
+$(document).ready(function () {
+    $(".simple-select").select2();
+    $(".multiple-select").select2();
+    $(".parent-select").select2();
+    $(".parent-select").on("change", function (e) {
+        let $elt = $(".parent-select").select2("val");
+        Livewire.emit("updateChildList", $elt);
+    });
+    document.addEventListener("modelsUpdated", (evt) => {
+        $(".child-select").select2();
+    });
+});
 
 // DELETE CONFIRMATION  MODAL CUSTOMIZING...
 

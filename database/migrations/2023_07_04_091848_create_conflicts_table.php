@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('structure_id')->constrained();
             $table->date('conflict_date');
             $table->string('cause');
+            $table->string('created_by');
             $table->softDeletes();
             $table->timestamps();
         });

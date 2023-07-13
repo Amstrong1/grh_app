@@ -25,7 +25,7 @@ class StoreStructureRequest extends FormRequest
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'adresse' => ['required', 'string', 'min:3', 'max:255'],
             'contact' => ['required'],
-            'email' => ['required', 'email:filter'],
+            'email' => ['required', 'unique:structures', 'email:filter'],
             'ifu' => ['required', 'numeric'],
             'rccm' => ['required', 'min:10', 'max:20'],
             'logo' => ['required', 'image', 'max:512'],

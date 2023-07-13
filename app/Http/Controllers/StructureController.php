@@ -9,6 +9,10 @@ use App\Http\Requests\UpdateStructureRequest;
 
 class StructureController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('superadmin');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -18,7 +22,6 @@ class StructureController extends Controller
             'structures' => Structure::all(),
             'my_actions' => $this->structure_actions(),
             'my_attributes' => $this->structure_columns(),
-
         ]);
     }
 
@@ -39,7 +42,8 @@ class StructureController extends Controller
     {
         $structure = new Structure();
 
-        $path = $request->file('logo')->store('public/logos');
+        $fileName = time() . '.' . $request->logo->extension();
+        $path = $request->file('logo')->storeAs('logos', $fileName, 'public');
 
         $structure->name = $request->name;
         $structure->adresse = $request->adresse;
@@ -49,9 +53,13 @@ class StructureController extends Controller
         $structure->rccm = $request->rccm;
         $structure->logo = $path;
 
-        $structure->save();
-
-        return redirect('structure');
+        if ($structure->save()) {
+            Alert::toast("Données enregistrées", 'success');
+            return redirect('structure');
+        } else {
+            Alert::toast('Une erreur est survenue', 'error');
+            return redirect()->back()->withInput($request->input());
+        }
     }
 
     /**
@@ -81,7 +89,8 @@ class StructureController extends Controller
         $structure = Structure::find($structure->id);
 
         if ($request->file !== null) {
-            $path = $request->file('logo')->store('public/logos');
+            $fileName = time() . '.' . $request->logo->extension();
+            $path = $request->file('logo')->storeAs('logos', $fileName, 'public');
         }
 
         $structure->name = $request->name;
@@ -118,6 +127,7 @@ class StructureController extends Controller
     private function structure_columns()
     {
         $columns = (object) [
+            'logo' => '',
             'name' => 'Dénomination',
             'contact' => 'Contact',
             'email' => 'Email',

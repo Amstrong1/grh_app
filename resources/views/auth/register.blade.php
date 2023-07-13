@@ -1,25 +1,31 @@
 <x-guest-layout>
-    {{-- <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Nom')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- Name -->
-        <div>
+        <div class="mt-4">
             <x-input-label for="firstname" :value="__('Prénom')" />
-            <x-text-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" required autofocus autocomplete="name" />
+            <x-text-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" required autofocus autocomplete="" />
             <x-input-error :messages="$errors->get('firstname')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-input-label for="email_struct" :value="__('Email de l\'entreprise')" />
+            <x-text-input id="emai_structl" class="block mt-1 w-full" type="email" name="email_struct" :value="old('email_struct')" required autocomplete="" />
+            <x-input-error :messages="$errors->get('email_struct')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="email" :value="__('Email de l\'administrateur')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -48,14 +54,14 @@
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
+                {{ __('Se connecter') }}
             </a>
 
             <x-primary-button class="ml-4">
-                {{ __('Register') }}
+                {{ __('S\'inscrire') }}
             </x-primary-button>
         </div>
-    </form> --}}
-    <img src="{{ asset('assets/img/404.svg') }}" alt="Not found">
-    <h1>Vous tentez d'accéder à une ressource qui n'est pas disponible, contacter votre administrateur pour plus d'information</h1>
+    </form>
+    {{-- <img src="{{ asset('assets/img/404.svg') }}" alt="Not found">
+    <h1>Vous tentez d'accéder à une ressource qui n'est pas disponible, contacter votre administrateur pour plus d'information</h1> --}}
 </x-guest-layout>

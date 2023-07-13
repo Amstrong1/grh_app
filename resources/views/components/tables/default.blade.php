@@ -1,4 +1,4 @@
-<div class="flex flex-col items-stretch  w-full overflow-hidden rounded-lg shadow-xs border dark:border-gray-700">
+<div class="flex flex-col items-stretch w-full overflow-hidden rounded-lg shadow-xs border dark:border-gray-700">
     <div class="w-full overflow-x-auto">
         <div class="flex justify-center items-center p-4 border-b table-search-container">
             <label for="table-search" class="sr-only">Rechercher</label>
@@ -34,15 +34,14 @@
                         <tr class="text-gray-700 dark:text-gray-400">
                             @foreach ($mattributes as $column => $title)
                                 <td class="px-4 py-3 text-center">
-                                    @if ($column == 'avatar' || $column == 'image' || $column == 'photo')
+                                    @if ($column == 'avatar' || $column == 'image' || $column == 'photo' || $column == 'logo')
                                         <a class="flex items-center justify-center text-sm hover:opacity-80">
                                             <!-- Avatar OR Image with inset shadow -->
                                             <div class="relative hidden h-12 w-12 mr-3 md:block">
                                                 <img class="object-cover w-full h-full rounded-lg"
                                                     src="{{ $resource->{$column} !== null
                                                         ? url('storage/' . $resource->{$column})
-                                                        : "
-                                                                                         https://ui-avatars.com/api/?background=random&name=" . $resource->fullname }}"
+                                                        : 'https://ui-avatars.com/api/?background=random&name=' . $resource->fullname }}"
                                                     alt="" loading="lazy">
                                             </div>
                                             {{-- <div>
@@ -51,15 +50,12 @@
                                         </a>
                                     @elseif ($column == 'status')
                                         <span @class([
-                                            'whitespace-nowrap px-2 py-1 font-semibold leading-tight
-                                                                      rounded-full',
+                                            'whitespace-nowrap px-2 py-1 font-semibold leading-tight rounded-full',
                                             'text-green-700 bg-green-100  dark:bg-green-700 dark:text-green-100' =>
                                                 $resource->$column == 'Terminé',
-                                            ' text-gray-700 bg-gray-100 dark:text-gray-100
-                                                                    dark:bg-gray-700' =>
+                                            ' text-gray-700 bg-gray-100 dark:text-gray-100  dark:bg-gray-700' =>
                                                 $resource->$column == 'En cours',
-                                            ' text-gray-700 bg-yellow-100
-                                                                    dark:text-gray-100 dark:bg-yellow-700' =>
+                                            ' text-gray-700 bg-yellow-100 dark:text-gray-100 dark:bg-yellow-700' =>
                                                 $resource->$column == 'En attente',
                                         ])>
                                             {{ $resource->{$column} }}
@@ -71,6 +67,10 @@
                                                     ($resource->{$column}->fullname ?? ($resource->{$column}->nom_structure ?? $resource->{$column}->adresse))) }}
                                         @elseif (is_string($resource->{$column}) && mb_strlen($resource->{$column}) > 100)
                                             {{ Str::of($resource->{$column})->limit(100, '(...)') }}
+                                        @elseif (is_array($resource->{$column}))
+                                            @for ($i = 0; $i < sizeof($resource->{$column}); $i++)
+                                                {{ $resource->{$column}[$i] }} <br>
+                                            @endfor
                                         @else
                                             {{ $resource->$column }}
                                         @endif
@@ -104,8 +104,7 @@
                                                     </svg>
                                                 </a>
                                             @elseif ($action == 'delete')
-                                                <form
-                                                    action="{{ route($type . '.destroy', [$type => $resource]) }}"
+                                                <form action="{{ route($type . '.destroy', [$type => $resource]) }}"
                                                     method="POST"
                                                     onsubmit="event.preventDefault(); deleteConfirmation(this)">
                                                     @method('DELETE')
