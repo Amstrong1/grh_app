@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MaritalStatus;
-use App\Http\Requests\StoreMaritalStatusRequest;
-use App\Http\Requests\UpdateMaritalStatusRequest;
+use App\Models\PaySalaryAdvantage;
+use App\Http\Requests\StorePaySalaryAdvantageRequest;
+use App\Http\Requests\UpdatePaySalaryAdvantageRequest;
 
-class MaritalStatusController extends Controller
+class PaySalaryAdvantageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class MaritalStatusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMaritalStatusRequest $request)
+    public function store(StorePaySalaryAdvantageRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class MaritalStatusController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MaritalStatus $maritalStatus)
+    public function show(PaySalaryAdvantage $paySalaryAdvantage)
     {
         //
     }
@@ -43,7 +43,7 @@ class MaritalStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MaritalStatus $maritalStatus)
+    public function edit(PaySalaryAdvantage $paySalaryAdvantage)
     {
         //
     }
@@ -51,7 +51,7 @@ class MaritalStatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMaritalStatusRequest $request, MaritalStatus $maritalStatus)
+    public function update(UpdatePaySalaryAdvantageRequest $request, PaySalaryAdvantage $paySalaryAdvantage)
     {
         //
     }
@@ -59,7 +59,7 @@ class MaritalStatusController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MaritalStatus $maritalStatus)
+    public function destroy(PaySalaryAdvantage $paySalaryAdvantage)
     {
         //
     }

@@ -26,7 +26,7 @@ class UpdateStructureRequest extends FormRequest
             'adresse' => ['required', 'string', 'min:3', 'max:255'],
             'contact' => ['required'],
             'email' => ['required', 'email:filter'],
-            'ifu' => ['required', 'numeric'],
+            'ifu' => ['required', 'numeric', 'digits:13'],
             'rccm' => ['required', 'min:10', 'max:20'],
             'logo' => ['image', 'max:512'],
         ];

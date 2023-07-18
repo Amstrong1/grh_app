@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('structure_id')->constrained();
             $table->foreignId('department_id')->nullable()->constrained();
             $table->string('name');
-            $table->decimal('gross_wage', 10, 2);
-            $table->decimal('hourly_rate', 10, 2);
-            $table->decimal('overtime_rate', 10, 2);
+            $table->decimal('basis_wage', 10, 2);
+            $table->decimal('hourly_rate', 10, 2)->nullable();
+            $table->decimal('overtime_rate', 10, 2)->nullable();
             $table->softDeletes();    
             $table->timestamps();
         });

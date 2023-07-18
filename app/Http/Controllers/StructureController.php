@@ -151,7 +151,7 @@ class StructureController extends Controller
     {
         $fields = [
             'name' => [
-                'title' => 'Nom',
+                'title' => 'Dénomination',
                 'field' => 'text'
             ],
             'adresse' => [

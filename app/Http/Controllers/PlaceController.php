@@ -47,13 +47,18 @@ class PlaceController extends Controller
         $place->structure_id = Auth::user()->structure->id;
         $place->department()->associate($request->department);
         $place->name = $request->name;
-        $place->gross_wage = $request->gross_wage;
+        $place->basis_wage = $request->basis_wage;
         $place->hourly_rate = $request->hourly_rate;
         $place->overtime_rate = $request->overtime_rate;
 
-        $place->save();
-
-        return redirect('place');
+        if ($place->save()) {
+            Alert::toast('Les données ont été enregistrées', 'success');
+            return redirect('place');
+        }
+        else {
+            Alert::toast('Les données ont été enregistrées', 'error');
+            return redirect()->back()->withInput($request->input());
+        } 
     }
 
     /**
@@ -80,7 +85,21 @@ class PlaceController extends Controller
      */
     public function update(UpdatePlaceRequest $request, Place $place)
     {
-        //
+        $place = Place::find($place->id);
+
+        $place->department()->associate($request->department);
+        $place->name = $request->name;
+        $place->basis_wage = $request->basis_wage;
+        $place->hourly_rate = $request->hourly_rate;
+        $place->overtime_rate = $request->overtime_rate;
+        
+        if ($place->save()) {
+            Alert::toast('Les informations ont été modifiées', 'success');
+            return redirect('place');
+        }else {            
+            Alert::toast('Les informations ont été modifiées', 'success');
+            return redirect()->back()->withInput($request->input());
+        }
     }
 
     /**
@@ -103,7 +122,7 @@ class PlaceController extends Controller
         $columns = (object) [
             'name' => 'Poste',
             'department_name' => 'Département',
-            'formatted_gross_wage' => 'Salaire da base',
+            'formatted_basis_wage' => 'Salaire de base',
             'formatted_hourly_rate' => 'Tarif horaire',
             'formatted_overtime_rate' => 'Tarif heure supplémentaire',
         ];
@@ -131,7 +150,7 @@ class PlaceController extends Controller
                 'title' => 'Nom',
                 'field' => 'text'
             ],
-            'gross_wage' => [
+            'basis_wage' => [
                 'title' => 'Salaire brut',
                 'field' => 'text'
             ],
@@ -142,7 +161,7 @@ class PlaceController extends Controller
             'overtime_rate' => [
                 'title' => 'Tarif heure sup',
                 'field' => 'text'
-            ]
+            ],
         ];
         return $fields;
     }

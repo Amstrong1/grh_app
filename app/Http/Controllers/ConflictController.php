@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreConflictRequest;
 use App\Http\Requests\UpdateConflictRequest;
+use App\Notifications\NewConflictNotification;
 
 class ConflictController extends Controller
 {
@@ -48,20 +49,17 @@ class ConflictController extends Controller
         $conflict->created_by = Auth::user()->name . ' ' . Auth::user()->firstname;
 
         if ($conflict->save()) {
-            $get_conflict = Conflict::where('structure_id', Auth::user()->structure->id)
-                ->where('conflict_date', $request->conflict_date)
-                ->where('cause', $request->cause)
-                ->where('created_by', Auth::user()->name . ' ' . Auth::user()->firstname)
-                ->first();
 
             foreach ($request->users as $user) {
                 ConflictUser::create([
                     'user_id' => $user,
-                    'conflict_id' => $get_conflict->id,
+                    'conflict_id' => $conflict->id,
                     'structure_id' => Auth::user()->structure->id,
                 ]);
             }
             Alert::toast("Données enregistrées", 'success');
+            $user = User::where('structure_id', Auth::user()->structure_id)->where('role', 'admin')->first();
+            $user->notify(new NewConflictNotification());
             return redirect('conflict');
         } else {
             Alert::toast('Une erreur est survenue', 'error');

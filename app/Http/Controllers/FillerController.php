@@ -47,6 +47,7 @@ class FillerController extends Controller
         $filler->structure_id = Auth::user()->structure->id;
         $filler->name = $request->name;
         $filler->rate = $request->rate;
+        $filler->amount = $request->amount;
 
         if ($filler->save()) {
             Alert::toast('Les données ont été enregistrées', 'success');
@@ -86,6 +87,7 @@ class FillerController extends Controller
 
         $filler->name = $request->name;
         $filler->rate = $request->rate;
+        $filler->amount = $request->amount;
         
         if ($filler->save()) {
             Alert::toast('Les informations ont été modifiées', 'success');
@@ -116,6 +118,7 @@ class FillerController extends Controller
         $columns = (object) [
             'name' => 'Nom',
             'rate' => 'Valeur en pourcentage',
+            'amount' => 'Montant',
         ];
         return $columns;
     }
@@ -138,7 +141,11 @@ class FillerController extends Controller
             ],
             'rate' => [
                 'title' => 'Pourcentage',
-                'field' => 'text'
+                'field' => 'number'
+            ],
+            'amount' => [
+                'title' => 'Montant',
+                'field' => 'number'
             ],
         ];
         return $fields;

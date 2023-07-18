@@ -4,9 +4,18 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
-                        <h1 class="font-bold text-lg my-2">Liste des entreprises</h1>
-                        
-                        @if (Auth::user()->role === 'admin')
+                        <h1 class="font-bold text-lg my-2">
+                            Liste des tâches
+                            @if (request()->routeIs('task.pending'))
+                                en cours
+                            @elseif (request()->routeIs('task.finished'))
+                                finies
+                            @else
+                                à faire
+                            @endif
+                        </h1>
+
+                        @if (Auth::user()->role === 'admin' || Auth::user()->role === 'supervisor')
                             <x-primary-button>
                                 <a href="{{ route('task.create') }}">Nouveau</a>
                             </x-primary-button>

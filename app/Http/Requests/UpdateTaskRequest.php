@@ -22,16 +22,15 @@ class UpdateTaskRequest extends FormRequest
      */
     public function rules(): array
     {
-        if (Auth::user()->role == 'admin') {
+        if (Auth::user()->role == 'user') {
             return [
+                'status' => ['required'],
+            ];
+        } else {
+            return [                
                 'user' => ['required'],
                 'due_date' => ['required', 'date'],
                 'task' => ['required', 'string', 'min:3', 'max:255'],
-            ];
-        } else {
-            return [
-                'status' => ['required'],
-                'report' => ['string', 'max:255', 'min:2'],
             ];
         }
         

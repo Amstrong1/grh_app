@@ -11,7 +11,7 @@ class StorePayRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class StorePayRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user' => ['required'],
+            'period_start' => ['required', 'before:period_end'],
+            'period_end' => ['required', 'after:period_start'],
+            'overtime_done' => ['required'],
+            'pay_date' => ['required'],
         ];
     }
 }

@@ -49,4 +49,14 @@ class Structure extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function pays(): HasMany
+    {
+        return $this->hasMany(Pay::class);
+    }
+
+    public function salaryAdvantages(): HasMany
+    {
+        return $this->hasMany(SalaryAdvantages::class);
+    }
 }

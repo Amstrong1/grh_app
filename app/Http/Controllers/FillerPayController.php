@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sex;
-use App\Http\Requests\StoreSexRequest;
-use App\Http\Requests\UpdateSexRequest;
+use App\Models\FillerPay;
+use App\Http\Requests\StoreFillerPayRequest;
+use App\Http\Requests\UpdateFillerPayRequest;
 
-class SexController extends Controller
+class FillerPayController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class SexController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSexRequest $request)
+    public function store(StoreFillerPayRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class SexController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Sex $sex)
+    public function show(FillerPay $fillerPay)
     {
         //
     }
@@ -43,7 +43,7 @@ class SexController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sex $sex)
+    public function edit(FillerPay $fillerPay)
     {
         //
     }
@@ -51,7 +51,7 @@ class SexController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSexRequest $request, Sex $sex)
+    public function update(UpdateFillerPayRequest $request, FillerPay $fillerPay)
     {
         //
     }
@@ -59,7 +59,7 @@ class SexController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sex $sex)
+    public function destroy(FillerPay $fillerPay)
     {
         //
     }

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisteredUserController extends Controller
 {
@@ -55,9 +56,11 @@ class RegisteredUserController extends Controller
     
             Auth::login($user);
     
+            Alert::toast('Administrateur enregistré', 'success');
             return redirect(RouteServiceProvider::HOME);
         }
         else {
+            Alert::toast('Votre entreprise n\'est pas enregistré', 'error');
             return back()->withInput();
         }
     }

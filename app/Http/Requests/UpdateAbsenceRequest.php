@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UserRoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateAbsenceRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateAbsenceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +23,15 @@ class UpdateAbsenceRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        if (Auth::user()->role === UserRoleEnum::User) {
+            return [
+                'absence_date' => ['required', 'date'],
+                'cause' => ['required', 'string', 'max:255', 'min:2'],
+            ];
+        } else {
+            return [
+                'status' => ['required'],
+            ];
+        }
     }
 }

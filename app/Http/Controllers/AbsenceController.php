@@ -2,71 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\PermissionStatusEnum;
 use App\Models\Absence;
+use App\Enums\UserRoleEnum;
+use App\Enums\PermissionStatusEnum;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreAbsenceRequest;
 use App\Http\Requests\UpdateAbsenceRequest;
+use App\Models\User;
+use App\Notifications\NewPermissionNotification;
+use App\Notifications\PermissionResponse;
 
 class AbsenceController extends Controller
 {
     /**
-     * Instantiate a new controller instance.
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('admin')->only('indexAll', 'validate');
-    //     $this->middleware('supervisor')->only('indexAllDepartment', 'validate');
-    // }
-    /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $structure = Auth::user()->structure;
-        return view('app.absence.index', [
-            'absences' => $structure->absences()->where('user_id', Auth::id())->get(),
-            'my_actions' => $this->absence_actions(),
-            'my_attributes' => $this->absence_columns(),
-        ]);
-    }
-
-    public function indexPending()
-    {
-        $structure = Auth::user()->structure;
-        return view('app.absence.index', [
-            'absences' => $structure->absences()
-                ->where('user_id', Auth::id())
-                ->where('status', PermissionStatusEnum::Pending)
-                ->get(),
-            'my_attributes' => $this->absence_columns(),
-            'my_actions' => $this->absence_actions(),
-        ]);
+        if (Auth::user()->role === UserRoleEnum::User) {
+            return view('app.absence.index', [
+                'absences' => $structure->absences()
+                    ->where('user_id', Auth::id())
+                    ->where('status', PermissionStatusEnum::Pending)
+                    ->get(),
+                'my_attributes' => $this->absence_columns(),
+                'my_actions' => $this->absence_actions(),
+            ]);
+        } else {
+            return view('app.absence.index', [
+                'absences' => $structure->absences()
+                    ->where('status', PermissionStatusEnum::Pending)
+                    ->get(),
+                'my_attributes' => $this->absence_columns(),
+                'my_actions' => $this->absence_actions(),
+            ]);
+        }
     }
 
     public function indexAllowed()
     {
         $structure = Auth::user()->structure;
-        return view('app.absence.index', [
-            'absences' => $structure->absences()
-                ->where('user_id', Auth::id())
-                ->where('status', PermissionStatusEnum::Allowed)
-                ->get(),
-            'my_attributes' => $this->absence_columns(),
-        ]);
+        if (Auth::user()->role === UserRoleEnum::User) {
+            return view('app.absence.index', [
+                'absences' => $structure->absences()
+                    ->where('user_id', Auth::id())
+                    ->where('status', PermissionStatusEnum::Allowed)
+                    ->get(),
+                'my_attributes' => $this->absence_columns(),
+                'my_actions' => [],
+            ]);
+        } else {
+            return view('app.absence.index', [
+                'absences' => $structure->absences()
+                    ->where('status', PermissionStatusEnum::Allowed)
+                    ->get(),
+                'my_attributes' => $this->absence_columns(),
+                'my_actions' => [],
+            ]);
+        }
     }
 
     public function indexDenied()
     {
         $structure = Auth::user()->structure;
-        return view('app.absence.index', [
-            'absences' => $structure->absences()
-                ->where('user_id', Auth::id())
-                ->where('status', PermissionStatusEnum::Denied)
-                ->get(),
-            'my_attributes' => $this->absence_columns(),
-        ]);
+        if (Auth::user()->role === UserRoleEnum::User) {
+            return view('app.absence.index', [
+                'absences' => $structure->absences()
+                    ->where('user_id', Auth::id())
+                    ->where('status', PermissionStatusEnum::Denied)
+                    ->get(),
+                'my_attributes' => $this->absence_columns(),
+                'my_actions' => [],
+            ]);
+        } else {
+            return view('app.absence.index', [
+                'absences' => $structure->absences()
+                    ->where('status', PermissionStatusEnum::Denied)
+                    ->get(),
+                'my_attributes' => $this->absence_columns(),
+                'my_actions' => [],
+            ]);
+        }
     }
 
     /**
@@ -94,6 +113,8 @@ class AbsenceController extends Controller
 
         if ($absence->save()) {
             Alert::toast("Données enregistrées", 'success');
+            $user = User::where('structure_id', Auth::user()->structure_id)->where('role', 'admin')->first();
+            $user->notify(new NewPermissionNotification());
             return redirect('absence');
         } else {
             Alert::toast('Une erreur est survenue', 'error');
@@ -127,12 +148,30 @@ class AbsenceController extends Controller
     {
         $absence = Absence::find($absence->id);
 
-        $absence->name = $request->name;
+        if (Auth::user()->role === 'user') {
+            $absence->absence_date = $request->absence_date;
+            $absence->cause = $request->cause;
 
-        if ($absence->save()) {
-            Alert::toast('Les informations ont été modifiées', 'success');
-            return redirect('absence');
-        };
+            if ($absence->save()) {
+                Alert::toast('Les informations ont été modifiées', 'success');
+                return redirect('absence');
+            } else {
+                Alert::toast('Une erreur est survenue', 'error');
+                return back()->withInput($request->input());
+            }
+        } else {
+            $absence->status = $request->status;
+
+            if ($absence->save()) {
+                Alert::toast('Les informations ont été modifiées', 'success');
+                $user = $absence->user;
+                $user->notify(new PermissionResponse($absence->status));
+                return redirect('absence');
+            } else {
+                Alert::toast('Une erreur est survenue', 'error');
+                return back()->withInput($request->input());
+            }
+        }
     }
 
     /**
@@ -156,32 +195,54 @@ class AbsenceController extends Controller
             'user_fullname' => 'Nom et prénoms',
             'absence_date' => 'Date',
             'cause' => 'Motif',
-            'status' => 'Statut',
+            // 'status' => 'Statut',
         ];
         return $columns;
     }
 
     private function absence_actions()
     {
-        $actions = (object) array(
-            'edit' => 'Modifier',
-            'delete' => "Supprimer",
-        );
+        if (Auth::user()->role === UserRoleEnum::User) {
+            $actions = (object) array(
+                'edit' => 'Modifier',
+                'delete' => "Supprimer",
+            );
+        } else {
+            $actions = (object) array(
+                'edit' => 'Modifier',
+            );
+        }
+
         return $actions;
     }
 
     private function absence_fields()
     {
-        $fields = [
-            'absence_date' => [
-                'title' => 'Date',
-                'field' => 'date'
-            ],
-            'cause' => [
-                'title' => 'Motif',
-                'field' => 'textarea'
-            ],
-        ];
+        if (Auth::user()->role === 'user') {
+            $fields = [
+                'absence_date' => [
+                    'title' => 'Date',
+                    'field' => 'date'
+                ],
+                'cause' => [
+                    'title' => 'Motif',
+                    'field' => 'textarea'
+                ],
+            ];
+        } else {
+            $status = [
+                'Accordé' => PermissionStatusEnum::Allowed,
+                'Refusé' => PermissionStatusEnum::Denied,
+            ];
+            $fields = [
+                'status' => [
+                    'title' => 'Status',
+                    'field' => 'select',
+                    'options' => $status
+                ],
+            ];
+        }
+
         return $fields;
     }
 }

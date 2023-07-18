@@ -23,7 +23,8 @@ class UpdateFillerRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:2|max:255',
-            'rate' => 'required|numeric',
+            'rate' => 'required_without:amount',
+            'amount' => 'required_without:rate',
         ];
     }
 }

@@ -4,15 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Place extends Model
 {
     use HasFactory;
 
-    protected $appends = ['department_name', 'formatted_gross_wage', 'formatted_hourly_rate', 'formatted_overtime_rate'];
+    protected $appends = [
+        'department_name',
+        'formatted_basis_wage',
+        'formatted_hourly_rate', 
+        'formatted_overtime_rate',
+    ];
 
     /**
      * List of guarded properties
@@ -43,9 +48,9 @@ class Place extends Model
         return $this->department->name;
     }
 
-    public function getFormattedGrossWageAttribute()
+    public function getFormattedbasisWageAttribute()
     {
-        return number_format($this->gross_wage, 2, ',', ' ');
+        return number_format($this->basis_wage, 2, ',', ' ');
     }
 
     public function getFormattedHourlyRateAttribute()

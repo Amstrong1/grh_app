@@ -10,7 +10,7 @@
                                 accordées
                             @elseif (request()->routeIs('absence.denied'))
                                 refusées
-                            @elseif (request()->routeIs('absence.pending'))
+                            @elseif (request()->routeIs('absence.index'))
                                 en attentes
                             @endif
                         </h1>
@@ -19,7 +19,7 @@
                         </x-primary-button>
                     </div>
                     <div class="mt-4">
-                        <x-tables.default :resources="$absences" :mattributes="$my_attributes" type="absence" />
+                        <x-tables.default :resources="$absences" :mattributes="$my_attributes" type="absence" :mactions="$my_actions"/>
                     </div>
                 </div>
             </div>

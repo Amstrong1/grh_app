@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('structure_id')->constrained();
             $table->string('name');
-            $table->string('rate');
+            $table->string('rate')->nullable();
+            $table->string('amount')->nullable();
             $table->timestamps();
         });
     }

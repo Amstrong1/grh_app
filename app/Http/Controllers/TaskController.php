@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Task;
+use App\Models\TaskUser;
 use App\Enums\TaskStatusEnum;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
-use App\Models\TaskUser;
+use App\Notifications\NewTaskNotification;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TaskController extends Controller
@@ -22,21 +23,83 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('app.task.index', [
-            'tasks' => Auth::user()->tasks,
-            'my_actions' => $this->task_actions(),
-            'my_attributes' => $this->task_columns(),
-        ]);
+        if (Auth::user()->role === 'user') {
+            $allTasks = Auth::user()->tasks;
+            $taskToDo = [];
+
+            foreach ($allTasks as $allTask) {
+                if ($allTask->status == 'A faire') {
+                    $taskToDo[] = $allTask;
+                }
+            }
+
+            return view('app.task.index', [
+                'tasks' => $taskToDo,
+                'my_actions' => $this->task_actions(),
+                'my_attributes' => $this->task_columns(),
+            ]);
+        } else {
+            $structure = Auth::user()->structure;
+            return view('app.task.index', [
+                'tasks' => $structure->tasks()->where('status', "En cours")->get(),
+                'my_actions' => $this->task_actions(),
+                'my_attributes' => $this->task_columns(),
+            ]);
+        }
     }
 
-    public function indexAll()
+    public function indexPending()
     {
-        $structure = Auth::user()->structure;
-        return view('app.task.index', [
-            'tasks' => $structure->tasks()->get(),
-            'my_actions' => $this->task_actions(),
-            'my_attributes' => $this->task_columns(),
-        ]);
+        if (Auth::user()->role === 'user') {
+            $allTasks = Auth::user()->tasks;
+            $taskPending = [];
+
+            foreach ($allTasks as $allTask) {
+                if ($allTask->status == 'En cours') {
+                    $taskPending[] = $allTask;
+                }
+            }
+
+            return view('app.task.index', [
+                'tasks' => $taskPending,
+                'my_actions' => $this->task_actions(),
+                'my_attributes' => $this->task_columns(),
+            ]);
+        } else {
+            $structure = Auth::user()->structure;
+            return view('app.task.index', [
+                'tasks' => $structure->tasks()->where('status', "En cours")->get(),
+                'my_actions' => $this->task_actions(),
+                'my_attributes' => $this->task_columns(),
+            ]);
+        }
+    }
+
+    public function indexFinished()
+    {
+        if (Auth::user()->role === 'user') {
+            $allTasks = Auth::user()->tasks;
+            $taskFinished = [];
+
+            foreach ($allTasks as $allTask) {
+                if ($allTask->status == 'Terminé') {
+                    $taskFinished[] = $allTask;
+                }
+            }
+
+            return view('app.task.index', [
+                'tasks' => $taskFinished,
+                'my_actions' => $this->task_actions(),
+                'my_attributes' => $this->task_columns(),
+            ]);
+        } else {
+            $structure = Auth::user()->structure;
+            return view('app.task.index', [
+                'tasks' => $structure->tasks()->where('status', "Terminé")->get(),
+                'my_actions' => $this->task_actions(),
+                'my_attributes' => $this->task_columns(),
+            ]);
+        }
     }
 
     /**
@@ -64,19 +127,15 @@ class TaskController extends Controller
 
         if ($task->save()) {
 
-            $get_task = Task::where('structure_id', Auth::user()->structure->id)
-                ->where('due_date', $request->due_date)
-                ->where('due_time', $request->due_time)
-                ->where('task', $request->task)
-                ->where('status', TaskStatusEnum::ToDo)
-                ->first();
-
             foreach ($request->users as $user) {
                 TaskUser::create([
                     'user_id' => $user,
-                    'task_id' =>  $get_task->id,
+                    'task_id' =>  $task->id,
                     'structure_id' => Auth::user()->structure->id,
                 ]);
+
+                $user = User::where('id', $user)->first();
+                $user->notify(new NewTaskNotification());
             }
 
             Alert::toast("Données enregistrées", 'success');
@@ -128,7 +187,7 @@ class TaskController extends Controller
             }
         } else {
             $task->status = $request->status;
-            $task->report = $request->status;
+            $task->report = $request->report;
         }
 
         if ($task->save()) {
@@ -165,14 +224,14 @@ class TaskController extends Controller
 
     private function task_actions()
     {
-        if (Auth::user()->role === 'admin') {
+        if (Auth::user()->role === 'user') {
             $actions = (object) array(
                 'edit' => 'Modifier',
-                'delete' => "Supprimer",
             );
         } else {
             $actions = (object) array(
                 'edit' => 'Modifier',
+                'delete' => "Supprimer",
             );
         }
 
@@ -181,7 +240,21 @@ class TaskController extends Controller
 
     private function task_fields()
     {
-        if (Auth::user()->role === 'admin') {
+        if (Auth::user()->role === 'user') {
+            $status = ['En cours' => 'En cours', 'Terminé' => 'Terminé'];
+            $fields = [
+                'status' => [
+                    'title' => 'Statut',
+                    'field' => 'select',
+                    'options' => $status,
+                ],
+                'report' => [
+                    'title' => 'Rapport',
+                    'field' => 'textarea',
+                ],
+
+            ];
+        } else {
             $fields = [
                 'users' => [
                     'title' => 'Sélectionner employés',
@@ -199,18 +272,6 @@ class TaskController extends Controller
                 'task' => [
                     'title' => 'Tache',
                     'field' => 'textarea'
-                ],
-            ];
-        } else {
-            $fields = [
-                'status' => [
-                    'title' => 'Statut',
-                    'field' => 'select',
-                    'option' => TaskStatusEnum::cases(),
-                ],
-                'report' => [
-                    'title' => 'Rapport',
-                    'field' => 'textarea',
                 ],
             ];
         }

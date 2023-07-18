@@ -24,9 +24,9 @@ class StorePlaceRequest extends FormRequest
         return [
             'department' => 'required',
             'name' => 'required|string|min:2|max:255',
-            'gross_wage' => 'numeric',
-            'hourly_rate' => 'numeric',
-            'overtime_rate' => 'numeric'
+            'basis_wage' => 'required_without:hourly_rate|numeric',
+            'hourly_rate' => 'required_without:basis_wage|numeric',
+            'overtime_rate' => 'required_without:basis_wage|numeric'
         ];
     }
 }

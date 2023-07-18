@@ -61,10 +61,9 @@ class CareerController extends Controller
         $user->password = $request->password;
 
         if ($user->save()) {
-            $get_user = User::where('email', $request->email)->first();
 
             $career = Career::create([
-                'user_id' => $get_user->id,
+                'user_id' => $user->id,
                 'place_id' => $request->place,
                 'birthday' => $request->birthday,
                 'sex' => $request->sex,
@@ -279,7 +278,7 @@ class CareerController extends Controller
                 'title' => 'Date de naissance',
                 'field' => 'text',
             ],
-            'Sexe' => [
+            'sex' => [
                 'title' => 'Sexe',
                 'field' => 'text',
             ],
@@ -299,12 +298,8 @@ class CareerController extends Controller
                 'title' => 'Contact',
                 'field' => 'text',
             ],
-            'sector' => [
-                'title' => 'Département',
-                'field' => 'text',
-            ],
-            'study_level' => [
-                'title' => 'Département',
+            'diploma' => [
+                'title' => 'Diplome',
                 'field' => 'text',
             ],
             'department_name' => [
@@ -370,6 +365,10 @@ class CareerController extends Controller
             'contact' => [
                 'title' => 'Contact',
                 'field' => 'tel',
+            ],
+            'diploma' => [
+                'title' => 'Diplome',
+                'field' => 'text',
             ],
             'contract_start' => [
                 'title' => 'Debut de contrat',
