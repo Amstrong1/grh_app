@@ -6,7 +6,7 @@ use App\Models\SalaryAdvantage;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class SalaryAdvantagesPolicy
+class SalaryAdvantagePolicy
 {
     /**
      * Determine whether the user can view any models.
