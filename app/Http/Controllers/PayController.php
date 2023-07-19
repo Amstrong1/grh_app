@@ -7,10 +7,12 @@ use App\Models\User;
 use App\Models\Filler;
 use App\Models\Department;
 use App\Enums\UserRoleEnum;
-use App\Models\SalaryAdvantages;
+use App\Models\SalaryAdvantage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePayRequest;
 use App\Http\Requests\UpdatePayRequest;
+use App\Models\FillerPay;
+use App\Models\PaySalaryAdvantage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PayController extends Controller
@@ -40,7 +42,7 @@ class PayController extends Controller
             ->get();
         $departments = Department::all();
         $fillers = Filler::all();
-        $salaryAdvantages = SalaryAdvantages::all();
+        $salaryAdvantages = SalaryAdvantage::all();
         return view('app.pay.create', compact(
             'users',
             'departments',
@@ -58,28 +60,43 @@ class PayController extends Controller
         $gross_wage = 0;
 
         $ads = 0;
-        $salaryAdvantageCount = SalaryAdvantages::where('structure_id', Auth::user()->structure_id)->count();
+        $fillers = 0;
 
+        $salaryAdvantageCount = SalaryAdvantage::where('structure_id', Auth::user()->structure_id)->count();
+        $fillersCount = Filler::where('structure_id', Auth::user()->structure_id)->count();
+        $user = User::where('id', $request->user)->first();
+
+        // somme des avantages salariales
         for ($i = 0; $i < $salaryAdvantageCount; $i++) {
             if ($request->boolean('advantageCheckbox' . $i) === true) {
-                $ads += $request->input('advantageAmount' . [$i]);
+                if (gettype($request->input('advantageAmount' . $i)) === 'integer') {
+                    $ads += $request->input('advantageAmount' . $i);
+                } else {
+                    $ads += (intval($request->input('advantageAmount' . $i)) * $user->career->place->basis_wage) / 100;
+                }
             }
         }
 
-        $fillers = 0;
-        $fillersCount = Filler::where('structure_id', Auth::user()->structure_id)->count();
-        for ($i = 0; $i < $fillersCount; $i++) {
-            if ($request->boolean('fillerCheckbox' . $i) === true) {
-                $fillers += $request->input('fillerAmount' . [$i]);
-            }
-        }
-
-        $user = User::where('id', $request->user)->first();
+        // calcul du salaire brut
         if ($user->career->place->basis_wage !== null) {
             $gross_wage = $user->career->place->basis_wage + ($user->career->place->overtime_rate * $request->overtime_done) + $ads;
         } else {
             $gross_wage = ($user->career->place->hourly_rate * $request->hours_done) + ($user->career->place->overtime_rate * $request->overtime_done) + $ads;
         }
+
+        // somme des imputations salariales
+        for ($i = 0; $i < $fillersCount; $i++) {
+            if ($request->boolean('fillerCheckbox' . $i) === true) {
+                if (gettype($request->input('fillerAmount' . $i)) === 'integer') {
+                    $fillers += $request->input('fillerAmount' . $i);
+                } else {
+                    $fillers += (intval($request->input('fillerAmount' . $i)) * $gross_wage) / 100;
+                }
+            }
+        }
+
+        // calcul du salaire net
+        $net_wage = $gross_wage - $fillers;
 
         $pay = new Pay();
 
@@ -94,43 +111,40 @@ class PayController extends Controller
         $pay->created_by = Auth::user()->id;
         $pay->pay_date = $request->pay_date;
 
-        $payCheck = Pay::where('user_id', $request->user)
-            ->where('period_start', $request->period_start)
-            ->where('period_end', $request->period_end)
-            ->count();
+        if ($pay->save()) {
+            for ($i = 0; $i < $salaryAdvantageCount; $i++) {
+                if ($request->boolean('advantageCheckbox' . $i) === true) {
+                    $salaryAdvantages = new PaySalaryAdvantage();
 
-        if ($payCheck !== 0) {
-            if ($pay->save()) {
-                for ($i = 0; $i < $salaryAdvantageCount; $i++) {
-                    if ($request->boolean('advantageCheckbox' . $i) === true) {
-                        $salaryAdvantages = new SalaryAdvantages();
+                    $salaryAdvantages->pay_id = $pay->id;
+                    $salaryAdvantages->salary_advantage_id = $request->input('advantageId' . $i);
+                    $salaryAdvantages->amount = $request->input('advantageAmount' . $i);
 
-                        $salaryAdvantages->structure_id = Auth::user()->structure_id;
-                        $salaryAdvantages->pay_id = $pay->id;
-                        $salaryAdvantages->name = $request->input('advantageName' . [$i]);
-                        $salaryAdvantages->amount = $request->input('advantageAmount' . [$i]);
-                    }
+                    $salaryAdvantages->save();
                 }
-
-                for ($i = 0; $i < $fillersCount; $i++) {
-                    if ($request->boolean('fillerCheckbox' . $i) === true) {
-                        $filler = new Filler();
-
-                        $filler->structure_id = Auth::user()->structure_id;
-                        $filler->pay_id = $pay->id;
-                        $filler->name = $request->input('fillerName' . [$i]);
-                        $filler->amount = $request->input('fillerAmount' . [$i]);
-                    }
-                }
-
-                Alert::toast('Fiche de paie enregistrée', 'success');
-                return redirect('pay');
-            } else {
-                Alert::toast('Une erreur est survenue', 'error');
-                return back();
             }
+
+            for ($i = 0; $i < $fillersCount; $i++) {
+                if ($request->boolean('fillerCheckbox' . $i) === true) {
+                    $filler = new FillerPay();
+
+                    $filler->pay_id = $pay->id;
+                    $filler->filler_id = $request->input('fillerId' . $i);
+
+                    if (gettype($request->input('fillerAmount' . $i)) === 'integer') {
+                        $filler->amount = $request->input('fillerAmount' . $i);
+                    } else {
+                        $filler->amount = (intval($request->input('fillerAmount' . $i)) * $gross_wage) / 100;
+                    }
+
+                    $filler->save();
+                }
+            }
+
+            Alert::toast('Fiche de paie enregistrée', 'success');
+            return redirect('pay');
         } else {
-            Alert::toast('Une fiche de paie pour cet employé sur la même période existe déja', 'error');
+            Alert::toast('Une erreur est survenue', 'error');
             return back();
         }
     }
@@ -140,7 +154,14 @@ class PayController extends Controller
      */
     public function show(Pay $pay)
     {
-        return view('app.pay.show');
+        $payFillers = $pay->fillers()->get();
+        $payAds = $pay->salaryAdvantages()->get();
+
+        return view('app.pay.show', [
+            'pay' => $pay,
+            'payAds' => $payAds,
+            'payFillers' => $payFillers,
+        ]);
     }
 
     /**
@@ -178,7 +199,7 @@ class PayController extends Controller
     {
         $columns = (object) [
             'user' => 'Nom et Prénoms',
-            'pay_date' => 'Date de paiement',
+            'formatted_pay_date' => 'Date de paiement',
             'period' => 'Période',
         ];
         return $columns;
@@ -188,7 +209,7 @@ class PayController extends Controller
     {
         $actions = (object) array(
             'show' => 'Voir',
-            'edit' => 'Modifier',
+            // 'edit' => 'Modifier',
             'delete' => "Supprimer",
         );
         return $actions;

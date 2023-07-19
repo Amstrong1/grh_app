@@ -193,7 +193,7 @@ class AbsenceController extends Controller
     {
         $columns = (object) [
             'user_fullname' => 'Nom et prénoms',
-            'absence_date' => 'Date',
+            'formatted_absence_date' => 'Date',
             'cause' => 'Motif',
             // 'status' => 'Statut',
         ];

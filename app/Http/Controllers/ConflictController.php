@@ -46,6 +46,7 @@ class ConflictController extends Controller
         $conflict->structure_id = Auth::user()->structure->id;
         $conflict->conflict_date = $request->conflict_date;
         $conflict->cause = $request->cause;
+        $conflict->status = 'En cours';
         $conflict->created_by = Auth::user()->name . ' ' . Auth::user()->firstname;
 
         if ($conflict->save()) {
@@ -80,7 +81,10 @@ class ConflictController extends Controller
      */
     public function edit(Conflict $conflict)
     {
-        // 
+        return view('app.conflict.edit', [
+            'conflict' => $conflict,
+            'my_fields' => $this->conflict_edit_fields(),
+        ]);
     }
 
     /**
@@ -88,7 +92,33 @@ class ConflictController extends Controller
      */
     public function update(UpdateConflictRequest $request, Conflict $conflict)
     {
-        // 
+        $conflict = Conflict::find($conflict->id);
+
+        if (Auth::user()->role === 'admin') {
+            $conflict->due_date = $request->due_date;
+            $conflict->due_time = $request->due_time;
+            $conflict->task = $request->task;
+
+            foreach ($request->users as $user) {
+                ConflictUser::where('task_id', $conflict->id)->delete();
+                ConflictUser::create([
+                    'user_id' => $user,
+                    'task_id' => $conflict->id,
+                    'structure_id' => Auth::user()->structure->id,
+                ]);
+            }
+        } else {
+            $conflict->status = $request->status;
+            $conflict->report = $request->report;
+        }
+
+        if ($conflict->save()) {
+            Alert::toast('Les informations ont été modifiées', 'success');
+            return redirect('conflict');
+        } else {
+            Alert::toast('Une erreur est survenue', 'error');
+            return redirect()->back()->withInput($request->input());
+        }
     }
 
     /**
@@ -110,7 +140,7 @@ class ConflictController extends Controller
     {
         $columns = (object) [
             'users_fullname' => 'Nom et prénoms',
-            'conflict_date' => 'Date',
+            'formatted_conflict_date' => 'Date',
             'cause' => 'Motif',
         ];
         return $columns;
@@ -118,9 +148,16 @@ class ConflictController extends Controller
 
     private function conflict_actions()
     {
-        $actions = (object) array(
-            'delete' => "Supprimer",
-        );
+        if (Auth::user()->role === 'user') {
+            $actions = (object) array(
+                'edit' => "Modifier",
+            );
+        } else {
+            $actions = (object) array(
+                'edit' => "Modifier",
+                // 'delete' => "Supprimer",
+            );
+        }
         return $actions;
     }
 
@@ -141,6 +178,52 @@ class ConflictController extends Controller
                 'field' => 'textarea'
             ],
         ];
+        return $fields;
+    }
+
+    private function conflict_edit_fields()
+    {
+        if (Auth::user()->role === 'user') {
+            $fields = [
+                'users' => [
+                    'title' => 'Personnes en cause',
+                    'field' => 'multiple-select',
+                    'options' => User::where('structure_id', Auth::user()->structure->id)->get(),
+                ],
+                'conflict_date' => [
+                    'title' => 'Date',
+                    'field' => 'date'
+                ],
+                'cause' => [
+                    'title' => 'Motif',
+                    'field' => 'textarea'
+                ],
+            ];
+        } else {
+            $status = ['En cours' => 'En cours', 'Résolu' => 'Résolu'];
+
+            $fields = [
+                'users' => [
+                    'title' => 'Personnes en cause',
+                    'field' => 'multiple-select',
+                    'options' => User::where('structure_id', Auth::user()->structure->id)->get(),
+                ],
+                'conflict_date' => [
+                    'title' => 'Date',
+                    'field' => 'date'
+                ],
+                'cause' => [
+                    'title' => 'Motif',
+                    'field' => 'textarea'
+                ],
+                'status' => [
+                    'title' => 'Statut',
+                    'field' => 'select',
+                    'options' => $status,
+                ],
+            ];
+        }
+
         return $fields;
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pay_salary_advantages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pay_id')->constrained();
-            $table->string('salary_advantage_id');
+            $table->foreignId('salary_advantage_id')->constrained();
             $table->decimal('amount', 10, 2);
             $table->timestamps();
         });

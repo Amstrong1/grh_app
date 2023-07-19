@@ -20,8 +20,12 @@ return new class extends Migration
             $table->string('sex');
             $table->integer('child');
             $table->string('contact');
+            $table->string('adress');
             $table->string('diploma');
             $table->string('contract');
+            $table->string('social_security_number')->nullable();
+            $table->string('matricule')->nullable();
+            $table->date('registration_date')->nullable();
             $table->date('contract_start');
             $table->date('contract_end')->nullable();            
             $table->date('dismissal')->nullable();

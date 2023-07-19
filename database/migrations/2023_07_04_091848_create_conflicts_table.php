@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('conflict_date');
             $table->string('cause');
             $table->string('created_by');
+            $table->string('status');
             $table->softDeletes();
             $table->timestamps();
         });

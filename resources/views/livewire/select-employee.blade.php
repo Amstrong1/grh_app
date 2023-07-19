@@ -116,6 +116,9 @@
                                 readonly
                                 class="rounded-0 relative m-0 block w-[1px] min-w-0 flex-auto border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary" />
 
+                            <input type="hidden" name="advantageId{{ $advantageField }}"
+                                value="{{ $salaryAdvantage->id }}">
+
                             <input type="text" aria-label="Montant" name="advantageAmount{{ $advantageField }}"
                                 value="{{ $salaryAdvantage->amount ?? ($salaryAdvantage->rate * $user->career->place->basis_wage) / 100 }}"
                                 class="relative m-0 -ml-px block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary" />
@@ -148,6 +151,9 @@
                             <input type="text" value="{{ $filler->name }}" name="fillerName{{ $fillerField }}"
                                 class="relative m-0 block w-[1px] min-w-0 flex-auto border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 aria-label="Text input with checkbox" readonly />
+
+                            <input type="hidden" name="fillerId{{ $fillerField }}"
+                                value="{{ $filler->id }}">
 
                             <input type="text" aria-label="Montant" name="fillerAmount{{ $fillerField }}"
                                 value="{{ $filler->amount ?? $filler->rate . '%' }}" readonly

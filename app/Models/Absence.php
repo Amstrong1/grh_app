@@ -10,7 +10,7 @@ class Absence extends Model
 {
     use HasFactory;
 
-    protected $append = ['user_fullname'];
+    protected $append = ['user_fullname', 'formatted_absence_date'];
 
     public function user(): BelongsTo
     {
@@ -20,5 +20,10 @@ class Absence extends Model
     public function getUserFullnameAttribute()
     {
         return $this->user->name . ' ' . $this->user->firstname;
+    }
+    
+    public function getFormattedAbsenceDateAttribute()
+    {
+        return getFormattedDate($this->absence_date);
     }
 }

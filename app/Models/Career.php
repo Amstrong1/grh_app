@@ -10,7 +10,17 @@ class Career extends Model
 {
     use HasFactory;
 
-    protected $append = ['user_name', 'user_firstname', 'user_email', 'department_name', 'post_name'];
+    protected $append = [
+        'user_name', 
+        'user_firstname', 
+        'user_email', 
+        'department_name', 
+        'post_name',
+        'formatted_registration_date',
+        'formatted_birthday',
+        'formatted_contract_start',
+        'formatted_contract_end'
+    ];
 
     protected $guarded = [];
 
@@ -47,5 +57,25 @@ class Career extends Model
     public function getPostNameAttribute()
     {
         return $this->place->name;
+    }    
+    
+    public function getFormattedBirthdayAttribute()
+    {
+        return getFormattedDate($this->birthday);
+    } 
+    
+    public function getFormattedContractStartAttribute()
+    {
+        return getFormattedDate($this->contract_start);
+    } 
+    
+    public function getFormattedContractEndAttribute()
+    {
+        return getFormattedDate($this->contract_end);
+    }
+    
+    public function getFormattedRegistrationDateAttribute()
+    {
+        return getFormattedDate($this->registration_date);
     }
 }

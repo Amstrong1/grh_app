@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SalaryAdvantages;
+use App\Models\SalaryAdvantage;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Http\Requests\StoreSalaryAdvantagesRequest;
-use App\Http\Requests\UpdateSalaryAdvantagesRequest;
+use App\Http\Requests\StoreSalaryAdvantageRequest;
+use App\Http\Requests\UpdateSalaryAdvantageRequest;
 
-class SalaryAdvantagesController extends Controller
+class SalaryAdvantageController extends Controller
 {
     public function __construct()
     {
@@ -40,9 +40,9 @@ class SalaryAdvantagesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSalaryAdvantagesRequest $request)
+    public function store(StoreSalaryAdvantageRequest $request)
     {
-        $salaryAdvantage = new SalaryAdvantages();
+        $salaryAdvantage = new SalaryAdvantage();
 
         $salaryAdvantage->structure_id = Auth::user()->structure->id;
         $salaryAdvantage->name = $request->name;
@@ -62,7 +62,7 @@ class SalaryAdvantagesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SalaryAdvantages $salaryAdvantages)
+    public function show(SalaryAdvantage $salaryAdvantage)
     {
         //
     }
@@ -70,10 +70,10 @@ class SalaryAdvantagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SalaryAdvantages $salaryAdvantages)
+    public function edit(SalaryAdvantage $salaryAdvantage)
     {
         return view('app.salaryAdvantage.edit', [
-            'salaryAdvantage' => $salaryAdvantages,
+            'salaryAdvantage' => $salaryAdvantage,
             'my_fields' => $this->salaryAdvantage_fields(),
         ]);
     }
@@ -81,9 +81,9 @@ class SalaryAdvantagesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSalaryAdvantagesRequest $request, SalaryAdvantages $salaryAdvantages)
+    public function update(UpdateSalaryAdvantageRequest $request, SalaryAdvantage $salaryAdvantages)
     {
-        $salaryAdvantage = SalaryAdvantages::find($salaryAdvantages->id);
+        $salaryAdvantage = SalaryAdvantage::find($salaryAdvantages->id);
 
         $salaryAdvantage->name = $request->name;
         $salaryAdvantage->rate = $request->rate;
@@ -101,7 +101,7 @@ class SalaryAdvantagesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SalaryAdvantages $salaryAdvantages)
+    public function destroy(SalaryAdvantage $salaryAdvantages)
     {
         try {
             $salaryAdvantages = $salaryAdvantages->delete();

@@ -1,13 +1,13 @@
 <ul class="mr-auto flex flex-row" data-te-navbar-nav-ref>
-    <li data-te-nav-item-ref>
+    <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
-            class="block py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="block py-2 pr-2 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('dashboard')" :active="request()->routeIs('dashboard')" data-te-ripple-init data-te-ripple-color="light">
             Accueil
         </x-nav-link>
     </li>
 
-    <li class="static" data-te-nav-item-ref data-te-dropdown-ref>
+    <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
 
         <x-nav-link :active="request()->routeIs('absence.*')"
             class="flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
@@ -49,7 +49,7 @@
         </div>
     </li>
 
-    <li class="static" data-te-nav-item-ref data-te-dropdown-ref>
+    <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('conflict.*')"
             class="flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
@@ -84,7 +84,7 @@
         </div>
     </li>
 
-    <li class="static" data-te-nav-item-ref data-te-dropdown-ref>
+    <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('task.*')"
             class="flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
@@ -131,7 +131,7 @@
         </div>
     </li>
 
-    <li class="static" data-te-nav-item-ref data-te-dropdown-ref>
+    <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('pay.*')"
             class="flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
@@ -166,27 +166,27 @@
         </div>
     </li>
 
-    <li data-te-nav-item-ref>
+    {{-- <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
             class="block py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('dashboard')" :active="request()->routeIs('absence')" data-te-ripple-init data-te-ripple-color="light">
             Evaluations
         </x-nav-link>
-    </li>
+    </li> --}}
 
-    <li data-te-nav-item-ref>
+    <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
             class="block py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('notification')" :active="request()->routeIs('notification')" data-te-ripple-init data-te-ripple-color="light">
             Notifications
-            <span
-                class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-top text-[0.75em] font-bold leading-none text-primary-700">
+            <div
+                class="z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-slate-500 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
                 {{ auth()->user()->unreadNotifications->count() }}
-            </span>
+            </div>
         </x-nav-link>
     </li>
 
-    <li class="static" data-te-nav-item-ref data-te-dropdown-ref>
+    <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link
             class="flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
@@ -233,7 +233,7 @@
         </div>
     </li>
 
-    <li class="static" data-te-nav-item-ref data-te-dropdown-ref>
+    <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link
             class="flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"

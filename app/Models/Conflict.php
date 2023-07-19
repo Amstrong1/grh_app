@@ -10,7 +10,7 @@ class Conflict extends Model
 {
     use HasFactory;
 
-    protected $append = ['users_fullname'];
+    protected $append = ['users_fullname', 'formatted_conflict_date'];
  
     public function users(): BelongsToMany
     {
@@ -25,5 +25,10 @@ class Conflict extends Model
             $users_fullname[] = $getUser->name . ' ' . $getUser->firstname;
         }
         return $users_fullname;
+    }   
+    
+    public function getFormattedConflictDateAttribute()
+    {
+        return getFormattedDate($this->conflict_date);
     }
 }

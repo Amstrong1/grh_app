@@ -70,10 +70,14 @@ class CareerController extends Controller
                 'marital_status' => $request->marital_status,
                 'child' => $request->child,
                 'contact' => $request->contact,
+                'adress' => $request->adress,
                 'contract' => $request->contract,
                 'contract_start' => $request->contract_start,
                 'contract_end' => $request->contract_end,
                 'diploma' => $request->diploma,
+                'social_security_number' => $request->social_security_number,
+                'matricule' => $request->matricule,
+                'registration_date' => $request->registration_date,
             ]);
 
             if ($career) {
@@ -133,6 +137,10 @@ class CareerController extends Controller
                 'contract' => $request->contract,
                 'place_id' => $request->post_name,
                 'diploma' => $request->diploma,
+                'adress' => $request->adress,
+                'social_security_number' => $request->social_security_number,
+                'matricule' => $request->matricule,
+                'registration_date' => $request->registration_date,
             ]);
 
         if ($career_update && $user_update) {
@@ -169,7 +177,7 @@ class CareerController extends Controller
         $actions = (object) array(
             'show' => "Détails",
             'edit' => "Modifier",
-            'delete' => "Supprimer",
+            // 'delete' => "Supprimer",
         );
         return $actions;
     }
@@ -229,9 +237,25 @@ class CareerController extends Controller
                 'title' => 'Contact',
                 'field' => 'tel',
             ],
+            'adress' => [
+                'title' => 'Adresse',
+                'field' => 'text',
+            ],
             'diploma' => [
                 'title' => 'Diplome',
                 'field' => 'text',
+            ],
+            'social_security_number' => [
+                'title' => 'N° de sécurité social',
+                'field' => 'text',
+            ],
+            'matricule' => [
+                'title' => 'Matricule',
+                'field' => 'text',
+            ],
+            'registration_date' => [
+                'title' => 'Date d\'entrée',
+                'field' => 'date',
             ],
             'place' => [
                 'title' => 'Poste',
@@ -274,7 +298,7 @@ class CareerController extends Controller
                 'title' => 'Prénoms',
                 'field' => 'text',
             ],
-            'birthday' => [
+            'formatted_birthday' => [
                 'title' => 'Date de naissance',
                 'field' => 'text',
             ],
@@ -298,6 +322,10 @@ class CareerController extends Controller
                 'title' => 'Contact',
                 'field' => 'text',
             ],
+            'adress' => [
+                'title' => 'Adresse',
+                'field' => 'text',
+            ],
             'diploma' => [
                 'title' => 'Diplome',
                 'field' => 'text',
@@ -310,15 +338,27 @@ class CareerController extends Controller
                 'title' => 'Poste',
                 'field' => 'text',
             ],
+            'social_security_number' => [
+                'title' => 'N° de sécurité sociale',
+                'field' => 'text',
+            ],
+            'matricule' => [
+                'title' => 'Matricule',
+                'field' => 'text',
+            ],
+            'formatted_registration_date' => [
+                'title' => 'Date d\'entrée',
+                'field' => 'text',
+            ],
             'contract' => [
                 'title' => 'Type de contrat',
                 'field' => 'text',
             ],
-            'contract_start' => [
+            'formatted_contract_start' => [
                 'title' => 'Debut de contrat',
                 'field' => 'text',
             ],
-            'contract_end' => [
+            'formatted_contract_end' => [
                 'title' => 'Fin de contrat',
                 'field' => 'text',
             ],
@@ -366,9 +406,25 @@ class CareerController extends Controller
                 'title' => 'Contact',
                 'field' => 'tel',
             ],
+            'adress' => [
+                'title' => 'Adresse',
+                'field' => 'tel',
+            ],
             'diploma' => [
                 'title' => 'Diplome',
                 'field' => 'text',
+            ],
+            'social_security_number' => [
+                'title' => 'N° de sécurité social',
+                'field' => 'text',
+            ],
+            'matricule' => [
+                'title' => 'Matricule',
+                'field' => 'text',
+            ],
+            'registration_date' => [
+                'title' => 'Date d\'entrée',
+                'field' => 'date',
             ],
             'contract_start' => [
                 'title' => 'Debut de contrat',

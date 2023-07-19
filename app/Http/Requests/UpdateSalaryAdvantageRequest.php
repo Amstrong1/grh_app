@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSalaryAdvantagesRequest extends FormRequest
+class UpdateSalaryAdvantageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,7 @@ class UpdateSalaryAdvantagesRequest extends FormRequest
         return [
             'name' => 'required|string|min:2|max:255',
             'rate' => 'required_without:amount',
-            'amount' => 'required_without:rate',        ];
+            'amount' => 'required_without:rate',     
+        ];
     }
 }

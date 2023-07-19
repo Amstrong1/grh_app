@@ -6,14 +6,24 @@ use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('app.notification.index');
     }
-    
-    public function markAsRead() {
+
+    public function markAsRead()
+    {
         foreach (auth()->user()->notifications as $notification) {
             $notification->markAsRead();
         }
-        return view('app.notification.index');
+        return redirect('notification');
+    }
+
+    public function remove()
+    {
+        foreach (auth()->user()->notifications as $notification) {
+            $notification->delete();
+        }
+        return redirect('notification');
     }
 }

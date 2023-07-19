@@ -5,14 +5,20 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">Notifications</h1>
-                        
-                        <x-primary-button>
-                            <a href="{{ route('notification.markAsRead') }}">Tout marquer comme lu</a>
-                        </x-primary-button>
+
+                        <div>
+                            <x-primary-button>
+                                <a href="{{ route('notification.markAsRead') }}">Tout marquer comme lu</a>
+                            </x-primary-button>
+
+                            <x-danger-button>
+                                <a href="{{ route('notification.remove') }}">Tout supprimer</a>
+                            </x-danger-button>
+                        </div>
                     </div>
                     @foreach (auth()->user()->notifications as $notification)
                         <div class="p-2">
-                            {{ $notification->data['message'] . ', le ' . $notification->created_at }}
+                            {{ $notification->data['message'] . ', le ' . getFormattedDateTime($notification->created_at) }}
                         </div>
                     @endforeach
                 </div>

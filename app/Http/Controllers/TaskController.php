@@ -41,7 +41,7 @@ class TaskController extends Controller
         } else {
             $structure = Auth::user()->structure;
             return view('app.task.index', [
-                'tasks' => $structure->tasks()->where('status', "En cours")->get(),
+                'tasks' => $structure->tasks()->where('status', "A faire")->get(),
                 'my_actions' => $this->task_actions(),
                 'my_attributes' => $this->task_columns(),
             ]);
@@ -193,7 +193,10 @@ class TaskController extends Controller
         if ($task->save()) {
             Alert::toast('Les informations ont été modifiées', 'success');
             return redirect('task');
-        };
+        } else {
+            Alert::toast('Une erreur est survenue', 'error');
+            return redirect()->back()->withInput($request->input());
+        }
     }
 
     /**
@@ -231,7 +234,7 @@ class TaskController extends Controller
         } else {
             $actions = (object) array(
                 'edit' => 'Modifier',
-                'delete' => "Supprimer",
+                // 'delete' => "Supprimer",
             );
         }
 

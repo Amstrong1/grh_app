@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('salary_advantages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('structure_id')->constrained();
-            $table->foreignId('pay_id')->constrained();
             $table->string('name');
-            $table->string('amount');
+            $table->string('rate')->nullable();
+            $table->string('amount')->nullable();
             $table->timestamps();
         });
     }

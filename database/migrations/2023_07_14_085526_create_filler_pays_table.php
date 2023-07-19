@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('filler_pays', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pay_id')->constrained();
-            $table->string('filler_id');
+            $table->foreignId('filler_id')->constrained();
             $table->decimal('amount', 10, 2);
             $table->timestamps();
         });

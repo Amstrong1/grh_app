@@ -43,18 +43,19 @@ Route::middleware('auth')->group(function () {
         Route::resource('salaryAdvantage', SalaryAdvantagesController::class);
         Route::resource('pay', PayController::class);
     });
-    
+
     Route::resource('career', CareerController::class);
 
     Route::resource('conflict', ConflictController::class);
 
-    Route::get('notification',[ NotificationController::class, 'index'])->name('notification');
-    Route::get('notification/mark',[ NotificationController::class, 'markAsRead'])->name('notification.markAsRead');
+    Route::get('notification/mark', [NotificationController::class, 'markAsRead'])->name('notification.markAsRead');
+    Route::get('notification/remove', [NotificationController::class, 'remove'])->name('notification.remove');
+    Route::get('notification', [NotificationController::class, 'index'])->name('notification');
 
     Route::get('task/pending', [TaskController::class, 'indexPending'])->name('task.pending');
     Route::get('task/finished', [TaskController::class, 'indexFinished'])->name('task.finished');
     Route::resource('task', TaskController::class);
-    
+
     Route::get('absence/allowed', [AbsenceController::class, 'indexAllowed'])->name('absence.allowed');
     Route::get('absence/denied', [AbsenceController::class, 'indexDenied'])->name('absence.denied');
     Route::resource('absence', AbsenceController::class);

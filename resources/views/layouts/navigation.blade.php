@@ -1,20 +1,7 @@
-<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 hidden lg:block">
     <nav class="relative flex w-full items-center justify-between py-2 text-neutral-600 dark:text-neutral-300 lg:flex-wrap lg:justify-start"
         data-te-navbar-ref>
         <div class="px-6">
-            <button
-                class="sm:hidden border-0 bg-transparent py-3 text-xl leading-none transition-shadow duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white"
-                type="button" data-te-collapse-init data-te-target="#navbarSupportedContentX"
-                aria-controls="navbarSupportedContentX" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="[&>svg]:w-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="h-8 w-8">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                </span>
-            </button>
-
             <div class="flex-grow basis-[100%] items-center lg:!flex lg:basis-auto" id="navbarSupportedContentX"
                 data-te-collapse-item>
                 @if (Auth::user()->role === 'superadmin')
@@ -30,3 +17,34 @@
         </div>
     </nav>
 </div>
+
+<!-- Sidenav -->
+<nav id="sidenav-5"
+    class="lg:hidden fixed left-0 top-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:translate-x-0 dark:bg-zinc-800"
+    data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-accordion="true">
+
+    @if (Auth::user()->role === 'superadmin')
+        @include('layouts.partials.mobile.superadmin')
+    @elseif (Auth::user()->role === 'admin')
+        @include('layouts.partials.mobile.admin')
+    @elseif (Auth::user()->role === 'supervisor')
+        @include('layouts.partials.mobile.supervisor')
+    @else
+        @include('layouts.partials.mobile.user')
+    @endif
+
+</nav>
+<!-- Sidenav -->
+
+<!-- Toggler -->
+<x-primary-button class="lg:hidden m-4" data-te-sidenav-toggle-ref data-te-target="#sidenav-5" aria-controls="#sidenav-5"
+    aria-haspopup="true">
+    <span class="block [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+            <path fill-rule="evenodd"
+                d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+                clip-rule="evenodd" />
+        </svg>
+    </span>
+</x-primary-button>
+<!-- Toggler -->

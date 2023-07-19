@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SalaryAdvantages>
  */
-class SalaryAdvantagesFactory extends Factory
+class SalaryAdvantageFactory extends Factory
 {
     /**
      * Define the model's default state.
