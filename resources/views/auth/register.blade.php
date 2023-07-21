@@ -1,4 +1,9 @@
 <x-guest-layout>
+
+    <h2 class="mb-2 mt-1 pb-1 text-md font-semibold">
+        Créer un compte administrateur
+    </h2>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
