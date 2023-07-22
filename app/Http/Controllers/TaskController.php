@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Task;
+use App\Models\User;
+use App\Models\Career;
 use App\Models\TaskUser;
 use App\Enums\TaskStatusEnum;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
-use App\Notifications\NewTaskNotification;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Notifications\NewTaskNotification;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class TaskController extends Controller
 {
@@ -33,19 +35,19 @@ class TaskController extends Controller
                 }
             }
 
-            return view('app.task.index', [
-                'tasks' => $taskToDo,
-                'my_actions' => $this->task_actions(),
-                'my_attributes' => $this->task_columns(),
-            ]);
+            $tasks = $taskToDo;
+        } elseif (Auth::user()->role === 'supervisor') {
+            $tasks = $this->getTask('A faire');
         } else {
             $structure = Auth::user()->structure;
-            return view('app.task.index', [
-                'tasks' => $structure->tasks()->where('status', "A faire")->get(),
-                'my_actions' => $this->task_actions(),
-                'my_attributes' => $this->task_columns(),
-            ]);
+            $tasks = $structure->tasks()->where('status', "A faire")->get();
         }
+
+        return view('app.task.index', [
+            'tasks' => $tasks,
+            'my_actions' => $this->task_actions(),
+            'my_attributes' => $this->task_columns(),
+        ]);
     }
 
     public function indexPending()
@@ -60,19 +62,18 @@ class TaskController extends Controller
                 }
             }
 
-            return view('app.task.index', [
-                'tasks' => $taskPending,
-                'my_actions' => $this->task_actions(),
-                'my_attributes' => $this->task_columns(),
-            ]);
+            $tasks = $taskPending;
+        } elseif (Auth::user()->role === 'supervisor') {
+            $tasks = $this->getTask('En cours');
         } else {
             $structure = Auth::user()->structure;
-            return view('app.task.index', [
-                'tasks' => $structure->tasks()->where('status', "En cours")->get(),
-                'my_actions' => $this->task_actions(),
-                'my_attributes' => $this->task_columns(),
-            ]);
+            $tasks = $structure->tasks()->where('status', "En cours")->get();
         }
+        return view('app.task.index', [
+            'tasks' => $tasks,
+            'my_actions' => $this->task_actions(),
+            'my_attributes' => $this->task_columns(),
+        ]);
     }
 
     public function indexFinished()
@@ -87,19 +88,18 @@ class TaskController extends Controller
                 }
             }
 
-            return view('app.task.index', [
-                'tasks' => $taskFinished,
-                'my_actions' => $this->task_actions(),
-                'my_attributes' => $this->task_columns(),
-            ]);
+            $tasks = $taskFinished;
+        } elseif (Auth::user()->role === 'supervisor') {
+            $tasks = $this->getTask('Terminé');
         } else {
             $structure = Auth::user()->structure;
-            return view('app.task.index', [
-                'tasks' => $structure->tasks()->where('status', "Terminé")->get(),
-                'my_actions' => $this->task_actions(),
-                'my_attributes' => $this->task_columns(),
-            ]);
+            $tasks = $structure->tasks()->where('status', "Terminé")->get();
         }
+        return view('app.task.index', [
+            'tasks' => $tasks,
+            'my_actions' => $this->task_actions(),
+            'my_attributes' => $this->task_columns(),
+        ]);
     }
 
     /**
@@ -258,11 +258,34 @@ class TaskController extends Controller
 
             ];
         } else {
+            if (Auth::user()->role === "admin") {
+                $users = User::where('structure_id', Auth::user()->structure->id)->get();
+            } else {
+                $departments = Auth::user()->departments;
+                $places = new EloquentCollection();
+                foreach ($departments as $department) {
+                    $places[] = $department->places()->get();
+                }
+                $places = $places->collapse();
+
+                $careers = new EloquentCollection();
+                foreach ($places as $place) {
+                    $careers[] = Career::where('place_id', $place->id)->get();
+                }
+                $careers = $careers->collapse();
+
+                $users = new EloquentCollection();
+                foreach ($careers as $career) {
+                    $users[] = User::where('id', $career->user_id)->get();
+                }
+                $users = $users->collapse();
+            }
+
             $fields = [
                 'users' => [
                     'title' => 'Sélectionner employés',
                     'field' => 'multiple-select',
-                    'options' => User::where('structure_id', Auth::user()->structure->id)->get(),
+                    'options' => $users,
                 ],
                 'due_date' => [
                     'title' => 'Date d\'achèvement',
@@ -280,5 +303,40 @@ class TaskController extends Controller
         }
 
         return $fields;
+    }
+
+    private function getTask($status)
+    {
+        $departments = Auth::user()->departments;
+        $places = new EloquentCollection();
+        foreach ($departments as $department) {
+            $places[] = $department->places()->get();
+        }
+        $places = $places->collapse();
+
+        $careers = new EloquentCollection();
+        foreach ($places as $place) {
+            $careers[] = Career::where('place_id', $place->id)->get();
+        }
+        $careers = $careers->collapse();
+
+        $users = new EloquentCollection();
+        foreach ($careers as $career) {
+            $users[] = User::where('id', $career->user_id)->get();
+        }
+        $users = $users->collapse();
+
+        $allTasks = new EloquentCollection();
+        foreach ($users as $user) {
+            $allTasks[] = $user->tasks;
+        }
+        $allTasks = $allTasks->collapse();
+
+        foreach ($allTasks as $allTask) {
+            if ($allTask->status == $status) {
+                $tasks[] = $allTask;
+            }
+        }
+        return $tasks;
     }
 }

@@ -27,6 +27,12 @@
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
+                        <x-nav-link href="{{ route('absence.create') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Nouvelle permission
+                        </x-nav-link>
+                    </div>
+                    <div>
                         <x-nav-link href="{{ route('absence.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             Permissions en attente
@@ -82,6 +88,14 @@
                 </div>
             </div>
         </div>
+    </li>    
+
+    <li class="mx-2" data-te-nav-item-ref>
+        <x-nav-link
+            class="block py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
+            :href="route('career.show', [Auth::user()->career->id])" :active="request()->routeIs('career.*')" data-te-ripple-init data-te-ripple-color="light">
+            Carrière
+        </x-nav-link>
     </li>
 
     <li class="static mx-2" data-te-nav-item-ref data-te-dropdown-ref>
@@ -138,18 +152,6 @@
             Evaluations
         </x-nav-link>
     </li> --}}
-
-    <li class="mx-2" data-te-nav-item-ref>
-        <x-nav-link
-            class="block py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
-            :href="route('notification')" :active="request()->routeIs('notification')" data-te-ripple-init data-te-ripple-color="light">
-            Notifications
-            <div
-                class="z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-slate-500 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
-                {{ auth()->user()->unreadNotifications->count() }}
-            </div>
-        </x-nav-link>
-    </li>
 
     <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link

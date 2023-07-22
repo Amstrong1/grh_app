@@ -24,6 +24,11 @@
         <ul class="!visible relative m-0 hidden list-none p-0 data-[te-collapse-show]:block "
             data-te-sidenav-collapse-ref>
             <li class="relative">
+                <x-link href="{{ route('absence.create') }}"
+                    data-te-sidenav-link-ref>Nouvelle permission
+                </x-link>
+            </li>
+            <li class="relative">
                 <x-link href="{{ route('absence.index') }}"
                     data-te-sidenav-link-ref>Permissions en attente
                 </x-link>
@@ -142,17 +147,6 @@
             Evaluations
         </a>
     </li> --}}
-
-    <li class="relative">
-        <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-            :href="route('notification')" :active="request()-> routeIs('notification')" data-te-sidenav-link-ref>
-            Notifications
-            <div
-                class="z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-slate-500 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
-                {{ auth()->user()->unreadNotifications->count() }}
-            </div>
-        </a>
-    </li>
 
     <li class="relative">
         <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"

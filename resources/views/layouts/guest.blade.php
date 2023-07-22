@@ -33,7 +33,7 @@
                     </a>
                 </div>
                 <h1 class="mb-12 mt-1 pb-1 text-md font-semibold">
-                    Bienvenu sur E-GRH, votre application de gestion de ressources humaines
+                    Bienvenu sur E-GRH, votre plateforme de gestion de ressources humaines
                 </h1>
             </div>
 

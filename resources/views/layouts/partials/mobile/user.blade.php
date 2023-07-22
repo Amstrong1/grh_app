@@ -146,16 +146,4 @@
             Evaluations
         </x-nav-link>
     </li> --}}
-
-    <li data-te-nav-item-ref>
-        <x-nav-link
-            class="block py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
-            :href="route('notification')" :active="request()->routeIs('notification')" data-te-ripple-init data-te-ripple-color="light">
-            Notifications
-            <div
-                class="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-neutral-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
-                {{ auth()->user()->unreadNotifications->count() }}
-            </div>
-        </x-nav-link>
-    </li>
 </ul>

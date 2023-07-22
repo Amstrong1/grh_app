@@ -20,6 +20,22 @@
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+    <style>
+        input, .select2-container .select2-selection--single, .select2-container .select2-selection--multiple {
+            height: 44px;
+        }
+        .select2-container .select2-selection--single, .select2-container .select2-selection--multiple {
+            border-color: #e5e7eb;
+            border-width: 2px;
+            padding-top: 8px;
+            margin-top: 4px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow b {
+            top: 90%;
+            left: 0;
+        }
+    </style>
+
     @livewireStyles
 
     <!-- Scripts -->

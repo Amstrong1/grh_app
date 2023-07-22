@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreCareerRequest;
 use App\Http\Requests\UpdateCareerRequest;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class CareerController extends Controller
 {
@@ -23,11 +24,34 @@ class CareerController extends Controller
     public function index()
     {
         $structure = Auth::user()->structure;
-        $users = $structure->users()->where('role', '!=', UserRoleEnum::Admin)->where('role', '!=', UserRoleEnum::SuperAdmin)->get();
-        $careers = [];
 
-        foreach ($users as $user) {
-            $careers[] = $user->career()->first();
+        if (Auth::user()->role === 'admin') {
+            $users = $structure->users()
+                ->where('role', '!=', UserRoleEnum::Admin)
+                ->where('role', '!=', UserRoleEnum::SuperAdmin)
+                ->get();
+
+            $careers = [];
+
+            foreach ($users as $user) {
+                $careers[] = $user->career()->first();
+            }
+        }
+        // if auth user is supervisor
+        else {
+            $departments = Auth::user()->departments;
+
+            $places = new EloquentCollection();
+            foreach ($departments as $department) {
+                $places[] = $department->places()->get();
+            }
+            $places = $places->collapse();
+
+            $careers = new EloquentCollection();
+            foreach ($places as $place) {
+                $careers[] = Career::where('place_id', $place->id)->get();
+            }
+            $careers = $careers->collapse();
         }
 
         return view('app.user.index', [
@@ -202,6 +226,18 @@ class CareerController extends Controller
             'Internat' => 'Internat'
         ];
 
+        if (Auth::user()->role === "admin") {
+            $places = Place::where('structure_id', Auth::user()->structure->id)->get();
+        } else {
+            $departments = Auth::user()->departments;
+            $places = new EloquentCollection();
+            foreach ($departments as $department) {
+                $places[] = $department->places()->get();
+            }
+            $places = $places->collapse();
+        }
+
+
         $fields = [
             'name' => [
                 'title' => 'Nom',
@@ -260,7 +296,7 @@ class CareerController extends Controller
             'place' => [
                 'title' => 'Poste',
                 'field' => 'model',
-                'options' => Place::where('structure_id', Auth::user()->structure->id)->get(),
+                'options' => $places,
             ],
             'contract' => [
                 'title' => 'Type de contrat',

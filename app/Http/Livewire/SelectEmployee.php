@@ -6,7 +6,7 @@ use App\Models\Filler;
 use Livewire\Component;
 use App\Models\Department;
 use App\Enums\UserRoleEnum;
-use App\Models\SalaryAdvantages;
+use App\Models\SalaryAdvantage;
 use Illuminate\Support\Facades\Auth;
 
 class SelectEmployee extends Component
@@ -49,7 +49,7 @@ class SelectEmployee extends Component
 
         $this->departments = Department::all();
         $this->fillers = Filler::all();
-        $this->salaryAdvantages = SalaryAdvantages::all();
+        $this->salaryAdvantages = SalaryAdvantage::all();
     }
 
     public function render()

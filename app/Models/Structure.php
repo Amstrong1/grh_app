@@ -57,6 +57,6 @@ class Structure extends Model
 
     public function salaryAdvantages(): HasMany
     {
-        return $this->hasMany(SalaryAdvantages::class);
+        return $this->hasMany(SalaryAdvantage::class);
     }
 }

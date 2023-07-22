@@ -14,7 +14,7 @@ use App\Http\Controllers\ConflictController;
 use App\Http\Controllers\StructureController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\SalaryAdvantagesController;
+use App\Http\Controllers\SalaryAdvantageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('department', DepartmentController::class);
         Route::resource('place', PlaceController::class);
         Route::resource('filler', FillerController::class);
-        Route::resource('salaryAdvantage', SalaryAdvantagesController::class);
+        Route::resource('salaryAdvantage', SalaryAdvantageController::class);
         Route::resource('pay', PayController::class);
     });
 

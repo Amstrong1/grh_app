@@ -35,7 +35,7 @@ class Place extends Model
         return $this->hasOne(User::class);
     }
 
-    public function career(): HasMany
+    public function careers(): HasMany
     {
         return $this->hasMany(Career::class);
     }

@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Career;
 use App\Models\Absence;
 use App\Enums\UserRoleEnum;
 use App\Enums\PermissionStatusEnum;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Notifications\PermissionResponse;
 use App\Http\Requests\StoreAbsenceRequest;
 use App\Http\Requests\UpdateAbsenceRequest;
-use App\Models\User;
 use App\Notifications\NewPermissionNotification;
-use App\Notifications\PermissionResponse;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class AbsenceController extends Controller
 {
@@ -23,69 +25,66 @@ class AbsenceController extends Controller
     {
         $structure = Auth::user()->structure;
         if (Auth::user()->role === UserRoleEnum::User) {
-            return view('app.absence.index', [
-                'absences' => $structure->absences()
-                    ->where('user_id', Auth::id())
-                    ->where('status', PermissionStatusEnum::Pending)
-                    ->get(),
-                'my_attributes' => $this->absence_columns(),
-                'my_actions' => $this->absence_actions(),
-            ]);
+            $absences = $structure->absences()
+                ->where('user_id', Auth::id())
+                ->where('status', PermissionStatusEnum::Pending)
+                ->get();
+        } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+            $absences = $this->getAbsence(PermissionStatusEnum::Pending);
         } else {
-            return view('app.absence.index', [
-                'absences' => $structure->absences()
-                    ->where('status', PermissionStatusEnum::Pending)
-                    ->get(),
-                'my_attributes' => $this->absence_columns(),
-                'my_actions' => $this->absence_actions(),
-            ]);
+            $absences = $structure->absences()
+                ->where('status', PermissionStatusEnum::Pending)
+                ->get();
         }
+        return view('app.absence.index', [
+            'absences' => $absences,
+            'my_attributes' => $this->absence_columns(),
+            'my_actions' => $this->absence_actions(),
+        ]);
     }
 
     public function indexAllowed()
     {
         $structure = Auth::user()->structure;
         if (Auth::user()->role === UserRoleEnum::User) {
-            return view('app.absence.index', [
-                'absences' => $structure->absences()
-                    ->where('user_id', Auth::id())
-                    ->where('status', PermissionStatusEnum::Allowed)
-                    ->get(),
-                'my_attributes' => $this->absence_columns(),
-                'my_actions' => [],
-            ]);
+            $absences = $structure->absences()
+                ->where('user_id', Auth::id())
+                ->where('status', PermissionStatusEnum::Allowed)
+                ->get();
+        } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+            $absences = $this->getAbsence(PermissionStatusEnum::Allowed);
         } else {
-            return view('app.absence.index', [
-                'absences' => $structure->absences()
-                    ->where('status', PermissionStatusEnum::Allowed)
-                    ->get(),
-                'my_attributes' => $this->absence_columns(),
-                'my_actions' => [],
-            ]);
+            $absences = $structure->absences()
+                ->where('status', PermissionStatusEnum::Allowed)
+                ->get();
         }
+        return view('app.absence.index', [
+            'absences' => $absences,
+            'my_attributes' => $this->absence_columns(),
+            'my_actions' => [],
+        ]);
     }
 
     public function indexDenied()
     {
         $structure = Auth::user()->structure;
         if (Auth::user()->role === UserRoleEnum::User) {
-            return view('app.absence.index', [
-                'absences' => $structure->absences()
-                    ->where('user_id', Auth::id())
-                    ->where('status', PermissionStatusEnum::Denied)
-                    ->get(),
-                'my_attributes' => $this->absence_columns(),
-                'my_actions' => [],
-            ]);
+            $absences = $structure->absences()
+                ->where('user_id', Auth::id())
+                ->where('status', PermissionStatusEnum::Denied)
+                ->get();
+        } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+            $absences = $this->getAbsence(PermissionStatusEnum::Denied);
         } else {
-            return view('app.absence.index', [
-                'absences' => $structure->absences()
-                    ->where('status', PermissionStatusEnum::Denied)
-                    ->get(),
-                'my_attributes' => $this->absence_columns(),
-                'my_actions' => [],
-            ]);
+            $absences = $structure->absences()
+                ->where('status', PermissionStatusEnum::Denied)
+                ->get();
         }
+        return view('app.absence.index', [
+            'absences' => $absences,
+            'my_attributes' => $this->absence_columns(),
+            'my_actions' => [],
+        ]);
     }
 
     /**
@@ -244,5 +243,42 @@ class AbsenceController extends Controller
         }
 
         return $fields;
+    }
+
+    private function getAbsence($status)
+    {
+        $departments = Auth::user()->departments;
+        $places = new EloquentCollection();
+        foreach ($departments as $department) {
+            $places[] = $department->places()->get();
+        }
+        $places = $places->collapse();
+
+        $careers = new EloquentCollection();
+        foreach ($places as $place) {
+            $careers[] = Career::where('place_id', $place->id)->get();
+        }
+        $careers = $careers->collapse();
+
+        $users = new EloquentCollection();
+        foreach ($careers as $career) {
+            $users[] = User::where('id', $career->user_id)->get();
+        }
+        $users = $users->collapse();
+
+        $allAbsences = new EloquentCollection();
+        foreach ($users as $user) {
+            $allAbsences[] = Absence::where('user_id', $user->id)
+                ->where('status', $status)
+                ->get();
+        }
+        $allAbsences = $allAbsences->collapse();
+
+        foreach ($allAbsences as $allAbsence) {
+            if ($allAbsence->status == $status) {
+                $absences[] = $allAbsence;
+            }
+        }
+        return $absences;
     }
 }

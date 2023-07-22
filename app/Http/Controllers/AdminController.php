@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\Department;
 use App\Enums\UserRoleEnum;
 use App\Models\DepartmentUser;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
