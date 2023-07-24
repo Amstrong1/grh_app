@@ -6,11 +6,13 @@ use App\Models\Task;
 use App\Models\User;
 use App\Models\Career;
 use App\Models\TaskUser;
+use Illuminate\Http\Request;
 use App\Enums\TaskStatusEnum;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 use App\Notifications\NewTaskNotification;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
@@ -23,7 +25,7 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::user()->role === 'user') {
             $allTasks = Auth::user()->tasks;
@@ -43,6 +45,37 @@ class TaskController extends Controller
             $tasks = $structure->tasks()->where('status', "A faire")->get();
         }
 
+        if (request()->method() == 'POST') {
+            $validate = Validator::make($request->all(), [
+                'start' => 'required|before:end',
+                'end' => 'required:after:start'
+            ]);
+            if (!$validate->fails()) {
+                if (Auth::user()->role === 'user') {
+                    $allTasks = Auth::user()->tasks;
+                    $taskToDo = [];
+
+                    foreach ($allTasks as $allTask) {
+                        if ($allTask->status == 'A faire') {
+                            if ($allTask->due_date >= $request->start || $allTask->due_date <= $request->end) {
+                                $taskToDo[] = $allTask;
+                            }
+                        }
+                    }
+
+                    $tasks = $taskToDo;
+                } elseif (Auth::user()->role === 'supervisor') {
+                    $tasks = $this->getTaskFiltered('A faire', $request->start, $request->end);
+                } else {
+                    $structure = Auth::user()->structure;
+                    $tasks = $structure->tasks()
+                        ->where('status', "A faire")
+                        ->whereBetween('due_date', [$request->start, $request->end])
+                        ->get();
+                }
+            }
+        }
+
         return view('app.task.index', [
             'tasks' => $tasks,
             'my_actions' => $this->task_actions(),
@@ -50,7 +83,7 @@ class TaskController extends Controller
         ]);
     }
 
-    public function indexPending()
+    public function indexPending(Request $request)
     {
         if (Auth::user()->role === 'user') {
             $allTasks = Auth::user()->tasks;
@@ -69,6 +102,37 @@ class TaskController extends Controller
             $structure = Auth::user()->structure;
             $tasks = $structure->tasks()->where('status', "En cours")->get();
         }
+
+        if (request()->method() == 'POST') {
+            $validate = Validator::make($request->all(), [
+                'start' => 'required|before:end',
+                'end' => 'required:after:start'
+            ]);
+            if (!$validate->fails()) {
+                if (Auth::user()->role === 'user') {
+                    $allTasks = Auth::user()->tasks;
+                    $taskPending = [];
+
+                    foreach ($allTasks as $allTask) {
+                        if ($allTask->status == 'En cours') {
+                            if ($allTask->due_date >= $request->start || $allTask->due_date <= $request->end) {
+                                $taskPending[] = $allTask;
+                            }
+                        }
+                    }
+
+                    $tasks = $taskPending;
+                } elseif (Auth::user()->role === 'supervisor') {
+                    $tasks = $this->getTaskFiltered('En cours', $request->start, $request->end);
+                } else {
+                    $structure = Auth::user()->structure;
+                    $tasks = $structure->tasks()->where('status', "En cours")
+                        ->whereBetween('due_date', [$request->start, $request->end])
+                        ->get();
+                }
+            }
+        }
+
         return view('app.task.index', [
             'tasks' => $tasks,
             'my_actions' => $this->task_actions(),
@@ -76,7 +140,7 @@ class TaskController extends Controller
         ]);
     }
 
-    public function indexFinished()
+    public function indexFinished(Request $request)
     {
         if (Auth::user()->role === 'user') {
             $allTasks = Auth::user()->tasks;
@@ -94,6 +158,36 @@ class TaskController extends Controller
         } else {
             $structure = Auth::user()->structure;
             $tasks = $structure->tasks()->where('status', "Terminé")->get();
+        }
+
+        if (request()->method() == 'POST') {
+            $validate = Validator::make($request->all(), [
+                'start' => 'required|before:end',
+                'end' => 'required:after:start'
+            ]);
+            if (!$validate->fails()) {
+                if (Auth::user()->role === 'user') {
+                    $allTasks = Auth::user()->tasks;
+                    $taskFinished = [];
+
+                    foreach ($allTasks as $allTask) {
+                        if ($allTask->status == 'Terminé') {
+                            if ($allTask->due_date >= $request->start || $allTask->due_date <= $request->end) {
+                                $taskFinished[] = $allTask;
+                            }
+                        }
+                    }
+
+                    $tasks = $taskFinished;
+                } elseif (Auth::user()->role === 'supervisor') {
+                    $tasks = $this->getTaskFiltered('Terminé', $request->start, $request->end);
+                } else {
+                    $structure = Auth::user()->structure;
+                    $tasks = $structure->tasks()->where('status', "Terminé")
+                        ->whereBetween('due_date', [$request->start, $request->end])
+                        ->get();
+                }
+            }
         }
         return view('app.task.index', [
             'tasks' => $tasks,
@@ -218,7 +312,7 @@ class TaskController extends Controller
     {
         $columns = (object) [
             'task' => 'Tâche',
-            'due_date' => 'Date d\'achèvement',
+            'formatted_due_date' => 'Date d\'achèvement',
             'due_time' => 'Heure d\'achèvement',
             'users_fullname' => 'Chargé(s) de la tâche',
         ];
@@ -335,6 +429,43 @@ class TaskController extends Controller
         foreach ($allTasks as $allTask) {
             if ($allTask->status == $status) {
                 $tasks[] = $allTask;
+            }
+        }
+        return $tasks;
+    }
+
+    private function getTaskFiltered($status, $post_start, $post_end)
+    {
+        $departments = Auth::user()->departments;
+        $places = new EloquentCollection();
+        foreach ($departments as $department) {
+            $places[] = $department->places()->get();
+        }
+        $places = $places->collapse();
+
+        $careers = new EloquentCollection();
+        foreach ($places as $place) {
+            $careers[] = Career::where('place_id', $place->id)->get();
+        }
+        $careers = $careers->collapse();
+
+        $users = new EloquentCollection();
+        foreach ($careers as $career) {
+            $users[] = User::where('id', $career->user_id)->get();
+        }
+        $users = $users->collapse();
+
+        $allTasks = new EloquentCollection();
+        foreach ($users as $user) {
+            $allTasks[] = $user->tasks;
+        }
+        $allTasks = $allTasks->collapse();
+
+        foreach ($allTasks as $allTask) {
+            if ($allTask->status == $status) {
+                if ($allTask->due_date >= $post_start || $allTask->due_date <= $post_end) {
+                    $tasks[] = $allTask;
+                }
             }
         }
         return $tasks;

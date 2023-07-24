@@ -7,20 +7,35 @@ use App\Models\Conflict;
 use App\Models\ConflictUser;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreConflictRequest;
 use App\Http\Requests\UpdateConflictRequest;
 use App\Notifications\NewConflictNotification;
+use Illuminate\Http\Request;
 
 class ConflictController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $structure = Auth::user()->structure;
+        $conflicts = $structure->conflicts()->get();
+
+        if (request()->method() == 'POST') {
+            $validate = Validator::make($request->all(), [
+                'start' => 'required|before:end',
+                'end' => 'required:after:start'
+            ]);
+            if (!$validate->fails()) {
+                $conflicts = Conflict::where('structure_id', Auth::user()->structure_id)
+                    ->whereBetween('conflict_date', [$request->start, $request->end])
+                    ->get();
+            }
+        }
         return view('app.conflict.index', [
-            'conflicts' => $structure->conflicts()->get(),
+            'conflicts' => $conflicts,
             'my_actions' => $this->conflict_actions(),
             'my_attributes' => $this->conflict_columns(),
         ]);

@@ -3,21 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Task extends Model
+class RegularTask extends Model
 {
     use HasFactory;
 
-    protected $append = ['users_fullname', 'formatted_due_date'];
+    protected $append = ['users_fullname'];
 
     protected $guarded = [];
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'task_users');
-    } 
+        return $this->belongsToMany(User::class, 'regular_task_users');
+    }
+
+    public function regularTaskReports(): HasMany
+    {
+        return $this->hasMany(RegularTaskReport::class);
+    }
 
     public function getUsersFullnameAttribute() //users_fullname
     {
@@ -27,10 +33,5 @@ class Task extends Model
             $users_fullname[] = $getUser->name . ' ' . $getUser->firstname;
         }
         return $users_fullname;
-    }
-
-    public function getFormattedDueDateAttribute()
-    {
-        return getFormattedDate($this->due_date);
     }
 }

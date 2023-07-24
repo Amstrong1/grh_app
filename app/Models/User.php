@@ -82,6 +82,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Conflict::class, 'conflict_users');
     }
 
+    public function regularTasks(): BelongsToMany
+    {
+        return $this->belongsToMany(RegularTask::class, 'regular_task_users');
+    }
+
     public function tasks(): BelongsToMany
     {
         return $this->belongsToMany(Task::class, 'task_users');

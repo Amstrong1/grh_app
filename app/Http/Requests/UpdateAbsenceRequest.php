@@ -25,7 +25,10 @@ class UpdateAbsenceRequest extends FormRequest
     {
         if (Auth::user()->role === UserRoleEnum::User) {
             return [
-                'absence_date' => ['required', 'date'],
+                'start_date' => ['required', 'date'],
+                'start_hour' => ['required'],
+                'end_date' => ['required', 'date'],
+                'end_hour' => ['required'],
                 'cause' => ['required', 'string', 'max:255', 'min:2'],
             ];
         } else {

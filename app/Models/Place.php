@@ -17,6 +17,7 @@ class Place extends Model
         'formatted_basis_wage',
         'formatted_hourly_rate', 
         'formatted_overtime_rate',
+        'formatted_overtime_rate_week',
     ];
 
     /**
@@ -61,5 +62,10 @@ class Place extends Model
     public function getFormattedOvertimeRateAttribute()
     {
         return number_format($this->overtime_rate, 2, ',', ' ');
+    }
+
+    public function getFormattedOvertimeRateWeekAttribute()
+    {
+        return number_format($this->overtime_rate_week, 2, ',', ' ');
     }
 }

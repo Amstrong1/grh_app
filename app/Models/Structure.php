@@ -45,6 +45,11 @@ class Structure extends Model
         return $this->hasMany(Conflict::class);
     }
 
+    public function regularTasks(): HasMany
+    {
+        return $this->hasMany(RegularTask::class);
+    }
+
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);

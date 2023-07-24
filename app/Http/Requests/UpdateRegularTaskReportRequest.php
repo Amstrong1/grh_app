@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAbsenceRequest extends FormRequest
+class UpdateRegularTaskReportRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,11 +22,7 @@ class StoreAbsenceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start_date' => ['required', 'date'],
-            'start_hour' => ['required'],
-            'end_date' => ['required', 'date'],
-            'end_hour' => ['required'],
-            'cause' => ['required', 'string', 'max:255', 'min:2'],
+            //
         ];
     }
 }

@@ -124,7 +124,8 @@ class PlaceController extends Controller
             'department_name' => 'Département',
             'formatted_basis_wage' => 'Salaire de base',
             'formatted_hourly_rate' => 'Tarif horaire',
-            'formatted_overtime_rate' => 'Tarif heure supplémentaire',
+            'formatted_overtime_rate' => 'Tarif heure sup semaine',
+            'formatted_overtime_rate_week' => 'Tarif heure sup weekend/férié',
         ];
         return $columns;
     }
@@ -160,6 +161,10 @@ class PlaceController extends Controller
             ],
             'overtime_rate' => [
                 'title' => 'Tarif heure sup',
+                'field' => 'text'
+            ],
+            'overtime_rate_week' => [
+                'title' => 'Tarif heure sup weekend/férié',
                 'field' => 'text'
             ],
         ];

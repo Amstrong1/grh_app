@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
             StructureSeeder::class,
         ]);
 
+        $this->call([
+            DaySeeder::class,
+        ]);
+
         \App\Models\User::factory()->create([
             'structure_id' => 1,
             'name' => 'Test',

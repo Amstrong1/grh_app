@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('basis_wage', 10, 2);
             $table->decimal('hourly_rate', 10, 2)->nullable();
             $table->decimal('overtime_rate', 10, 2)->nullable();
+            $table->decimal('overtime_rate_week', 10, 2)->nullable();
             $table->softDeletes();    
             $table->timestamps();
         });

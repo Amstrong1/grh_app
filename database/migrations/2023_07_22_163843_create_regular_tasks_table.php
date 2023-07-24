@@ -11,25 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('absences', function (Blueprint $table) {
+        Schema::create('regular_tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('structure_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->date('start_date');
-            $table->time('start_hour');
-            $table->date('end_date');
-            $table->time('hour_date');
-            $table->string('cause');
-            $table->string('status');
+            $table->string('frequency');
+            $table->time('task_hour')->nullable();
+            $table->string('task_day')->nullable();
+            $table->string('task');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('absences');
+        Schema::dropIfExists('regular_tasks');
     }
 };

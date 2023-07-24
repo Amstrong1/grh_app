@@ -6,10 +6,12 @@ use App\Models\User;
 use App\Models\Career;
 use App\Models\Absence;
 use App\Enums\UserRoleEnum;
+use Illuminate\Http\Request;
 use App\Enums\PermissionStatusEnum;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Notifications\PermissionResponse;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreAbsenceRequest;
 use App\Http\Requests\UpdateAbsenceRequest;
 use App\Notifications\NewPermissionNotification;
@@ -21,7 +23,7 @@ class AbsenceController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+    public function index(Request $request)
     {
         $structure = Auth::user()->structure;
         if (Auth::user()->role === UserRoleEnum::User) {
@@ -36,6 +38,32 @@ class AbsenceController extends Controller
                 ->where('status', PermissionStatusEnum::Pending)
                 ->get();
         }
+
+        if (request()->method() == 'POST') {
+            $validate = Validator::make($request->all(), [
+                'start' => 'required|before:end',
+                'end' => 'required|after:start'
+            ]);
+            if (!$validate->fails()) {
+                if (Auth::user()->role === UserRoleEnum::User) {
+                    $absences = $structure->absences()
+                        ->where('user_id', Auth::id())
+                        ->where('status', PermissionStatusEnum::Pending)
+                        ->whereBetween('start_date', [$request->start, $request->end])
+                        ->orWhere('end_date', [$request->start, $request->end])
+                        ->get();
+                } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+                    $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Pending, $request->start, $request->end);
+                } else {
+                    $absences = $structure->absences()
+                        ->where('status', PermissionStatusEnum::Pending)
+                        ->whereBetween('start_date', [$request->start, $request->end])
+                        ->orWhere('end_date', [$request->start, $request->end])
+                        ->get();
+                }
+            }
+        }
+
         return view('app.absence.index', [
             'absences' => $absences,
             'my_attributes' => $this->absence_columns(),
@@ -43,7 +71,7 @@ class AbsenceController extends Controller
         ]);
     }
 
-    public function indexAllowed()
+    public function indexAllowed(Request $request)
     {
         $structure = Auth::user()->structure;
         if (Auth::user()->role === UserRoleEnum::User) {
@@ -52,7 +80,7 @@ class AbsenceController extends Controller
                 ->where('status', PermissionStatusEnum::Allowed)
                 ->get();
         } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
-            $absences = $this->getAbsence(PermissionStatusEnum::Allowed);
+            $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Allowed, $request->start, $request->end);
         } else {
             $absences = $structure->absences()
                 ->where('status', PermissionStatusEnum::Allowed)
@@ -65,7 +93,7 @@ class AbsenceController extends Controller
         ]);
     }
 
-    public function indexDenied()
+    public function indexDenied(Request $request)
     {
         $structure = Auth::user()->structure;
         if (Auth::user()->role === UserRoleEnum::User) {
@@ -74,7 +102,7 @@ class AbsenceController extends Controller
                 ->where('status', PermissionStatusEnum::Denied)
                 ->get();
         } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
-            $absences = $this->getAbsence(PermissionStatusEnum::Denied);
+            $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Denied, $request->start, $request->end);
         } else {
             $absences = $structure->absences()
                 ->where('status', PermissionStatusEnum::Denied)
@@ -192,7 +220,10 @@ class AbsenceController extends Controller
     {
         $columns = (object) [
             'user_fullname' => 'Nom et prénoms',
-            'formatted_absence_date' => 'Date',
+            'formatted_start_date' => 'Date de départ',
+            'start_hour' => 'Heure de départ',
+            'formatted_end_date' => 'Date d\'arrivé',
+            'end_hour' => 'Heure d\'arrivé',
             'cause' => 'Motif',
             // 'status' => 'Statut',
         ];
@@ -219,9 +250,21 @@ class AbsenceController extends Controller
     {
         if (Auth::user()->role === 'user') {
             $fields = [
-                'absence_date' => [
-                    'title' => 'Date',
+                'start_date' => [
+                    'title' => 'Date de départ',
                     'field' => 'date'
+                ],
+                'start_hour' => [
+                    'title' => 'Heure de départ',
+                    'field' => 'time'
+                ],
+                'end_date' => [
+                    'title' => 'Date de retour',
+                    'field' => 'date'
+                ],
+                'end_hour' => [
+                    'title' => 'Heure de retour',
+                    'field' => 'time'
                 ],
                 'cause' => [
                     'title' => 'Motif',
@@ -270,6 +313,45 @@ class AbsenceController extends Controller
         foreach ($users as $user) {
             $allAbsences[] = Absence::where('user_id', $user->id)
                 ->where('status', $status)
+                ->get();
+        }
+        $allAbsences = $allAbsences->collapse();
+
+        foreach ($allAbsences as $allAbsence) {
+            if ($allAbsence->status == $status) {
+                $absences[] = $allAbsence;
+            }
+        }
+        return $absences;
+    }
+
+    private function getAbsenceFiltered($status, $start_post, $end_post)
+    {
+        $departments = Auth::user()->departments;
+        $places = new EloquentCollection();
+        foreach ($departments as $department) {
+            $places[] = $department->places()->get();
+        }
+        $places = $places->collapse();
+
+        $careers = new EloquentCollection();
+        foreach ($places as $place) {
+            $careers[] = Career::where('place_id', $place->id)->get();
+        }
+        $careers = $careers->collapse();
+
+        $users = new EloquentCollection();
+        foreach ($careers as $career) {
+            $users[] = User::where('id', $career->user_id)->get();
+        }
+        $users = $users->collapse();
+
+        $allAbsences = new EloquentCollection();
+        foreach ($users as $user) {
+            $allAbsences[] = Absence::where('user_id', $user->id)
+                ->where('status', $status)
+                ->whereBetween('start_date', [$start_post, $end_post])
+                ->orWhere('end_date', [$start_post, $end_post])
                 ->get();
         }
         $allAbsences = $allAbsences->collapse();

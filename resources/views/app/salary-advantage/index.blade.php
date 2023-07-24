@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-tables.default :resources="$salaryAdvantages" :mattributes="$my_attributes" type="salaryAdvantage" :mactions="$my_actions" />
+                        <x-tables.default :resources="$salaryAdvantages" :mattributes="$my_attributes" type="salary_advantage" :mactions="$my_actions" />
                     </div>
                 </div>
             </div>

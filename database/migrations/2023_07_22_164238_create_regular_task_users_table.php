@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('absences', function (Blueprint $table) {
+        Schema::create('regular_task_users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('structure_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->date('start_date');
-            $table->time('start_hour');
-            $table->date('end_date');
-            $table->time('hour_date');
-            $table->string('cause');
-            $table->string('status');
+            $table->foreignId('regular_task_id')->constrained();
+            $table->foreignId('structure_id')->constrained();
             $table->timestamps();
         });
     }
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absences');
+        Schema::dropIfExists('regular_task_users');
     }
 };

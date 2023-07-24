@@ -14,9 +14,24 @@
                                 en attentes
                             @endif
                         </h1>
-                        <x-primary-button>
-                            <a href="{{ route('absence.create') }}">Nouveau</a>
-                        </x-primary-button>
+
+                        <div class="flex">
+                            <form action="" method="post">
+                                @csrf
+                                <p class="text-sm mx-2">
+                                    <span>Filtrer du </span>
+                                    <input class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg" type="date" name="start" value="{{ request()->start }}">
+                                    <span> au </span>
+                                    <input class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg" type="date" name="end" value="{{ request()->end }}">
+                                    <x-secondary-button class="py-3 border-gray-300 border-2 shadow-lg" type="submit">
+                                        Appliquer
+                                    </x-secondary-button>
+                                </p>
+                            </form>
+                            <x-primary-button>
+                                <a href="{{ route('absence.create') }}">Nouveau</a>
+                            </x-primary-button>
+                        </div>
                     </div>
                     <div class="mt-4">
                         <x-tables.default :resources="$absences" :mattributes="$my_attributes" type="absence" :mactions="$my_actions"/>

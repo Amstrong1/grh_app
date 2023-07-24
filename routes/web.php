@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ConflictController;
 use App\Http\Controllers\StructureController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\RegularTaskController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SalaryAdvantageController;
 
@@ -28,8 +29,8 @@ use App\Http\Controllers\SalaryAdvantageController;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', HomeController::class);
-    Route::get('/dashboard', HomeController::class)->name('dashboard');
+    Route::match(['get', 'post'], '/', HomeController::class);
+    Route::match(['get', 'post'], '/dashboard', HomeController::class)->name('dashboard');
 
     Route::middleware(['superadmin'])->group(function () {
         Route::resource('structure', StructureController::class);
@@ -40,7 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('department', DepartmentController::class);
         Route::resource('place', PlaceController::class);
         Route::resource('filler', FillerController::class);
-        Route::resource('salaryAdvantage', SalaryAdvantageController::class);
+        Route::resource('salary_advantage', SalaryAdvantageController::class);
         Route::resource('pay', PayController::class);
     });
 
@@ -52,12 +53,14 @@ Route::middleware('auth')->group(function () {
     Route::get('notification/remove', [NotificationController::class, 'remove'])->name('notification.remove');
     Route::get('notification', [NotificationController::class, 'index'])->name('notification');
 
-    Route::get('task/pending', [TaskController::class, 'indexPending'])->name('task.pending');
-    Route::get('task/finished', [TaskController::class, 'indexFinished'])->name('task.finished');
+    Route::match(['get', 'post'], 'task/pending', [TaskController::class, 'indexPending'])->name('task.pending');
+    Route::match(['get', 'post'], 'task/finished', [TaskController::class, 'indexFinished'])->name('task.finished');
     Route::resource('task', TaskController::class);
 
-    Route::get('absence/allowed', [AbsenceController::class, 'indexAllowed'])->name('absence.allowed');
-    Route::get('absence/denied', [AbsenceController::class, 'indexDenied'])->name('absence.denied');
+    Route::resource('regular_task', RegularTaskController::class);
+
+    Route::match(['get', 'post'], 'absence/allowed', [AbsenceController::class, 'indexAllowed'])->name('absence.allowed');
+    Route::match(['get', 'post'], 'absence/denied', [AbsenceController::class, 'indexDenied'])->name('absence.denied');
     Route::resource('absence', AbsenceController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

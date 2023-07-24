@@ -21,7 +21,7 @@ class SalaryAdvantageController extends Controller
     public function index()
     {
         $structure = Auth::user()->structure;
-        return view('app.salaryAdvantage.index', [
+        return view('app.salary-advantage.index', [
             'salaryAdvantages' => $structure->salaryAdvantages()->get(),
             'my_actions' => $this->salaryAdvantage_actions(),
             'my_attributes' => $this->salaryAdvantage_columns(),
@@ -51,7 +51,7 @@ class SalaryAdvantageController extends Controller
 
         if ($salaryAdvantage->save()) {
             Alert::toast('Les données ont été enregistrées', 'success');
-            return redirect('salaryAdvantage');
+            return redirect('salary_advantage');
         }
         else {
             Alert::toast('Les données ont été enregistrées', 'error');
@@ -72,7 +72,7 @@ class SalaryAdvantageController extends Controller
      */
     public function edit(SalaryAdvantage $salaryAdvantage)
     {
-        return view('app.salaryAdvantage.edit', [
+        return view('app.salary-advantage.edit', [
             'salaryAdvantage' => $salaryAdvantage,
             'my_fields' => $this->salaryAdvantage_fields(),
         ]);
@@ -91,7 +91,7 @@ class SalaryAdvantageController extends Controller
         
         if ($salaryAdvantage->save()) {
             Alert::toast('Les informations ont été modifiées', 'success');
-            return redirect('salaryAdvantage');
+            return redirect('salary_advantage');
         }else {            
             Alert::toast('Les informations ont été modifiées', 'success');
             return redirect()->back()->withInput($request->input());
@@ -106,7 +106,7 @@ class SalaryAdvantageController extends Controller
         try {
             $salaryAdvantages = $salaryAdvantages->delete();
             Alert::success('Opération effectuée', 'Suppression éffectué');
-            return redirect('salaryAdvantage');
+            return redirect('salary_advantage');
         } catch (\Exception $e) {
             Alert::error('Erreur', 'Element introuvable');
             return redirect()->back();
