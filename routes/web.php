@@ -16,6 +16,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\RegularTaskController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SalaryAdvantageController;
+use App\Http\Controllers\RegularTaskReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('task', TaskController::class);
 
     Route::resource('regular_task', RegularTaskController::class);
+    Route::resource('regular_task_report', RegularTaskReportController::class);
 
     Route::match(['get', 'post'], 'absence/allowed', [AbsenceController::class, 'indexAllowed'])->name('absence.allowed');
     Route::match(['get', 'post'], 'absence/denied', [AbsenceController::class, 'indexDenied'])->name('absence.denied');

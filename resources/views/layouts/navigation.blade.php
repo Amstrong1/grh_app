@@ -2,7 +2,7 @@
     <nav class="relative flex w-full items-center justify-between py-2 text-neutral-600 dark:text-neutral-300 lg:flex-wrap lg:justify-start"
         data-te-navbar-ref>
         <div class="px-6">
-            <div class="flex-grow basis-[100%] items-center lg:!flex lg:basis-auto" id="navbarSupportedContentX"
+            <div class="flex-grow basis-[100%] items-center lg:!flex lg:basis-auto text-white" id="navbarSupportedContentX"
                 data-te-collapse-item>
                 @if (Auth::user()->role === 'superadmin')
                     @include('layouts.partials.superadmin')
@@ -20,8 +20,8 @@
 
 <!-- Sidenav -->
 <nav id="sidenav-5"
-    class="lg:hidden fixed left-0 top-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:translate-x-0 dark:bg-zinc-800"
-    data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-accordion="true">
+    class="lg:hidden fixed left-0 top-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:translate-x-0 dark:bg-zinc-800"
+    data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-accordion="true" style="background-color: #03224c">
 
     @if (Auth::user()->role === 'superadmin')
         @include('layouts.partials.mobile.superadmin')

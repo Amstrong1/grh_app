@@ -50,6 +50,11 @@ class Structure extends Model
         return $this->hasMany(RegularTask::class);
     }
 
+    public function regularTaskReports(): HasMany
+    {
+        return $this->hasMany(RegularTaskReport::class);
+    }
+
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);

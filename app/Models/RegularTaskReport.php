@@ -10,6 +10,7 @@ class RegularTaskReport extends Model
 {
     use HasFactory;
 
+    protected $append = ['task_label'];
     protected $guarded = [];
 
     public function users(): BelongsTo
@@ -17,8 +18,13 @@ class RegularTaskReport extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function regularTasks(): BelongsTo
+    public function regularTask(): BelongsTo
     {
-        return $this->belongs(RegularTask::class);
+        return $this->belongsTo(RegularTask::class);
+    }
+
+    public function getTaskLabelAttribute()
+    {
+        return $this->regularTask->task;
     }
 }

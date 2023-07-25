@@ -1,25 +1,27 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-semibold text-lg m-4">
                             {{ __('E-GRH TABLEAU DE BORD') }}
                         </h1>
 
+                        @if (Auth::user()->role !== 'superadmin')
                         <form action="" method="post">
                             @csrf
                             <p class="text-sm">
-                                <span>Filtrer du </span>
+                                <span>Période du </span>
                                 <input class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg" type="date" name="start" value="{{ request()->start }}">
                                 <span> au </span>
                                 <input class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg" type="date" name="end" value="{{ request()->end }}">
                                 <x-secondary-button class="py-3 border-gray-300 border-2 shadow-lg" type="submit">
-                                    Appliquer
+                                    Rechercher
                                 </x-secondary-button>
                             </p>
                         </form>
+                        @endif
                     </div>
 
                     @if (Auth::user()->role === 'superadmin')

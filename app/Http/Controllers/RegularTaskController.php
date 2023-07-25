@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Day;
 use App\Models\User;
 use App\Models\Career;
 use App\Models\RegularTask;
@@ -11,7 +12,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Notifications\NewTaskNotification;
 use App\Http\Requests\StoreRegularTaskRequest;
 use App\Http\Requests\UpdateRegularTaskRequest;
-use App\Models\Day;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class RegularTaskController extends Controller
@@ -83,7 +83,8 @@ class RegularTaskController extends Controller
 
         $days = [];
         foreach ($request->task_day as $day) {
-            $days[] = $day;
+            $day_name = Day::where('id', $day)->first();
+            $days[] = $day_name->name;
         }
         $days = implode("-", $days);
 

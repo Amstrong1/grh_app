@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('regular_task_reports', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('structure_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('regular_task_id')->constrained();
-            $table->string('report')->constrained();
+            $table->string('report');
+            $table->date('report_date');
             $table->timestamps();
         });
     }

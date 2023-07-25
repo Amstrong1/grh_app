@@ -26,6 +26,33 @@ class AbsenceController extends Controller
     public function index(Request $request)
     {
         $structure = Auth::user()->structure;
+
+        if ($request->method() == 'POST') {
+            dd($request);
+            $validate = Validator::make($request->all(), [
+                'start' => 'required|before:end',
+                'end' => 'required|after:start'
+            ]);
+            if (!$validate->fails()) {
+                if (Auth::user()->role === UserRoleEnum::User) {
+                    $absences = $structure->absences()
+                        ->where('user_id', Auth::id())
+                        ->where('status', PermissionStatusEnum::Pending)
+                        ->whereBetween('start_date', [$request->start, $request->end])
+                        ->orWhereBetween('end_date', [$request->start, $request->end])
+                        ->get();
+                } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+                    $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Pending, $request->start, $request->end);
+                } else {
+                    $absences = $structure->absences()
+                        ->where('status', PermissionStatusEnum::Pending)
+                        ->whereBetween('start_date', [$request->start, $request->end])
+                        ->orWhereBetween('end_date', [$request->start, $request->end])
+                        ->get();
+                }
+            }
+        }
+
         if (Auth::user()->role === UserRoleEnum::User) {
             $absences = $structure->absences()
                 ->where('user_id', Auth::id())
@@ -37,31 +64,6 @@ class AbsenceController extends Controller
             $absences = $structure->absences()
                 ->where('status', PermissionStatusEnum::Pending)
                 ->get();
-        }
-
-        if (request()->method() == 'POST') {
-            $validate = Validator::make($request->all(), [
-                'start' => 'required|before:end',
-                'end' => 'required|after:start'
-            ]);
-            if (!$validate->fails()) {
-                if (Auth::user()->role === UserRoleEnum::User) {
-                    $absences = $structure->absences()
-                        ->where('user_id', Auth::id())
-                        ->where('status', PermissionStatusEnum::Pending)
-                        ->whereBetween('start_date', [$request->start, $request->end])
-                        ->orWhere('end_date', [$request->start, $request->end])
-                        ->get();
-                } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
-                    $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Pending, $request->start, $request->end);
-                } else {
-                    $absences = $structure->absences()
-                        ->where('status', PermissionStatusEnum::Pending)
-                        ->whereBetween('start_date', [$request->start, $request->end])
-                        ->orWhere('end_date', [$request->start, $request->end])
-                        ->get();
-                }
-            }
         }
 
         return view('app.absence.index', [
@@ -134,11 +136,17 @@ class AbsenceController extends Controller
 
         $absence->structure_id = Auth::user()->structure->id;
         $absence->user_id = Auth::id();
-        $absence->absence_date = $request->absence_date;
+        $absence->start_date = $request->start_date;
+        $absence->start_hour = $request->start_hour;
+        $absence->end_date = $request->end_date;
+        $absence->end_hour = $request->end_hour;
         $absence->cause = $request->cause;
         $absence->status = PermissionStatusEnum::Pending;
 
         if ($absence->save()) {
+            $absence->reference = 'ABS00' . $absence->id;
+            $absence->save();
+
             Alert::toast("Données enregistrées", 'success');
             $user = User::where('structure_id', Auth::user()->structure_id)->where('role', 'admin')->first();
             $user->notify(new NewPermissionNotification());
@@ -176,7 +184,10 @@ class AbsenceController extends Controller
         $absence = Absence::find($absence->id);
 
         if (Auth::user()->role === 'user') {
-            $absence->absence_date = $request->absence_date;
+            $absence->start_date = $request->start_date;
+            $absence->start_hour = $request->start_hour;
+            $absence->end_date = $request->end_date;
+            $absence->end_hour = $request->end_hour;
             $absence->cause = $request->cause;
 
             if ($absence->save()) {
@@ -219,6 +230,7 @@ class AbsenceController extends Controller
     private function absence_columns()
     {
         $columns = (object) [
+            'reference' => 'Référence',
             'user_fullname' => 'Nom et prénoms',
             'formatted_start_date' => 'Date de départ',
             'start_hour' => 'Heure de départ',
@@ -232,7 +244,7 @@ class AbsenceController extends Controller
 
     private function absence_actions()
     {
-        if (Auth::user()->role === UserRoleEnum::User) {
+        if (Auth::user()->role === 'user') {
             $actions = (object) array(
                 'edit' => 'Modifier',
                 'delete' => "Supprimer",

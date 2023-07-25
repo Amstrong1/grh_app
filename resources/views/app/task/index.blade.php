@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">
@@ -15,7 +15,7 @@
                             @endif
                         </h1>
 
-                        <div class="flex">
+                        {{-- <div class="flex">
                             <form action="" method="post">
                                 @csrf
                                 <p class="text-sm mx-2">
@@ -31,13 +31,13 @@
                                         Appliquer
                                     </x-secondary-button>
                                 </p>
-                            </form>
-                            @if (Auth::user()->role === 'admin' || Auth::user()->role === 'supervisor')
-                                <x-primary-button>
-                                    <a href="{{ route('task.create') }}">Nouveau</a>
-                                </x-primary-button>
-                            @endif
-                        </div>
+                            </form> --}}
+                        @if (Auth::user()->role === 'admin' || Auth::user()->role === 'supervisor')
+                            <x-primary-button>
+                                <a href="{{ route('task.create') }}">Nouveau</a>
+                            </x-primary-button>
+                        @endif
+                        {{-- </div> --}}
 
                     </div>
                     <div class="mt-4">

@@ -22,9 +22,9 @@ class StoreAbsenceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start_date' => ['required', 'date'],
+            'start_date' => ['required', 'date', 'before:end_date'],
             'start_hour' => ['required'],
-            'end_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:start_date'],
             'end_hour' => ['required'],
             'cause' => ['required', 'string', 'max:255', 'min:2'],
         ];

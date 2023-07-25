@@ -4,19 +4,15 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
-                        <h1 class="font-bold text-lg my-2">Liste des tâches</h1>
+                        <h1 class="font-bold text-lg my-2">Liste des rapports</h1>
                         @if (Auth::user()->role === 'user')
                             <x-primary-button>
-                                <a href="{{ route('regular_task_report.create') }}">Rapports</a>
-                            </x-primary-button>
-                        @else
-                            <x-primary-button>
-                                <a href="{{ route('regular_task.create') }}">Nouveau</a>
+                                <a href="{{ route('regular_task_report.create') }}">Nouveau</a>
                             </x-primary-button>
                         @endif
                     </div>
                     <div class="mt-4">
-                        <x-tables.default :resources="$regularTasks" :mattributes="$my_attributes" type="regular_task" :mactions="$my_actions" />
+                        <x-tables.default :resources="$regularTaskReports" :mattributes="$my_attributes" type="regular_task_report" :mactions="$my_actions" />
                     </div>
                 </div>
             </div>

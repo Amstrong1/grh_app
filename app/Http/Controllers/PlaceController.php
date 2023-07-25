@@ -152,7 +152,7 @@ class PlaceController extends Controller
                 'field' => 'text'
             ],
             'basis_wage' => [
-                'title' => 'Salaire brut',
+                'title' => 'Salaire de base',
                 'field' => 'text'
             ],
             'hourly_rate' => [

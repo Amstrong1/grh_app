@@ -1,7 +1,7 @@
 <ul class="mr-auto flex flex-row" data-te-navbar-nav-ref>
     <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
-            class="block py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-white block py-2 pr-2 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('dashboard')" :active="request()->routeIs('dashboard')" data-te-ripple-init data-te-ripple-color="light">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
@@ -14,7 +14,7 @@
 
     <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
-            class="block py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-white block py-2 pr-2 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('career.show', [Auth::user()->career->id])" :active="request()->routeIs('career.*')" data-te-ripple-init data-te-ripple-color="light">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
@@ -28,7 +28,7 @@
     <li class="static mx-2" data-te-nav-item-ref data-te-dropdown-ref>
 
         <x-nav-link :active="request()->routeIs('absence.*')"
-            class="flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -81,7 +81,7 @@
 
     <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('task.*')"
-            class="flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -134,7 +134,7 @@
 
     <li class="static mx-2" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('conflict.*')"
-            class="flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -175,7 +175,7 @@
 
     {{-- <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
-            class="block py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-white block py-2 pr-2 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('dashboard')" :active="request()->routeIs('absence')" data-te-ripple-init data-te-ripple-color="light">
             Evaluations
         </x-nav-link>

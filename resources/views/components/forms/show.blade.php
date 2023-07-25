@@ -16,4 +16,11 @@
 
         </div>
     @endforeach
+    <div class="flex items-center justify-start mt-4">
+        <a href="{{ url()->previous() }}">
+            <x-primary-button class="ml-4">
+                {{ __('Retour') }}
+            </x-primary-button>
+        </a>
+    </div>
 </div>

@@ -1,7 +1,7 @@
 <ul class="mr-auto flex flex-row" data-te-navbar-nav-ref>
     <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
-            class="block py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-white block py-2 pr-2 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('dashboard')" :active="request()->routeIs('dashboard')" data-te-ripple-init data-te-ripple-color="light">
             Accueil
         </x-nav-link>
@@ -9,7 +9,7 @@
 
     <li class="static mx-2" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link
-            class="flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>Structure
             <span class="ml-2 w-2">

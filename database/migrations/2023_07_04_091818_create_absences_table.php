@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('structure_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->string('reference')->nullable();
             $table->date('start_date');
             $table->time('start_hour');
             $table->date('end_date');
-            $table->time('hour_date');
+            $table->time('end_hour');
             $table->string('cause');
             $table->string('status');
             $table->timestamps();

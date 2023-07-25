@@ -60,10 +60,10 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen">
 
         <!-- Page Heading -->
-        <header class="bg-white shadow">
+        <header class="bg-white text-white shadow" style="background-color: #03224c">
             @include('layouts.navigation-top')
             @include('layouts.navigation')
         </header>

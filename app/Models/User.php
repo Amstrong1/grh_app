@@ -6,11 +6,11 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -85,6 +85,11 @@ class User extends Authenticatable
     public function regularTasks(): BelongsToMany
     {
         return $this->belongsToMany(RegularTask::class, 'regular_task_users');
+    }
+
+    public function regularTaskReports(): HasMany
+    {
+        return $this->hasMany(RegularTaskReport::class);
     }
 
     public function tasks(): BelongsToMany

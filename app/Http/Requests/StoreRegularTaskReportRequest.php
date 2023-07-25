@@ -11,7 +11,7 @@ class StoreRegularTaskReportRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreRegularTaskReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'tasks' => ['required'],
+            'report' => ['required', 'min:2', 'max:255', 'string'],
         ];
     }
 }

@@ -11,7 +11,7 @@ class RegularTask extends Model
 {
     use HasFactory;
 
-    protected $append = ['users_fullname'];
+    protected $append = ['users_fullname', 'day_name'];
 
     protected $guarded = [];
 
@@ -25,6 +25,11 @@ class RegularTask extends Model
         return $this->hasMany(RegularTaskReport::class);
     }
 
+    public function days(): HasMany
+    {
+        return $this->hasMany(Day::class);
+    }
+
     public function getUsersFullnameAttribute() //users_fullname
     {
         $users_fullname = [];
@@ -33,5 +38,9 @@ class RegularTask extends Model
             $users_fullname[] = $getUser->name . ' ' . $getUser->firstname;
         }
         return $users_fullname;
+    }
+
+    public function getDayNameAttribute() {
+        // return $day_name = $this->days()->name;
     }
 }

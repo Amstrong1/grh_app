@@ -23,7 +23,6 @@ class DaySeeder extends Seeder
         ];
         for ($i = 0; $i < sizeof($days); $i++) {
             DB::table('days')->insert([
-                'id' => $days[$i],
                 'name' => $days[$i]
             ]);
         }
