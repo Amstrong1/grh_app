@@ -29,6 +29,12 @@ use App\Http\Controllers\RegularTaskReportController;
 |
 */
 
+// Route::get('storage-link', function() {
+//     $targetFolder = storage_path('app/public');
+//     $linkFolder = $SERVER['DOCUMENT_ROOT'] . '/storage';
+//     symlink($targetFolder, $linkFolder);
+// });
+
 Route::middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/', HomeController::class);
     Route::match(['get', 'post'], '/dashboard', HomeController::class)->name('dashboard');
