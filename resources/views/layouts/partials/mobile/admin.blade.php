@@ -18,9 +18,9 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                        d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>&nbsp;
-                Absences
+                Demandes
             </span>
             <span
                 class="absolute right-0 ml-auto mr-[0.8rem] transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-white dark:[&>svg]:text-gray-300"
@@ -48,27 +48,7 @@
                 </x-link>
             </li>
             <li class="relative">
-                <x-link href="{{ route('absence.index') }}" data-te-sidenav-link-ref>Modification congés en attente
-                </x-link>
-            </li>
-            <li class="relative">
-                <x-link href="{{ route('absence.allowed') }}" data-te-sidenav-link-ref>Modification congés validées
-                </x-link>
-            </li>
-            <li class="relative">
-                <x-link href="{{ route('absence.denied') }}" data-te-sidenav-link-ref>Modification congés refusées
-                </x-link>
-            </li>
-            <li class="relative">
-                <x-link href="{{ route('absence.index') }}" data-te-sidenav-link-ref>Attestation travail en attente
-                </x-link>
-            </li>
-            <li class="relative">
-                <x-link href="{{ route('absence.allowed') }}" data-te-sidenav-link-ref>Attestation travail validées
-                </x-link>
-            </li>
-            <li class="relative">
-                <x-link href="{{ route('absence.denied') }}" data-te-sidenav-link-ref>Attestation travail refusées
+                <x-link href="{{ route('temptation.index') }}" data-te-sidenav-link-ref>Autres demandes
                 </x-link>
             </li>
         </ul>
