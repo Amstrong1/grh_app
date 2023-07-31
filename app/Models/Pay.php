@@ -28,6 +28,11 @@ class Pay extends Model
         return $this->belongsToMany(Filler::class, 'filler_pays')->withPivot('amount');
     } 
 
+    public function holdingWages(): BelongsToMany
+    {
+        return $this->belongsToMany(HoldingWage::class, 'holding_wage_pays')->withPivot('amount');
+    } 
+
     public function getPeriodAttribute()
     {
         return getFormattedDate($this->period_start) . ' au ' . getFormattedDate($this->period_end);

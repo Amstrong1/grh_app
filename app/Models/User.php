@@ -102,6 +102,11 @@ class User extends Authenticatable
         return $this->hasMany(Pay::class);
     }
 
+    public function latestLeave(): HasOne
+    {
+        return $this->hasOne(Leave::class)->latestOfMany();
+    }
+
     public function getDepartmentListAttribute()
     {
         $departmentName = [];

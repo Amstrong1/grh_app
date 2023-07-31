@@ -21,15 +21,20 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <style>
-        input, .select2-container .select2-selection--single, .select2-container .select2-selection--multiple {
+        input,
+        .select2-container .select2-selection--single,
+        .select2-container .select2-selection--multiple {
             height: 44px;
         }
-        .select2-container .select2-selection--single, .select2-container .select2-selection--multiple {
+
+        .select2-container .select2-selection--single,
+        .select2-container .select2-selection--multiple {
             border-color: #e5e7eb;
             border-width: 2px;
             padding-top: 8px;
             margin-top: 4px;
         }
+
         .select2-container--default .select2-selection--single .select2-selection__arrow b {
             top: 90%;
             left: 0;
@@ -57,9 +62,10 @@
     </script>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('assets/vendor/ckeditor5/build/ckeditor.js') }}"></script>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased" style="background-color: #344168">
     <div class="min-h-screen">
 
         <!-- Page Heading -->
@@ -96,6 +102,13 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script defer src="{{ asset('js/main.js') }}"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 
 </body>
 

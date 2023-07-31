@@ -8,6 +8,7 @@ use App\Models\Place;
 use App\Models\Absence;
 use App\Models\Conflict;
 use App\Models\Structure;
+use App\Models\LeaveType;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,10 +28,17 @@ class HomeController extends Controller
         $sanctions = 0;
         $rewards = 0;
 
+        $leaveSolds = LeaveType::where('assign_to_all', true)->get();
+        $leaveSold = 0;
+
+        foreach ($leaveSolds as $value) {
+            $leaveSold += $value->last;
+        }
+
         if (request()->method() == 'POST') {
             $validate = Validator::make($request->all(), [
                 'start' => 'required|before:end',
-                'end' => 'required:after:start'
+                'end' => 'required|after:start'
             ]);
             if (!$validate->fails()) {
                 $conflicts = Conflict::where('structure_id', Auth::user()->structure_id)
@@ -62,6 +70,7 @@ class HomeController extends Controller
                 'tasks',
                 'sanctions',
                 'rewards',
+                'leaveSold',
             )
         );
     }

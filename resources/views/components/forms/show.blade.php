@@ -7,7 +7,7 @@
             $fill = $item->{$attr};
         @endphp
 
-        <div class="m-2">
+        <div @class(['m-2', 'col-span-2' => isset($value['colspan'])])>
 
             <x-input-label for="{{ $attr }}" value="{!! $value['title'] !!}"></x-input-label>
 

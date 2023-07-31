@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Pay;
 use App\Models\User;
 use App\Models\Filler;
+use App\Models\FillerPay;
 use App\Models\Department;
 use App\Enums\UserRoleEnum;
 use App\Models\SalaryAdvantage;
+use App\Models\PaySalaryAdvantage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePayRequest;
 use App\Http\Requests\UpdatePayRequest;
-use App\Models\FillerPay;
-use App\Models\PaySalaryAdvantage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PayController extends Controller

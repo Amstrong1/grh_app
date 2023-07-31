@@ -26,7 +26,7 @@ class NewTaskNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -35,8 +35,8 @@ class NewTaskNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line('Une nouvelle tâche vous a été assignée')
+                    ->action('Voir dans l\'application', url('/task/pending'))
                     ->line('Thank you for using our application!');
     }
 

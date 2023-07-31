@@ -10,7 +10,11 @@ class Absence extends Model
 {
     use HasFactory;
 
-    protected $append = ['user_fullname', 'formatted_start_date', 'formatted_end_date'];
+    protected $append = [
+        'user_fullname', 
+        'formatted_start_date', 
+        'formatted_end_date'
+    ];
 
     public function user(): BelongsTo
     {

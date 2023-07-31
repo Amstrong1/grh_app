@@ -22,9 +22,10 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-            </svg>&nbsp;
-            Absences
+                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
+            &nbsp;
+            Demandes
             <span class="ml-2 w-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
                     <path fill-rule="evenodd"
@@ -41,22 +42,68 @@
                     <div>
                         <x-nav-link href="{{ route('absence.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Permissions en attente
+                            Permissions absences en attente
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('absence.allowed') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Permissions validées
+                            Permissions absences validées
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('absence.denied') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Permissions refusées
+                            Permissions absences refusées
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('temptation.index') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Autres demandes
                         </x-nav-link>
                     </div>
                 </div>
+                {{-- <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    <div>
+                        <x-nav-link href="{{ route('absence.index') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Modification congés en attente
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('absence.allowed') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Modification congés validées
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('absence.denied') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Modification congés refusées
+                        </x-nav-link>
+                    </div>
+                </div>
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    <div>
+                        <x-nav-link href="{{ route('absence.index') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Attestation travail en attente
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('absence.allowed') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Attestation travail validées
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('absence.denied') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Attestation travail refusées
+                        </x-nav-link>
+                    </div>
+                </div> --}}
             </div>
         </div>
     </li>
@@ -165,7 +212,7 @@
 
     {{-- vacation --}}
     <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
-        <x-nav-link :active="request()->routeIs('pay.*')"
+        <x-nav-link :active="request()->routeIs('leave.*')"
             class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
@@ -189,15 +236,15 @@
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
-                        <x-nav-link href="}" aria-current="true"
+                        <x-nav-link href="{{ route('leave.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Planifier
+                            Voir l'agenda
                         </x-nav-link>
                     </div>
                     <div>
-                        <x-nav-link href="" aria-current="true"
+                        <x-nav-link href="{{ route('leave.create') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Voir l'agenda
+                            Planifier
                         </x-nav-link>
                     </div>
                 </div>
@@ -258,9 +305,21 @@
                         </x-nav-link>
                     </div>
                     <div>
+                        <x-nav-link href="{{ route('holding_wage.index') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Retenus salaires
+                        </x-nav-link>
+                    </div>
+                    <div>
                         <x-nav-link href="{{ route('salary_advantage.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             Avantages salariales
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('leave_type.index') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Types Congés
                         </x-nav-link>
                     </div>
                 </div>

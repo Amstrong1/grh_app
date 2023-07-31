@@ -35,7 +35,6 @@ class StoreCareerRequest extends FormRequest
             'contract' => ['required'],
             'contract_start' => ['required'],
             'contract_end' => ['exclude_if:contract,CDI', 'required', 'after:contract_start'],
-            'password' => ['required', 'confirmed', 'min:8'],
         ];
     }
 }

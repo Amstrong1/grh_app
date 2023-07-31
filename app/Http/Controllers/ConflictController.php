@@ -26,7 +26,7 @@ class ConflictController extends Controller
         if (request()->method() == 'POST') {
             $validate = Validator::make($request->all(), [
                 'start' => 'required|before:end',
-                'end' => 'required:after:start'
+                'end' => 'required|after:start'
             ]);
             if (!$validate->fails()) {
                 $conflicts = Conflict::where('structure_id', Auth::user()->structure_id)

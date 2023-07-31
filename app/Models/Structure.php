@@ -35,6 +35,11 @@ class Structure extends Model
         return $this->hasMany(Filler::class);
     }
 
+    public function holdingWages(): HasMany
+    {
+        return $this->hasMany(HoldingWage::class);
+    }
+
     public function absences(): HasMany
     {
         return $this->hasMany(Absence::class);
@@ -68,5 +73,20 @@ class Structure extends Model
     public function salaryAdvantages(): HasMany
     {
         return $this->hasMany(SalaryAdvantage::class);
+    }
+
+    public function leaves(): HasMany
+    {
+        return $this->hasMany(Leave::class);
+    }
+
+    public function leaveTypes(): HasMany
+    {
+        return $this->hasMany(LeaveType::class);
+    }
+
+    public function temptations(): HasMany
+    {
+        return $this->hasMany(Temptation::class);
     }
 }

@@ -24,9 +24,9 @@ class UpdatePlaceRequest extends FormRequest
         return [
             'department' => 'required',
             'name' => 'required|string|min:2|max:255',
-            'basis_wage' => 'required_without:hourly_rate|numeric',
-            'hourly_rate' => 'required_without:basis_wage|numeric',
-            'overtime_rate' => 'required_without:basis_wage|numeric',
+            'basis_wage' => 'required_without:hourly_rate',
+            'hourly_rate' => 'required_without:basis_wage',
+            'overtime_rate' => 'required_without:basis_wage',
             'overtime_rate_week' => 'required_without:basis_wage'
         ];
     }

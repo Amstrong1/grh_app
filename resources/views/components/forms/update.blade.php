@@ -5,7 +5,7 @@
     <!-- inputs -->
     <div @class(['form-group md:grid grid-cols-2 gap-2 mt-4'])>
         @foreach ($fields as $attr => $value)
-            <div class="m-2">
+            <div @class(['m-2', 'col-span-2' => isset($value['colspan'])])>
                 @php
                     $component = 'inputs.' . $value['field'];
                     $fill = $item->{$attr};
@@ -57,10 +57,21 @@
                             {{ $message }}
                         </p>
                     @enderror
-                @elseif ($value['field'] === 'textarea' || $value['field'] === 'richtext')
+                @elseif ($value['field'] === 'textarea')
                     <x-input-label for="{{ $attr }}" value="{!! $value['title'] !!}"></x-input-label>
 
                     <x-dynamic-component :component="$component" id="{{ $attr }}" name="{{ $attr }}"
+                        type="{{ $value['field'] }}" class="block mt-1 w-full border-2 p-2 rounded outline-0">
+                        {{ old($attr) ?? $fill }}</x-dynamic-component>
+                    @error($attr)
+                        <p class="text-red-500 text-sm pl-2 pt-2">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                @elseif ($value['field'] === 'richtext')
+                    <x-input-label for="{{ $attr }}" value="{!! $value['title'] !!}"></x-input-label>
+
+                    <x-dynamic-component :component="$component" id="editor" name="{{ $attr }}"
                         type="{{ $value['field'] }}" class="block mt-1 w-full border-2 p-2 rounded outline-0">
                         {{ old($attr) ?? $fill }}</x-dynamic-component>
                     @error($attr)

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreCareerRequest;
 use App\Http\Requests\UpdateCareerRequest;
+use App\Notifications\NewUserNotification;
+use App\Notifications\UpdateUserNotification;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class CareerController extends Controller
@@ -82,7 +84,7 @@ class CareerController extends Controller
         $user->firstname = $request->firstname;
         $user->email = $request->email;
         $user->role = UserRoleEnum::User;
-        $user->password = $request->password;
+        // $user->password = $request->password;
 
         if ($user->save()) {
 
@@ -106,6 +108,7 @@ class CareerController extends Controller
 
             if ($career) {
                 Alert::toast("Données enregistrées", 'success');
+                $user->notify(new NewUserNotification());
                 return redirect('career');
             } else {
                 Alert::toast('Une erreur est survenue', 'error');
@@ -169,6 +172,8 @@ class CareerController extends Controller
 
         if ($career_update && $user_update) {
             Alert::toast('Les informations ont été modifiées', 'success');
+            $user = User::find($career->user_id);
+            $user->notify(new UpdateUserNotification());
             return redirect('career');
         } else {
             Alert::toast('Une erreur est survenue', 'error');
@@ -311,14 +316,14 @@ class CareerController extends Controller
                 'title' => 'Fin de contrat',
                 'field' => 'date',
             ],
-            'password' => [
-                'title' => 'Mot de passe du compte',
-                'field' => 'password',
-            ],
-            'password_confirmation' => [
-                'title' => 'Confirmation du mot de passe',
-                'field' => 'password',
-            ],
+            // 'password' => [
+            //     'title' => 'Mot de passe du compte',
+            //     'field' => 'password',
+            // ],
+            // 'password_confirmation' => [
+            //     'title' => 'Confirmation du mot de passe',
+            //     'field' => 'password',
+            // ],
         ];
         return $fields;
     }
