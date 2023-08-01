@@ -5,25 +5,27 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">Liste des conflits</h1>
-
-                        {{-- <div class="flex">
-                            <form action="" method="post">
-                                @csrf
-                                <p class="text-sm mx-2">
-                                    <span>Filtrer du </span>
-                                    <input class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg" type="date" name="start" value="{{ request()->start }}">
-                                    <span> au </span>
-                                    <input class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg" type="date" name="end" value="{{ request()->end }}">
-                                    <x-secondary-button class="py-3 border-gray-300 border-2 shadow-lg" type="submit">
-                                        Appliquer
-                                    </x-secondary-button>
-                                </p>
-                            </form> --}}
                         <x-primary-button>
                             <a href="{{ route('conflict.create') }}">Nouveau</a>
                         </x-primary-button>
-                        {{-- </div> --}}
                     </div>
+
+                    <form action="{{ route('conflict.filter') }}" method="post">
+                        @csrf
+                        <p class="text-sm mx-2">
+                            <span>Filtrer du </span>
+                            <input
+                                class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg"
+                                type="date" name="start" value="{{ request()->start }}">
+                            <span> au </span>
+                            <input
+                                class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg"
+                                type="date" name="end" value="{{ request()->end }}">
+                            <x-secondary-button class="py-3 border-gray-300 border-2 shadow-lg" type="submit">
+                                Appliquer
+                            </x-secondary-button>
+                        </p>
+                    </form>
                     <div class="mt-4">
                         <x-tables.default :resources="$conflicts" :mattributes="$my_attributes" type="conflict" :mactions="$my_actions" />
                     </div>

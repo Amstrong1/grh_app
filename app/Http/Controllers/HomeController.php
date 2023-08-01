@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         $structures = Structure::all()->count();
         $users = User::where('structure_id', Auth::user()->structure_id)->count();
@@ -35,29 +35,6 @@ class HomeController extends Controller
             $leaveSold += $value->last;
         }
 
-        if (request()->method() == 'POST') {
-            $validate = Validator::make($request->all(), [
-                'start' => 'required|before:end',
-                'end' => 'required|after:start'
-            ]);
-            if (!$validate->fails()) {
-                $conflicts = Conflict::where('structure_id', Auth::user()->structure_id)
-                    ->whereBetween('conflict_date', [$request->start, $request->end])
-                    ->count();
-                $absences = Absence::where('structure_id', Auth::user()->structure_id)
-                    ->where('status', 'En attente')
-                    ->whereBetween('start_date', [$request->start, $request->end])
-                    ->orWhere('end_date', [$request->start, $request->end])
-                    ->count();
-                $tasks = Task::where('structure_id', Auth::user()->structure_id)
-                    ->where('status', 'En cours')
-                    ->whereBetween('due_date', [$request->start, $request->end])
-                    ->count();
-                $sanctions = 0;
-                $rewards = 0;
-            }
-        }
-
         return view(
             'app.index',
             compact(
@@ -73,5 +50,59 @@ class HomeController extends Controller
                 'leaveSold',
             )
         );
+    }
+
+    public function filter(Request $request)
+    {
+        $structures = Structure::all()->count();
+        $users = User::where('structure_id', Auth::user()->structure_id)->count();
+        $places = Place::where('structure_id', Auth::user()->structure_id)->count();
+        $departments = Department::where('structure_id', Auth::user()->structure_id)->count();
+
+        $validate = Validator::make($request->all(), [
+            'start' => 'required|before:end',
+            'end' => 'required|after:start'
+        ]);
+        if (!$validate->fails()) {
+            $conflicts = Conflict::where('structure_id', Auth::user()->structure_id)
+                ->whereBetween('conflict_date', [$request->start, $request->end])
+                ->count();
+            $absences = Absence::where('structure_id', Auth::user()->structure_id)
+                ->where('status', 'En attente')
+                ->whereBetween('start_date', [$request->start, $request->end])
+                ->orWhere('end_date', [$request->start, $request->end])
+                ->count();
+            $tasks = Task::where('structure_id', Auth::user()->structure_id)
+                ->where('status', 'En cours')
+                ->whereBetween('due_date', [$request->start, $request->end])
+                ->count();
+            $sanctions = 0;
+            $rewards = 0;
+
+            $leaveSolds = LeaveType::where('assign_to_all', true)->get();
+            $leaveSold = 0;
+
+            foreach ($leaveSolds as $value) {
+                $leaveSold += $value->last;
+            }
+
+            return view(
+                'app.index',
+                compact(
+                    'structures',
+                    'users',
+                    'places',
+                    'departments',
+                    'conflicts',
+                    'absences',
+                    'tasks',
+                    'sanctions',
+                    'rewards',
+                    'leaveSold',
+                )
+            );
+        } else {
+            return redirect('dashboard');
+        }
     }
 }

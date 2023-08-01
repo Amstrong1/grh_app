@@ -10,29 +10,42 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreTemptationRequest;
 use App\Http\Requests\UpdateTemptationRequest;
-use App\Notifications\MewTemptationNotification;
+use App\Notifications\NewTemptationNotification;
 
 class TemptationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         $structure = Auth::user()->structure;
         $temptations = $structure->temptations()->get();
 
-        if (request()->method() == 'POST') {
-            $validate = Validator::make($request->all(), [
-                'start' => 'required|before:end',
-                'end' => 'required|after:start'
-            ]);
-            if (!$validate->fails()) {
-                $temptations = Temptation::where('structure_id', Auth::user()->structure_id)
-                    ->whereBetween('temptation_date', [$request->start, $request->end])
-                    ->get();
-            }
+        return view('app.temptation.index', [
+            'temptations' => $temptations,
+            'my_actions' => $this->temptation_actions(),
+            'my_attributes' => $this->temptation_columns(),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function indexFilter(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'start' => 'required|before:end',
+            'end' => 'required|after:start'
+        ]);
+        if (!$validate->fails()) {
+            $temptations = Temptation::where('structure_id', Auth::user()->structure_id)
+                ->whereBetween('updated_at', [$request->start, $request->end])
+                ->get();
+        } else {
+            return redirect('temptation');
         }
+
         return view('app.temptation.index', [
             'temptations' => $temptations,
             'my_actions' => $this->temptation_actions(),
@@ -58,14 +71,14 @@ class TemptationController extends Controller
         $temptation = new Temptation();
 
         $temptation->structure_id = Auth::user()->structure->id;
-        $temptation->user_id = $request->user;
+        $temptation->user_id = Auth::user()->id;
         $temptation->object = $request->object;
         $temptation->message = $request->message;
 
         if ($temptation->save()) {
             Alert::toast("Données enregistrées", 'success');
             $user = User::where('role', 'admin')->where('structure_id', Auth::user()->structure_id)->first();
-            $user->notify(new MewTemptationNotification());
+            $user->notify(new NewTemptationNotification($temptation->object));
             return redirect('temptation');
         } else {
             Alert::toast('Une erreur est survenue', 'error');
@@ -136,7 +149,7 @@ class TemptationController extends Controller
         $columns = (object) [
             'user_fullname' => 'Réquerant',
             'object' => 'Object',
-            'formatted_temptation_date' => 'Date',
+            'formatted_temptation_date' => 'Date de la demande',
         ];
         return $columns;
     }

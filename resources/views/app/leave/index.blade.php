@@ -13,7 +13,7 @@
                         </x-primary-button>
                     </div>
 
-                    {{-- <form action="{{ route('leave.index') }}" method="POST">
+                    <form action="{{ route('leave.filter') }}" method="POST">
                         @csrf
                         <div class="md:flex text-sm mx-2">
                             <div class="p-2">Filtrer du </div>
@@ -32,7 +32,7 @@
                                 Appliquer
                             </x-secondary-button>
                         </div>
-                    </form> --}}
+                    </form>
 
                     <div class="mt-4">
                         <x-tables.default :resources="$leaves" :mattributes="$my_attributes" type="leave" :mactions="$my_actions" />

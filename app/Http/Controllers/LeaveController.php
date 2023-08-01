@@ -18,28 +18,41 @@ class LeaveController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         $structure = Auth::user()->structure;
         $leaves = $structure->leaves()->get();
 
-        if (request()->method() == 'POST') {
-            $validate = Validator::make($request->all(), [
-                'start' => 'required|before:end',
-                'end' => 'required|after:start'
-            ]);
-            if (!$validate->fails()) {
-                $leaves = Leave::where('structure_id', Auth::user()->structure_id)
-                    ->whereBetween('date_start', [$request->start, $request->end])
-                    ->orWhereBetween('date_start', [$request->start, $request->end])
-                    ->get();
-            }
-        }
         return view('app.leave.index', [
             'leaves' => $leaves,
             'my_actions' => $this->leave_actions(),
             'my_attributes' => $this->leave_columns(),
         ]);
+    }
+
+    /**
+     * filter a listing of the resource by date.
+     */
+    public function indexFilter(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'start' => 'required|before:end',
+            'end' => 'required|after:start'
+        ]);
+        if (!$validate->fails()) {
+            $leaves = Leave::where('structure_id', Auth::user()->structure_id)
+                ->whereBetween('date_start', [$request->start, $request->end])
+                ->orWhereBetween('date_start', [$request->start, $request->end])
+                ->get();
+                
+            return view('app.leave.index', [
+                'leaves' => $leaves,
+                'my_actions' => $this->leave_actions(),
+                'my_attributes' => $this->leave_columns(),
+            ]);
+        } else {
+            return redirect('leave');
+        }
     }
 
     /**
@@ -170,7 +183,7 @@ class LeaveController extends Controller
     private function leave_fields()
     {
         $structure = Auth::user()->structure;
-        $users = $structure->users()->where('role', '!=' ,'admin')->get();
+        $users = $structure->users()->where('role', '!=', 'admin')->get();
         $leaveTypes = $structure->leaveTypes()->get();
 
         $fields = [

@@ -23,35 +23,9 @@ class AbsenceController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index(Request $request)
+    public function index()
     {
         $structure = Auth::user()->structure;
-
-        if ($request->method() == 'POST') {
-            dd($request);
-            $validate = Validator::make($request->all(), [
-                'start' => 'required|before:end',
-                'end' => 'required|after:start'
-            ]);
-            if (!$validate->fails()) {
-                if (Auth::user()->role === UserRoleEnum::User) {
-                    $absences = $structure->absences()
-                        ->where('user_id', Auth::id())
-                        ->where('status', PermissionStatusEnum::Pending)
-                        ->whereBetween('start_date', [$request->start, $request->end])
-                        ->orWhereBetween('end_date', [$request->start, $request->end])
-                        ->get();
-                } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
-                    $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Pending, $request->start, $request->end);
-                } else {
-                    $absences = $structure->absences()
-                        ->where('status', PermissionStatusEnum::Pending)
-                        ->whereBetween('start_date', [$request->start, $request->end])
-                        ->orWhereBetween('end_date', [$request->start, $request->end])
-                        ->get();
-                }
-            }
-        }
 
         if (Auth::user()->role === UserRoleEnum::User) {
             $absences = $structure->absences()
@@ -73,7 +47,46 @@ class AbsenceController extends Controller
         ]);
     }
 
-    public function indexAllowed(Request $request)
+
+    /**
+     * filter a listing of the resource by date.
+     */
+
+    public function indexFilter(Request $request)
+    {
+        $structure = Auth::user()->structure;
+        $validate = Validator::make($request->all(), [
+            'start' => 'required|before:end',
+            'end' => 'required|after:start'
+        ]);
+        if (!$validate->fails()) {
+            if (Auth::user()->role === UserRoleEnum::User) {
+                $absences = $structure->absences()
+                    ->where('user_id', Auth::id())
+                    ->where('status', PermissionStatusEnum::Pending)
+                    ->whereBetween('start_date', [$request->start, $request->end])
+                    ->orWhereBetween('end_date', [$request->start, $request->end])
+                    ->get();
+            } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+                $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Pending, $request->start, $request->end);
+            } else {
+                $absences = $structure->absences()
+                    ->where('status', PermissionStatusEnum::Pending)
+                    ->whereBetween('start_date', [$request->start, $request->end])
+                    ->orWhereBetween('end_date', [$request->start, $request->end])
+                    ->get();
+            }
+            return view('app.absence.index', [
+                'absences' => $absences,
+                'my_attributes' => $this->absence_columns(),
+                'my_actions' => $this->absence_actions(),
+            ]);
+        } else {
+            return redirect('absence');
+        }
+    }
+
+    public function indexAllowed()
     {
         $structure = Auth::user()->structure;
         if (Auth::user()->role === UserRoleEnum::User) {
@@ -82,7 +95,7 @@ class AbsenceController extends Controller
                 ->where('status', PermissionStatusEnum::Allowed)
                 ->get();
         } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
-            $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Allowed, $request->start, $request->end);
+            $absences = $this->getAbsence(PermissionStatusEnum::Allowed);
         } else {
             $absences = $structure->absences()
                 ->where('status', PermissionStatusEnum::Allowed)
@@ -95,7 +108,41 @@ class AbsenceController extends Controller
         ]);
     }
 
-    public function indexDenied(Request $request)
+    public function indexAllowedFilter(Request $request)
+    {
+        $structure = Auth::user()->structure;
+        $validate = Validator::make($request->all(), [
+            'start' => 'required|before:end',
+            'end' => 'required|after:start'
+        ]);
+        if (!$validate->fails()) {
+            if (Auth::user()->role === UserRoleEnum::User) {
+                $absences = $structure->absences()
+                    ->where('user_id', Auth::id())
+                    ->where('status', PermissionStatusEnum::Allowed)
+                    ->whereBetween('start_date', [$request->start, $request->end])
+                    ->orWhereBetween('end_date', [$request->start, $request->end])
+                    ->get();
+            } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+                $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Allowed, $request->start, $request->end);
+            } else {
+                $absences = $structure->absences()
+                    ->where('status', PermissionStatusEnum::Allowed)
+                    ->whereBetween('start_date', [$request->start, $request->end])
+                    ->orWhereBetween('end_date', [$request->start, $request->end])
+                    ->get();
+            }
+            return view('app.absence.index', [
+                'absences' => $absences,
+                'my_attributes' => $this->absence_columns(),
+                'my_actions' => $this->absence_actions(),
+            ]);
+        } else {
+            return redirect()->route('absence.allowed');
+        }
+    }
+
+    public function indexDenied()
     {
         $structure = Auth::user()->structure;
         if (Auth::user()->role === UserRoleEnum::User) {
@@ -104,7 +151,7 @@ class AbsenceController extends Controller
                 ->where('status', PermissionStatusEnum::Denied)
                 ->get();
         } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
-            $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Denied, $request->start, $request->end);
+            $absences = $this->getAbsence(PermissionStatusEnum::Denied);
         } else {
             $absences = $structure->absences()
                 ->where('status', PermissionStatusEnum::Denied)
@@ -115,6 +162,40 @@ class AbsenceController extends Controller
             'my_attributes' => $this->absence_columns(),
             'my_actions' => [],
         ]);
+    }
+
+    public function indexDeniedFilter(Request $request)
+    {
+        $structure = Auth::user()->structure;
+        $validate = Validator::make($request->all(), [
+            'start' => 'required|before:end',
+            'end' => 'required|after:start'
+        ]);
+        if (!$validate->fails()) {
+            if (Auth::user()->role === UserRoleEnum::User) {
+                $absences = $structure->absences()
+                    ->where('user_id', Auth::id())
+                    ->where('status', PermissionStatusEnum::Denied)
+                    ->whereBetween('start_date', [$request->start, $request->end])
+                    ->orWhereBetween('end_date', [$request->start, $request->end])
+                    ->get();
+            } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+                $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Denied, $request->start, $request->end);
+            } else {
+                $absences = $structure->absences()
+                    ->where('status', PermissionStatusEnum::Denied)
+                    ->whereBetween('start_date', [$request->start, $request->end])
+                    ->orWhereBetween('end_date', [$request->start, $request->end])
+                    ->get();
+            }
+            return view('app.absence.index', [
+                'absences' => $absences,
+                'my_attributes' => $this->absence_columns(),
+                'my_actions' => $this->absence_actions(),
+            ]);
+        } else {
+            return redirect()->route('absence.denied');
+        }
     }
 
     /**

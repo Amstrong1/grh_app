@@ -20,7 +20,10 @@
                         </x-primary-button>
                     </div>
 
-                    {{-- <form action="{{ route('absence.index') }}" method="POST">
+                    <form method="POST"
+                        @if (request()->routeIs('absence.allowed')) action="{{ route('absence.allowed.filter') }}"
+                        @elseif (request()->routeIs('absence.denied')) action="{{ route('absence.denied.filter') }}"
+                        @elseif (request()->routeIs('absence.index')) action="{{ route('absence.filter') }}" @endif>
                         @csrf
                         <div class="md:flex text-sm mx-2">
                             <div class="p-2">Filtrer du </div>
@@ -39,7 +42,7 @@
                                 Appliquer
                             </x-secondary-button>
                         </div>
-                    </form> --}}
+                    </form>
 
                     <div class="mt-4">
                         <x-tables.default :resources="$absences" :mattributes="$my_attributes" type="absence" :mactions="$my_actions" />
