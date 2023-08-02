@@ -168,9 +168,15 @@ class RegularTaskController extends Controller
     public function destroy(RegularTask $regularTask)
     {
         try {
-            $regularTask = $regularTask->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
-            return redirect('regular_task');
+            $usersDel = RegularTaskUser::where('regular_task_id', $regularTask->id)->delete();
+            if ($usersDel) {
+                $regularTask = $regularTask->delete();
+                Alert::success('Opération effectuée', 'Suppression éffectué');
+                return redirect('regular_task');
+            } else {
+                Alert::error('Erreur', 'Element introuvable');
+                return redirect()->back();
+            }
         } catch (\Exception $e) {
             Alert::error('Erreur', 'Element introuvable');
             return redirect()->back();
@@ -196,7 +202,7 @@ class RegularTaskController extends Controller
         } else {
             $actions = (object) array(
                 'edit' => 'Modifier',
-                // 'delete' => "Supprimer",
+                'delete' => "Supprimer",
             );
         }
 

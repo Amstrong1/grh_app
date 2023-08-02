@@ -155,9 +155,16 @@ class ConflictController extends Controller
     public function destroy(Conflict $conflict)
     {
         try {
-            $conflict = $conflict->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
-            return redirect('conflict');
+            $usersDel = ConflictUser::where('conflict_id', $conflict->id)->delete();
+
+            if ($usersDel) {
+                $conflict = $conflict->delete();
+                Alert::success('Opération effectuée', 'Suppression éffectué');
+                return redirect('conflict');
+            } else {
+                Alert::error('Erreur', 'Element introuvable');
+                return redirect()->back();
+            }
         } catch (\Exception $e) {
             Alert::error('Erreur', 'Element introuvable');
             return redirect()->back();
@@ -183,7 +190,7 @@ class ConflictController extends Controller
         } else {
             $actions = (object) array(
                 'edit' => "Modifier",
-                // 'delete' => "Supprimer",
+                'delete' => "Supprimer",
             );
         }
         return $actions;

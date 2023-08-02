@@ -299,9 +299,15 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         try {
-            $task = $task->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
-            return redirect('task');
+            $usersDel = TaskUser::where('task_id', $task->id)->delete();
+            if ($usersDel) {
+                $task = $task->delete();
+                Alert::success('Opération effectuée', 'Suppression éffectué');
+                return redirect('task');
+            } else {
+                Alert::error('Erreur', 'Element introuvable');
+                return redirect()->back();
+            }
         } catch (\Exception $e) {
             Alert::error('Erreur', 'Element introuvable');
             return redirect()->back();
@@ -328,7 +334,7 @@ class TaskController extends Controller
         } else {
             $actions = (object) array(
                 'edit' => 'Modifier',
-                // 'delete' => "Supprimer",
+                'delete' => "Supprimer",
             );
         }
 
