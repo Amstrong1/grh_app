@@ -118,7 +118,7 @@ class HoldingWageController extends Controller
         $columns = (object) [
             'name' => 'Nom',
             'rate' => 'Valeur en pourcentage',
-            'amount' => 'Montant',
+            'formatted_amount' => 'Montant',
         ];
         return $columns;
     }
@@ -141,11 +141,11 @@ class HoldingWageController extends Controller
             ],
             'rate' => [
                 'title' => 'Pourcentage',
-                'field' => 'number'
+                'field' => 'text'
             ],
             'amount' => [
                 'title' => 'Montant',
-                'field' => 'number'
+                'field' => 'text'
             ],
         ];
         return $fields;

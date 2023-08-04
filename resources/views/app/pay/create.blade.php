@@ -5,17 +5,19 @@
                 <div class="p-6 text-gray-900">
                     <h1>Nouvelle fiche de paie</h1>
 
-                    <form action="{{ route('pay.store') }}" method="POST">
-                        @csrf
+                    @if (request()->routeIs('pay.create'))
+                        <form action="{{ route('pay.store') }}" method="POST">
+                            @csrf
 
-                        @livewire('select-employee')
+                            @livewire('select-employee')
 
-                        <div class="flex items-center justify-end mt-8">
-                            <x-primary-button class="ml-4">
-                                {{ __('Créer fiche de paie') }}
-                            </x-primary-button>
-                        </div>
-                    </form>
+                            <div class="flex items-center justify-end mt-8">
+                                <x-primary-button class="ml-4">
+                                    {{ __('Créer fiche de paie') }}
+                                </x-primary-button>
+                            </div>
+                        </form>
+                    @endif
 
                 </div>
             </div>

@@ -9,9 +9,7 @@ class PasswordController extends Controller
 {
     public function edit($user)
     {
-        // dd($user);
         $user = User::find($user);
-        // dd($user);
         return view('app.password.create', compact('user'));
     }
 

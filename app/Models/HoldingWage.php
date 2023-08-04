@@ -11,6 +11,8 @@ class HoldingWage extends Model
 {
     use HasFactory;
     
+    protected $append = ['formatted_amount'];
+    
     public function structure(): BelongsTo
     {
         return $this->belongsTo(Structure::class);
@@ -19,5 +21,10 @@ class HoldingWage extends Model
     public function pays(): BelongsToMany
     {
         return $this->belongsToMany(Pay::class, 'holding_wage_pays');
+    }
+
+    public function getFormattedAmountAttribute()
+    {
+        return number_format($this->amount, 2, '.', ' ');
     }
 }

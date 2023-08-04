@@ -1,177 +1,170 @@
-<x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
-                <div class="p-6 md:px-10 text-gray-900">
-                    <div class="flex justify-between">
-                        <div class="text-sm">
-                            <div class="flex items-center align-middle">
-                                <!-- Logo -->
-                                <div class="shrink-0 flex items-center">
-                                    <a href="{{ route('dashboard') }}">
-                                        <img class="h-14" src="{{ url('storage/' . Auth::user()->structure->logo) }}"
-                                            alt="{{ Auth::user()->structure->name }}" loading="lazy">
-                                    </a>
-                                </div>
+<!DOCTYPE html>
+<html lang="fr">
 
-                                <!-- Name -->
-                                <div class="ml-2 md:flex">
-                                    {{ Auth::user()->structure->name }}
-                                </div>
-                            </div>
-                            <div class="my-4">
-                                <p>
-                                    Siège : {{ Auth::user()->structure->adresse }}
-                                </p>
-                                <p>
-                                    IFU : {{ Auth::user()->structure->ifu }}
-                                </p>
-                                <p>
-                                    RCCM : {{ Auth::user()->structure->rccm }}
-                                </p>
-                                <p>
-                                    Email : {{ Auth::user()->structure->email }}
-                                </p>
-                                <p>
-                                    Tel : {{ Auth::user()->structure->contact }}
-                                </p>
-                            </div>
-                        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de paie</title>
 
-                        <div>
-                            <h1>
-                                BULLETIN DE PAIE
-                            </h1>
-                            <p>Du {{ $pay->period_start }} au {{ $pay->period_end }}</p>
-                            <p>Payé le {{ $pay->pay_date }}</p>
-                        </div>
-                    </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
 
-                    <div class="flex justify-between">
-                        <div>
-                            <p>
-                                {{ $pay->user->name . ' ' . $pay->user->firstname }}
-                            </p>
-                            <p>
-                                {{ $pay->user->career->adress }}
-                            </p>
-                            <p>
-                                {{ $pay->user->career->contact }}
-                            </p>
-                        </div>
+        .payslip {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
 
-                        <div>
-                            <p>
-                                N° Sécurité Sociale : {{ $pay->user->career->social_security_number }}
-                            </p>
-                            <p>
-                                Matricule : {{ $pay->user->career->matricule }}
-                            </p>
-                            <p>
-                                Date d'entrée : {{ $pay->user->career->registration_date }}
-                            </p>
-                            <p>
-                                Emploi : {{ $pay->user->career->place->name }}
-                            </p>
-                            <p>
-                                Contrat : {{ $pay->user->career->contract }}
-                            </p>
-                        </div>
-                    </div>
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-                    <div class="flex flex-col m-4">
-                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                                <div class="overflow-hidden">
-                                    <table class="min-w-full text-sm border">
-                                        <thead class="font-medium border">
-                                            <tr>
-                                                <th scope="col" class="px-6 py-4 text-left">Libellé</th>
-                                                <th scope="col" class="px-6 py-4 text-left">Unité</th>
-                                                <th scope="col" class="px-6 py-4 text-left">Montant</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="whitespace-nowrap px-6 py-4 font-bold">Salaire de base</td>
-                                                <td class="whitespace-nowrap px-6 py-4">
-                                                    {{ $pay->user->career->place->basis_wage }}</td>
-                                                <td class="whitespace-nowrap px-6 py-4">
-                                                    {{ $pay->user->career->place->basis_wage }}</td>
-                                            </tr>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
 
-                                            <tr>
-                                                <td class="whitespace-nowrap px-6 py-4 font-bold">Montant horaire
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-4">
-                                                    {{ $pay->user->career->place->hourly_rate }}</td>
-                                                <td class="whitespace-nowrap px-6 py-4">
-                                                    {{ $pay->user->career->place->hourly_rate * $pay->hour_done }}</td>
-                                            </tr>
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
 
-                                            <tr>
-                                                <td class="whitespace-nowrap px-6 py-4 font-bold">Montant horaire
-                                                    supplémentaire</td>
-                                                <td class="whitespace-nowrap px-6 py-4">
-                                                    {{ $pay->user->career->place->overtime_rate }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-4">
-                                                    {{ $pay->user->career->place->overtime_rate * $pay->overtime_done }}
-                                                </td>
-                                            </tr>
+        th {
+            background-color: #f2f2f2;
+        }
 
-                                            @if ($payAds->count() !== 0)
-                                                <tr>
-                                                    <td colspan="3" class="whitespace-nowrap px-6 pt-4 font-semibold italic">
-                                                        Avantages salariales</td>
-                                                </tr>
-                                            @endif
-                                            @foreach ($payAds as $payAd)
-                                                <tr>
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">
-                                                        {{ $payAd->name }}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">
-                                                        {{ $payAd->amount ?? $payAd->rate . '%' }}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">
-                                                        {{ $payAd->pivot->amount }}</td>
-                                                </tr>
-                                            @endforeach
+        .earnings th,
+        .deductions th,
+        .net-pay th {
+            text-align: left;
+        }
 
-                                            <tr>
-                                                <td class="whitespace-nowrap px-6 py-4 font-bold">Salaire brut</td>
-                                                <td class="whitespace-nowrap px-6 py-4 font-bold" colspan="2">{{ $pay->gross_wage }}</td>
-                                            </tr>
+        .earnings td:last-child,
+        .deductions td:last-child,
+        .net-pay td:last-child {
+            text-align: right;
+        }
+    </style>
+</head>
 
-                                            @if ($payFillers->count() !== 0)
-                                                <tr>
-                                                    <td colspan="3" class="whitespace-nowrap px-6 pt-4 font-semibold italic">
-                                                        Imputations salariales</td>
-                                                </tr>
-                                            @endif
-                                            @foreach ($payFillers as $payFiller)
-                                                <tr>
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">
-                                                        {{ $payFiller->name }}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">
-                                                        {{ $payFiller->amount ?? $payFiller->rate . '%' }}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">
-                                                        {{ $payFiller->pivot->amount }}</td>
-                                                </tr>
-                                            @endforeach
-
-                                            <tr>
-                                                <td class="whitespace-nowrap px-6 py-4 font-bold">Salaire net</td>
-                                                <td class="whitespace-nowrap px-6 py-4 font-bold" colspan="2">
-                                                    {{ $pay->net_wage }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<body>
+    <div class="payslip">
+        <h1>BULLETIN DE PAIE</h1>
+        <table class="employee-details">
+            <tr>
+                <td><strong>Employé :</strong></td>
+                <td>{{ $pay->user->name . ' ' . $pay->user->firstname }}</td>
+            </tr>
+            <tr>
+                <td><strong>Poste :</strong></td>
+                <td>{{ $pay->user->career->place->name }}</td>
+            </tr>
+        </table>
+        <table class="details">
+            <tr>
+                <td><strong>Période :</strong></td>
+                <td>{{ getFormattedDate($pay->period_start) }} - {{ getFormattedDate($pay->period_end) }}</td>
+            </tr>
+            <tr>
+                <td><strong>Payé le :</strong></td>
+                <td>{{ getFormattedDate($pay->pay_date) }}</td>
+            </tr>
+        </table>
+        <table class="earnings">
+            <tr>
+                <th>Gains</th>
+                <th>Unité</th>
+                <th>Montant</th>
+            </tr>
+            <tr>
+                <td>Salaire de base</td>
+                <td colspan="2">{{ $pay->user->career->place->basis_wage }}</td>
+            </tr>
+            <tr>
+                <td>Montant horaire</td>
+                <td>{{ $pay->user->career->place->hourly_rate }}</td>
+                <td>{{ $pay->user->career->place->hourly_rate * $pay->hour_done }}</td>
+            </tr>
+            <tr>
+                <td>Montant horaire
+                    supplémentaire</td>
+                <td>{{ $pay->user->career->place->overtime_rate }}</td>
+                <td>{{ $pay->user->career->place->overtime_rate * $pay->overtime_done }}</td>
+            </tr>
+            @foreach ($payAds as $payAd)
+                <tr>
+                    <td> {{ $payAd->name }}</td>
+                    <td> {{ $payAd->amount ?? $payAd->rate . '%' }}</td>
+                    <td> {{ $payAd->pivot->amount }}</td>
+                </tr>
+            @endforeach
+            <tr>
+                <td><strong>Salaire brut</strong></td>
+                <td colspan="2"><strong>{{ $pay->gross_wage }}</strong></td>
+            </tr>
+        </table>
+        <table class="deductions">
+            <tr>
+                <th>Deductions</th>
+                <th>Unité</th>
+                <th>Montant</th>
+            </tr>
+            @php
+                $fillers = 0;
+                $holds = 0;
+            @endphp
+            @foreach ($payFillers as $payFiller)
+                <tr>
+                    <td> {{ $payFiller->name }}</td>
+                    <td> {{ $payFiller->amount ?? $payFiller->rate . '%' }}</td>
+                    <td> {{ $payFiller->pivot->amount }}</td>
+                </tr>
+                @php
+                    $fillers += $payFiller->pivot->amount;
+                @endphp
+            @endforeach
+            @foreach ($payHolders as $payHolder)
+                <tr>
+                    <td> {{ $payHolder->name }}</td>
+                    <td> {{ $payHolder->amount ?? $payHolder->rate . '%' }}</td>
+                    <td> {{ $payHolder->pivot->amount }}</td>
+                </tr>
+                @php
+                    $holds += $payHolder->pivot->amount;
+                @endphp
+            @endforeach
+            <tr>
+                <td><strong>Total Deductions</strong></td>
+                <td colspan="2"><strong>{{ $fillers + $holds }}</strong></td>
+            </tr>
+        </table>
+        <table class="net-pay">
+            <tr>
+                <th>Salaire Net</th>
+                <th>Montant</th>
+            </tr>
+            <tr>
+                <td>Salaire Brut</td>
+                <td>{{ $pay->gross_wage }}</td>
+            </tr>
+            <tr>
+                <td>Total Deductions</td>
+                <td>{{ $fillers + $holds }}</td>
+            </tr>
+            <tr>
+                <td><strong>Salaire Net</strong></td>
+                <td><strong>{{ $pay->net_wage }}</strong></td>
+            </tr>
+        </table>
     </div>
-</x-app-layout>
+</body>
+
+</html>

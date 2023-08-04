@@ -12,7 +12,7 @@
 
                         <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
                             <div class="p-4">
-                                <x-forms.create :fields="$my_fields" type="salaryAdvantage" />
+                                <x-forms.create :fields="$my_fields" type="salary_advantage" />
                             </div>
                         </x-modal>
                     </div>

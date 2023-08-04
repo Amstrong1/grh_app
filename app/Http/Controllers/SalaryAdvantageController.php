@@ -117,7 +117,7 @@ class SalaryAdvantageController extends Controller
     {
         $columns = (object) [
             'name' => 'Nom',
-            'amount' => 'Montant',
+            'formatted_amount' => 'Montant',
             'rate' => 'Pourcentage',
         ];
         return $columns;
@@ -141,11 +141,11 @@ class SalaryAdvantageController extends Controller
             ],
             'rate' => [
                 'title' => 'Pourcentage',
-                'field' => 'number'
+                'field' => 'text'
             ],
             'amount' => [
                 'title' => 'Montant',
-                'field' => 'number'
+                'field' => 'text'
             ],
         ];
         return $fields;

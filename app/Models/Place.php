@@ -51,21 +51,21 @@ class Place extends Model
 
     public function getFormattedbasisWageAttribute()
     {
-        return number_format($this->basis_wage, 2, ',', ' ');
+        return number_format($this->basis_wage, 2, '.', ' ');
     }
 
     public function getFormattedHourlyRateAttribute()
     {
-        return number_format($this->hourly_rate, 2, ',', ' ');
+        return number_format($this->hourly_rate, 2, '.', ' ');
     }
 
     public function getFormattedOvertimeRateAttribute()
     {
-        return number_format($this->overtime_rate, 2, ',', ' ');
+        return number_format($this->overtime_rate, 2, '.', ' ');
     }
 
     public function getFormattedOvertimeRateWeekAttribute()
     {
-        return number_format($this->overtime_rate_week, 2, ',', ' ');
+        return number_format($this->overtime_rate_week, 2, '.', ' ');
     }
 }

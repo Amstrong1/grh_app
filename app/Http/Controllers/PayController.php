@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+
 use App\Models\Pay;
 use App\Models\User;
 use App\Models\Filler;
 use App\Models\FillerPay;
 use App\Models\Department;
+use App\Models\HoldingWage;
 use App\Enums\UserRoleEnum;
+use Illuminate\Support\Str;
+use App\Models\HoldingWagePay;
 use App\Models\SalaryAdvantage;
 use App\Models\PaySalaryAdvantage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePayRequest;
 use App\Http\Requests\UpdatePayRequest;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Notifications\NewPayslipNotification;
 
 class PayController extends Controller
 {
@@ -23,6 +29,7 @@ class PayController extends Controller
     public function index()
     {
         $structure = Auth::user()->structure;
+
         return view('app.pay.index', [
             'pays' => $structure->pays()->get(),
             'my_actions' => $this->pay_actions(),
@@ -60,43 +67,52 @@ class PayController extends Controller
         $gross_wage = 0;
 
         $ads = 0;
+        $holds = 0;
         $fillers = 0;
 
         $salaryAdvantageCount = SalaryAdvantage::where('structure_id', Auth::user()->structure_id)->count();
+        $holdingWageCount = HoldingWage::where('structure_id', Auth::user()->structure_id)->count();
         $fillersCount = Filler::where('structure_id', Auth::user()->structure_id)->count();
         $user = User::where('id', $request->user)->first();
 
         // somme des avantages salariales
         for ($i = 0; $i < $salaryAdvantageCount; $i++) {
             if ($request->boolean('advantageCheckbox' . $i) === true) {
-                if (gettype($request->input('advantageAmount' . $i)) === 'integer') {
-                    $ads += $request->input('advantageAmount' . $i);
-                } else {
-                    $ads += (intval($request->input('advantageAmount' . $i)) * $user->career->place->basis_wage) / 100;
-                }
+                $ads += intval($request->input('advantageAmount' . $i)) * intval($request->input('advantageQte' . $i));
             }
         }
 
         // calcul du salaire brut
         if ($user->career->place->basis_wage !== null) {
-            $gross_wage = $user->career->place->basis_wage + ($user->career->place->overtime_rate * $request->overtime_done) + $ads;
+            $gross_wage = $user->career->place->basis_wage + ($user->career->place->overtime_rate * $request->overtime_done) + ($user->career->place->overtime_rate_week * $request->overtime_done_week) + $ads;
         } else {
-            $gross_wage = ($user->career->place->hourly_rate * $request->hours_done) + ($user->career->place->overtime_rate * $request->overtime_done) + $ads;
+            $gross_wage = ($user->career->place->hourly_rate * $request->hours_done) + ($user->career->place->overtime_rate * $request->overtime_done) + ($user->career->place->overtime_rate_week * $request->overtime_done_week) + $ads;
+        }
+
+        // somme des retenues salariales
+        for ($i = 0; $i < $holdingWageCount; $i++) {
+            if ($request->boolean('holdingWageCheckbox' . $i) === true) {
+                if (str_contains($request->input('holdingWageAmount' . $i), '%')) {
+                    $holds += ((intval($request->input('holdingWageAmount' . $i)) * $gross_wage) / 100) * $request->input('holdingWageQte' . $i);
+                } else {
+                    $holds += intval($request->input('holdingWageAmount' . $i)) * intval($request->input('holdingWageQte' . $i));
+                }
+            }
         }
 
         // somme des imputations salariales
         for ($i = 0; $i < $fillersCount; $i++) {
             if ($request->boolean('fillerCheckbox' . $i) === true) {
-                if (gettype($request->input('fillerAmount' . $i)) === 'integer') {
-                    $fillers += $request->input('fillerAmount' . $i);
-                } else {
+                if (str_contains($request->input('fillerAmount' . $i), '%')) {
                     $fillers += (intval($request->input('fillerAmount' . $i)) * $gross_wage) / 100;
+                } else {
+                    $fillers += intval($request->input('fillerAmount' . $i));
                 }
             }
         }
 
         // calcul du salaire net
-        $net_wage = $gross_wage - $fillers;
+        $net_wage = $gross_wage - $fillers - $holds;
 
         $pay = new Pay();
 
@@ -112,37 +128,78 @@ class PayController extends Controller
         $pay->pay_date = $request->pay_date;
 
         if ($pay->save()) {
+            // store each salary advantage
             for ($i = 0; $i < $salaryAdvantageCount; $i++) {
                 if ($request->boolean('advantageCheckbox' . $i) === true) {
-                    $salaryAdvantages = new PaySalaryAdvantage();
 
-                    $salaryAdvantages->pay_id = $pay->id;
-                    $salaryAdvantages->salary_advantage_id = $request->input('advantageId' . $i);
-                    $salaryAdvantages->amount = $request->input('advantageAmount' . $i);
-
-                    $salaryAdvantages->save();
-                }
-            }
-
-            for ($i = 0; $i < $fillersCount; $i++) {
-                if ($request->boolean('fillerCheckbox' . $i) === true) {
-                    $filler = new FillerPay();
-
-                    $filler->pay_id = $pay->id;
-                    $filler->filler_id = $request->input('fillerId' . $i);
-
-                    if (gettype($request->input('fillerAmount' . $i)) === 'integer') {
-                        $filler->amount = $request->input('fillerAmount' . $i);
+                    if (str_contains($request->input('advantageAmount' . $i), '%')) {
+                        $amount = ((intval($request->input('advantageAmount' . $i)) * $gross_wage) / 100) * $request->input('advantageQte' . $i);
                     } else {
-                        $filler->amount = (intval($request->input('fillerAmount' . $i)) * $gross_wage) / 100;
+                        $amount = intval($request->input('advantageAmount' . $i)) * intval($request->input('advantageQte' . $i));
                     }
 
-                    $filler->save();
+                    PaySalaryAdvantage::create([
+                        'pay_id' => $pay->id,
+                        'salary_advantage_id' => $request->input('advantageId' . $i),
+                        'amount' => $amount,
+                    ]);
                 }
             }
 
-            Alert::toast('Fiche de paie enregistrée', 'success');
-            return redirect('pay');
+            // store each filler
+            for ($i = 0; $i < $fillersCount; $i++) {
+                if ($request->boolean('fillerCheckbox' . $i) === true) {
+
+                    if (str_contains($request->input('fillerAmount' . $i), '%')) {
+                        $amount = (intval($request->input('fillerAmount' . $i)) * $gross_wage) / 100;
+                    } else {
+                        $amount = intval($request->input('fillerAmount' . $i));
+                    }
+
+                    FillerPay::create([
+                        'pay_id' => $pay->id,
+                        'filler_id' => $request->input('fillerId' . $i),
+                        'amount' => $amount,
+                    ]);
+                }
+            }
+
+            // store each holding wages
+            for ($i = 0; $i < $holdingWageCount; $i++) {
+                if ($request->boolean('holdingWageCheckbox' . $i) === true) {
+
+                    if (str_contains($request->input('holdingWagerAmount' . $i), '%')) {
+                        $amount = ((intval($request->input('holdingWageAmount' . $i)) * $gross_wage) / 100) * $request->input('holdingWageQte' . $i);
+                    } else {
+                        $amount = intval($request->input('holdingWageAmount' . $i)) * intval($request->input('holdingWageQte' . $i));
+                    }
+
+                    HoldingWagePay::create([
+                        'pay_id' => $pay->id,
+                        'holding_wage_id' => $request->input('holdingWageId' . $i),
+                        'amount' => $amount,
+                    ]);
+                }
+            }
+
+            //save payslip pdf
+            $payFillers = $pay->fillers()->get();
+            $payHolders = $pay->holdingWages()->get();
+            $payAds = $pay->salaryAdvantages()->get();
+
+            $path = Str::slug('payslip' . $pay->id . '_' . time()) . ".pdf";
+
+            $pdf = PDF::loadView('app.pay.show', compact('pay', 'payFillers', 'payAds', 'payHolders'));
+            $pdf->save(public_path('storage/payslips/' . $path));
+
+            $pay->payslip = $path;
+
+            if ($pay->save) {
+                Alert::toast('Fiche de paie enregistrée', 'success');
+                $user = User::find($pay->user_id);
+                $user->notify(new NewPayslipNotification($pay->payslip, $pay->period_start, $pay->period_end));
+                return redirect('pay');
+            }
         } else {
             Alert::toast('Une erreur est survenue', 'error');
             return back();
@@ -155,13 +212,11 @@ class PayController extends Controller
     public function show(Pay $pay)
     {
         $payFillers = $pay->fillers()->get();
+        $payHolders = $pay->holdingWages()->get();
         $payAds = $pay->salaryAdvantages()->get();
 
-        return view('app.pay.show', [
-            'pay' => $pay,
-            'payAds' => $payAds,
-            'payFillers' => $payFillers,
-        ]);
+        $pdf = PDF::loadView('app.pay.show', compact('pay', 'payFillers', 'payAds', 'payHolders'));
+        return $pdf->stream();
     }
 
     /**
@@ -186,6 +241,10 @@ class PayController extends Controller
     public function destroy(Pay $pay)
     {
         try {
+            FillerPay::where('pay_id', $pay->id)->delete();
+            HoldingWagePay::where('pay_id', $pay->id)->delete();
+            PaySalaryAdvantage::where('pay_id', $pay->id)->delete();
+
             $pay = $pay->delete();
             Alert::success('Opération effectuée', 'Suppression éffectué');
             return redirect('pay');

@@ -6,6 +6,7 @@ use App\Models\Filler;
 use Livewire\Component;
 use App\Models\Department;
 use App\Enums\UserRoleEnum;
+use App\Models\HoldingWage;
 use App\Models\SalaryAdvantage;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +16,7 @@ class SelectEmployee extends Component
     public $fillers;
     public $structure;
     public $departments;
+    public $holdingWages;
     public $salaryAdvantages;
 
     public $user_id;
@@ -22,6 +24,7 @@ class SelectEmployee extends Component
     public $userPlaceBasisWage;
     public $userPlaceHourlyRate;
     public $userPlaceOvertimeRate;
+    public $userPlaceOvertimeRateWeek;
 
     protected $rules = [
         'user_id' => 'required',
@@ -41,6 +44,7 @@ class SelectEmployee extends Component
         $this->userPlaceBasisWage = $getFirstUser->career->place->basis_wage;
         $this->userPlaceHourlyRate = $getFirstUser->career->place->hourly_rate;
         $this->userPlaceOvertimeRate = $getFirstUser->career->place->overtime_rate;
+        $this->userPlaceOvertimeRateWeek = $getFirstUser->career->place->overtime_rate_week;
 
         $this->users = $this->structure->users()
             ->where('role', '!=', UserRoleEnum::Admin)
@@ -50,6 +54,7 @@ class SelectEmployee extends Component
         $this->departments = Department::all();
         $this->fillers = Filler::all();
         $this->salaryAdvantages = SalaryAdvantage::all();
+        $this->holdingWages = HoldingWage::all();
     }
 
     public function render()
@@ -69,5 +74,6 @@ class SelectEmployee extends Component
         $this->userPlaceBasisWage = $getSelectedUser->career->place->basis_wage;
         $this->userPlaceHourlyRate = $getSelectedUser->career->place->hourly_rate;
         $this->userPlaceOvertimeRate = $getSelectedUser->career->place->overtime_rate;
+        $this->userPlaceOvertimeRateWeek = $getSelectedUser->career->place->overtime_rate_week;
     }
 }
