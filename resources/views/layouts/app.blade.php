@@ -40,6 +40,8 @@
             left: 0;
         }
     </style>
+    
+    @laravelPWA
 
     @livewireStyles
 
