@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'LaravelPWA',
+    'name' => 'E-GRH App',
     'manifest' => [
         'name' => env('APP_NAME', 'My PWA App'),
         'short_name' => env('APP_NAME'),
@@ -59,8 +59,8 @@ return [
         ],
         'shortcuts' => [
             [
-                'name' => 'Shortcut Link 1',
-                'description' => 'Shortcut Link 1 Description',
+                'name' => 'E-GRH',
+                'description' => 'Application de gestion de ressources humaines',
                 'url' => '/',
                 'icons' => [
                     "src" => "/images/icons/icon-72x72.png",
@@ -68,8 +68,8 @@ return [
                 ]
             ],
             [
-                'name' => 'Shortcut Link 2',
-                'description' => 'Shortcut Link 2 Description',
+                'name' => 'E-GRH',
+                'description' => 'Application de gestion de ressources humaines',
                 'url' => '/dashboard'
             ]
         ],
