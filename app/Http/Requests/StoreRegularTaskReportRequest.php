@@ -22,6 +22,7 @@ class StoreRegularTaskReportRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'report_date' => ['required'],
             'tasks' => ['required'],
             'report' => ['required', 'min:2', 'max:255', 'string'],
         ];

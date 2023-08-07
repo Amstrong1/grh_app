@@ -77,6 +77,7 @@ class RegularTaskReportController extends Controller
 
             $regularTaskReport->structure_id = Auth::user()->structure->id;
             $regularTaskReport->user_id = Auth::user()->id;
+            $regularTaskReport->report_date = $request->report_date;
             $regularTaskReport->regular_task_id = $task;
             $regularTaskReport->report = $request->report;
 
@@ -105,7 +106,7 @@ class RegularTaskReportController extends Controller
     {
         return view('app.regular-task-report.edit', [
             'regularTaskReport' => $regularTaskReport,
-            'my_fields' => $this->regularTask_fields(),
+            'my_fields' => $this->regularTaskReport_fields(),
         ]);
     }
 
@@ -118,11 +119,12 @@ class RegularTaskReportController extends Controller
 
         $regularTaskReport->structure_id = Auth::user()->structure->id;
         $regularTaskReport->user_id = Auth::user()->id;
+        $regularTaskReport->report_date = $request->report_date;
         $regularTaskReport->report = $request->report;
 
         if ($regularTaskReport->save()) {
             Alert::toast('Les informations ont été modifiées', 'success');
-            return redirect('regular_task');
+            return redirect('regular_task_report');
         } else {
             Alert::toast('Une erreur est survenue', 'error');
             return redirect()->back()->withInput($request->input());
@@ -169,21 +171,34 @@ class RegularTaskReportController extends Controller
 
     private function regularTaskReport_fields()
     {
-        $fields = [
-            'report_date' => [
-                'title' => 'Sélectionner tâches',
-                'field' => 'date',
-            ],
-            'tasks' => [
-                'title' => 'Sélectionner tâches',
-                'field' => 'multiple-select',
-                'options' => Auth::user()->regularTasks,
-            ],
-            'report' => [
-                'title' => 'Rapport',
-                'field' => 'textarea',
-            ],
-        ];
+        if (request()->routeIs('regular_task_report.create')) {
+            $fields = [
+                'report_date' => [
+                    'title' => 'Date',
+                    'field' => 'date',
+                ],
+                'tasks' => [
+                    'title' => 'Sélectionner tâches',
+                    'field' => 'multiple-select',
+                    'options' => Auth::user()->regularTasks,
+                ],
+                'report' => [
+                    'title' => 'Rapport',
+                    'field' => 'textarea',
+                ],
+            ];
+        } else {
+            $fields = [
+                'report_date' => [
+                    'title' => 'Date',
+                    'field' => 'date',
+                ],
+                'report' => [
+                    'title' => 'Rapport',
+                    'field' => 'textarea',
+                ],
+            ];
+        }
 
         return $fields;
     }

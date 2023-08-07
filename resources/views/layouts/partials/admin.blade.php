@@ -63,47 +63,7 @@
                             Autres demandes
                         </x-nav-link>
                     </div>
-                </div>
-                {{-- <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                    <div>
-                        <x-nav-link href="{{ route('absence.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Modification congés en attente
-                        </x-nav-link>
-                    </div>
-                    <div>
-                        <x-nav-link href="{{ route('absence.allowed') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Modification congés validées
-                        </x-nav-link>
-                    </div>
-                    <div>
-                        <x-nav-link href="{{ route('absence.denied') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Modification congés refusées
-                        </x-nav-link>
-                    </div>
-                </div>
-                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                    <div>
-                        <x-nav-link href="{{ route('absence.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Attestation travail en attente
-                        </x-nav-link>
-                    </div>
-                    <div>
-                        <x-nav-link href="{{ route('absence.allowed') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Attestation travail validées
-                        </x-nav-link>
-                    </div>
-                    <div>
-                        <x-nav-link href="{{ route('absence.denied') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Attestation travail refusées
-                        </x-nav-link>
-                    </div>
-                </div> --}}
+                </div>               
             </div>
         </div>
     </li>
@@ -299,6 +259,12 @@
                         </x-nav-link>
                     </div>
                     <div>
+                        <x-nav-link href="{{ route('attendance_schedule.index') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Emploi du temps
+                        </x-nav-link>
+                    </div>
+                    <div>
                         <x-nav-link href="{{ route('filler.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             Imputations salaires
@@ -320,6 +286,12 @@
                         <x-nav-link href="{{ route('leave_type.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             Types Congés
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('reader.index') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Lecteur d'accès
                         </x-nav-link>
                     </div>
                 </div>

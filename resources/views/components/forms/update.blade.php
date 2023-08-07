@@ -99,5 +99,11 @@
         <x-primary-button class="ml-4">
             {{ __('Modifier') }}
         </x-primary-button>
+
+        <a href="{{ url()->previous() }}">
+            <x-danger-button type="button" class="ml-4">
+                {{ __('Annuler') }}
+            </x-danger-button>
+        </a>
     </div>
 </form>

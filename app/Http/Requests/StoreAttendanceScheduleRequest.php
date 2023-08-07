@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRegularTaskReportRequest extends FormRequest
+class StoreAttendanceScheduleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,9 @@ class UpdateRegularTaskReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'report_date' => ['required'],
-            'report' => ['required', 'min:2', 'max:255', 'string'],
+            'days' => 'required',
+            'hour_start' => 'required',
+            'hour_end' => 'required',
         ];
     }
 }

@@ -80,6 +80,16 @@ class Structure extends Model
         return $this->hasMany(Leave::class);
     }
 
+    public function readers(): HasMany
+    {
+        return $this->hasMany(Reader::class);
+    }
+
+    public function attendanceSchedules(): HasMany
+    {
+        return $this->hasMany(AttendanceSchedule::class);
+    }
+
     public function leaveTypes(): HasMany
     {
         return $this->hasMany(LeaveType::class);

@@ -95,15 +95,22 @@
         <ul class="!visible relative m-0 hidden list-none p-0 data-[te-collapse-show]:block"
             data-te-sidenav-collapse-ref>
             <li class="relative">
-                <x-link href="{{ route('task.pending') }}" data-te-sidenav-link-ref>Tâches en cours
+                <x-link href="{{ route('task.index') }}" data-te-sidenav-link-ref>Tâches à faire
                 </x-link>
             </li>
+            <x-link href="{{ route('task.pending') }}" data-te-sidenav-link-ref>Tâches en cours
+            </x-link>
+        </li>
             <li class="relative">
                 <x-link href="{{ route('task.finished') }}" data-te-sidenav-link-ref>Tâches finis
                 </x-link>
             </li>
             <li class="relative">
                 <x-link href="{{ route('regular_task.index') }}" data-te-sidenav-link-ref>Tâches régulières
+                </x-link>
+            </li>
+            <li class="relative">
+                <x-link href="{{ route('regular_task_report.index') }}" data-te-sidenav-link-ref>Rapport Tâches régulières
                 </x-link>
             </li>
         </ul>

@@ -222,6 +222,10 @@
                 <x-link href="{{ route('leave_type.index') }}" data-te-sidenav-link-ref>Avantages salariales
                 </x-link>
             </li>
+            <li class="relative">
+                <x-link href="{{ route('reader.index') }}" data-te-sidenav-link-ref> Lecteur d'accès
+                </x-link>
+            </li>
         </ul>
     </li>
 

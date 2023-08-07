@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\ReaderController;
 use App\Http\Controllers\FillerController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\ProfileController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\RegularTaskController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SalaryAdvantageController;
 use App\Http\Controllers\RegularTaskReportController;
+use App\Http\Controllers\AttendanceScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,9 +58,11 @@ Route::middleware('auth')->group(function () {
         Route::resource('admin', AdminController::class);
         Route::resource('department', DepartmentController::class);
         Route::resource('place', PlaceController::class);
+        Route::resource('reader', ReaderController::class);
         Route::resource('filler', FillerController::class);
         Route::resource('holding_wage', HoldingWageController::class);
         Route::resource('salary_advantage', SalaryAdvantageController::class);
+        Route::resource('attendance_schedule', AttendanceScheduleController::class);
         Route::resource('leave_type', LeaveTypeController::class);
 
         Route::post('leave/filter', [LeaveController::class, 'indexFilter'])->name('leave.filter');
