@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('structure_id');
             $table->string('type');
             $table->string('installation_place')->nullable();
+            $table->string('sens');
             $table->timestamps();
         });
     }

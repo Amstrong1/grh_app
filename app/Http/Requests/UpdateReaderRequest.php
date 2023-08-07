@@ -22,7 +22,8 @@ class UpdateReaderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => 'required'
+            'type' => 'required',
+            'sens' => 'required'
         ];
     }
 }

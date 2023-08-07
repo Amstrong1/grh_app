@@ -90,6 +90,11 @@ class Structure extends Model
         return $this->hasMany(AttendanceSchedule::class);
     }
 
+    public function attendanceLogs(): HasMany
+    {
+        return $this->hasMany(AttendanceLog::class);
+    }
+
     public function leaveTypes(): HasMany
     {
         return $this->hasMany(LeaveType::class);

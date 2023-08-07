@@ -8,8 +8,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\CareerController;
-use App\Http\Controllers\ReaderController;
 use App\Http\Controllers\FillerController;
+use App\Http\Controllers\ReaderController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ConflictController;
@@ -22,6 +22,7 @@ use App\Http\Controllers\HoldingWageController;
 use App\Http\Controllers\RegularTaskController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SalaryAdvantageController;
+use App\Http\Controllers\API\AttendanceLogController;
 use App\Http\Controllers\RegularTaskReportController;
 use App\Http\Controllers\AttendanceScheduleController;
 
@@ -69,6 +70,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('leave', LeaveController::class);
 
         Route::resource('pay', PayController::class);
+
+        Route::get('attendance_log', [AttendanceLogController::class, 'display'])->name('attendance_log.index');
     });
 
     Route::resource('career', CareerController::class);

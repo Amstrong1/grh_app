@@ -47,6 +47,7 @@ class ReaderController extends Controller
         $reader->structure_id = Auth::user()->structure->id;
         $reader->type = $request->type;
         $reader->installation_place = $request->installation_place;
+        $reader->sens = $request->sens;
 
         if ($reader->save()) {
             Alert::toast('Les données ont été enregistrées', 'success');
@@ -85,6 +86,7 @@ class ReaderController extends Controller
 
         $reader->type = $request->type;
         $reader->installation_place = $request->installation_place;
+        $reader->sens = $request->sens;
 
         if ($reader->save()) {
             Alert::toast('Les informations ont été modifiées', 'success');
@@ -115,6 +117,7 @@ class ReaderController extends Controller
         $columns = (object) [
             'type' => 'Type',
             'installation_place' => 'Emplacement',
+            'sens' => 'sens',
         ];
         return $columns;
     }
@@ -131,6 +134,7 @@ class ReaderController extends Controller
     private function reader_fields()
     {
         $types = ['Pointeur' => 'Pointeur', 'Empreinte' => 'Empreinte', 'Badge'=> 'Badge', 'Faciale' => 'Faciale'];
+        $sens = ['Tout' => 'Tout', 'Entrée' => 'Entrée', 'Sortie'=> 'Sortie'];
         $fields = [
             'type' => [
                 'title' => 'Type',
@@ -140,6 +144,11 @@ class ReaderController extends Controller
             'installation_place' => [
                 'title' => 'Position',
                 'field' => 'text'
+            ],
+            'type' => [
+                'title' => 'Sens',
+                'field' => 'select',
+                'options' => $sens,
             ],
         ];
         return $fields;
