@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Http\Request;
 use App\Models\AttendanceLog;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\AttendanceLogResource;
 use App\Http\Requests\StoreAttendanceLogRequest;
 use App\Http\Requests\UpdateAttendanceLogRequest;
@@ -20,7 +22,7 @@ class AttendanceLogController extends Controller
         return AttendanceLogResource::collection($attendanceLogs);
     }
 
-    
+
     public function display()
     {
         $structure = Auth::user()->structure;
@@ -29,6 +31,27 @@ class AttendanceLogController extends Controller
             'attendanceLogs' => $structure->attendanceLogs()->get(),
             'my_attributes' => $this->attendanceLogs_columns(),
         ]);
+    }
+
+    public function filter(Request $request)
+    {
+        $structure = Auth::user()->structure;
+        $validate = Validator::make($request->all(), [
+            'start' => 'required|before:end',
+            'end' => 'required|after:start'
+        ]);
+        if (!$validate->fails()) {
+            $attendanceLogs = $structure->attendanceLogs()
+                ->whereBetween('log_date', [$request->start, $request->end])
+                ->get();
+
+            return view('app.attendance-logs.index', [
+                'attendanceLogs' => $attendanceLogs,
+                'my_attributes' => $this->attendanceLogs_columns(),
+            ]);
+        } else {
+            return redirect('attendance_log.index');
+        }
     }
 
     /**

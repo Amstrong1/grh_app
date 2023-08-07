@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('pay', PayController::class);
 
         Route::get('attendance_log', [AttendanceLogController::class, 'display'])->name('attendance_log.index');
+        Route::post('attendance_log/filter', [AttendanceLogController::class, 'filter'])->name('attendance_log.filter');
     });
 
     Route::resource('career', CareerController::class);
