@@ -91,7 +91,7 @@ class TemptationController extends Controller
      */
     public function show(Temptation $temptation)
     {
-        dd($temptation);
+        // dd($temptation);
         return view('app.temptation.show', [
             'temptation' => $temptation,
             'my_fields' => $this->temptation_fields(),
@@ -159,13 +159,13 @@ class TemptationController extends Controller
     {
         if (Auth::user()->role === 'admin') {
             $actions = (object) array(
-                // 'show' => "Voir",
+                'show' => "Voir",
             );
         } else {
             $actions = (object) array(
-                // 'show' => "Voir",
-                // 'edit' => "Modifier",
-                // 'delete' => "Supprimer",
+                'show' => "Voir",
+                'edit' => "Modifier",
+                'delete' => "Supprimer",
             );
         }
         return $actions;

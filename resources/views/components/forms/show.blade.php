@@ -11,8 +11,14 @@
 
             <x-input-label for="{{ $attr }}" value="{!! $value['title'] !!}"></x-input-label>
 
-            <x-text-input class="block mt-1 w-full border-2 p-2 rounded outline-0" value="{{ old($attr) ?? $fill }}"
-                readonly />
+            @if ($value['field'] === 'richtext')
+                <textarea class="block mt-1 w-full border-2 p-2 rounded outline-0" id="reader" readonly>
+                    {!! old($attr) ?? $fill !!}
+                </textarea>
+            @else
+                <x-text-input class="block mt-1 w-full border-2 p-2 rounded outline-0" value="{{ old($attr) ?? $fill }}"
+                    readonly />
+            @endif
 
         </div>
     @endforeach
@@ -24,3 +30,14 @@
         </a>
     </div>
 </div>
+
+<script>
+    ClassicEditor.create(document.querySelector("#reader"), {
+        toolbar: [],
+    }).then(editor => {
+        editor.enableReadOnlyMode("editor");
+        console.log(editor);
+    }).catch(error => {
+        console.error(error);
+    });
+</script>
