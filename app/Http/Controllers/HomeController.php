@@ -7,10 +7,11 @@ use App\Models\User;
 use App\Models\Place;
 use App\Models\Absence;
 use App\Models\Conflict;
-use App\Models\Structure;
 use App\Models\LeaveType;
+use App\Models\Structure;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use App\Enums\PermissionStatusEnum;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,6 +34,24 @@ class HomeController extends Controller
 
         foreach ($leaveSolds as $value) {
             $leaveSold += $value->last;
+        }
+
+        $structure = Auth::user()->structure;
+        $absences = $structure->absences()
+            ->where('user_id', Auth::id())
+            ->where('status', PermissionStatusEnum::Allowed)
+            ->get();
+
+        $last = 0;
+        foreach ($absences as $value) {
+            $originalDate = "";
+            $originalDate = $value->start_date . ' ' . $value->start_hour;
+            $targetDate = $value->end_date . ' ' . $value->end_hour;
+            $last += getDateDiff($originalDate, $targetDate);
+        }
+
+        if ($last > 3) {
+            $leaveSold = $leaveSold - $last + 3;
         }
 
         return view(

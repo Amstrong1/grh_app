@@ -11,7 +11,7 @@
 
             <x-input-label for="{{ $attr }}" value="{!! $value['title'] !!}"></x-input-label>
 
-            <x-text-input class="block mt-1 w-full border-2 p-2 rounded outline-0" value="{!! old($attr) ?? $fill !!}"
+            <x-text-input class="block mt-1 w-full border-2 p-2 rounded outline-0" value="{{ old($attr) ?? $fill }}"
                 readonly />
 
         </div>
