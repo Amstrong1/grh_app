@@ -75,7 +75,7 @@
                         </x-nav-link>
                     </div>
                     <div>
-                        <x-nav-link href="{{ route('temptation.create') }}" aria-current="true"
+                        <x-nav-link href="{{ route('temptation.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             Autres demandes
                         </x-nav-link>

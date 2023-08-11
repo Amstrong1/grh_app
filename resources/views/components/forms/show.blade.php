@@ -12,7 +12,7 @@
             <x-input-label for="{{ $attr }}" value="{!! $value['title'] !!}"></x-input-label>
 
             @if ($value['field'] === 'richtext')
-                <textarea class="block mt-1 w-full border-2 p-2 rounded outline-0" id="reader" readonly>
+                <textarea class="block mt-1 w-full border-2 p-2 rounded outline-0" id="reader">
                     {!! old($attr) ?? $fill !!}
                 </textarea>
             @else

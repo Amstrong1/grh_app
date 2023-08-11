@@ -73,7 +73,7 @@
 
                     <x-dynamic-component :component="$component" id="editor" name="{{ $attr }}"
                         type="{{ $value['field'] }}" class="block mt-1 w-full border-2 p-2 rounded outline-0">
-                        {!! old($attr) !!}</x-dynamic-component>
+                        {!! old($attr) ?? $fill !!}</x-dynamic-component>
                     @error($attr)
                         <p class="text-red-500 text-sm pl-2 pt-2">
                             {{ $message }}

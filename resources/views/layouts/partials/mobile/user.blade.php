@@ -64,7 +64,7 @@
                 </x-link>
             </li>
             <li class="relative">
-                <x-link href="{{ route('temptation.create') }}" data-te-sidenav-link-ref>Autre demande
+                <x-link href="{{ route('temptation.index') }}" data-te-sidenav-link-ref>Autre demande
                 </x-link>
             </li>
         </ul>

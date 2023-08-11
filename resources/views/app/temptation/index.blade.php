@@ -6,23 +6,27 @@
                     <div class="md:flex justify-between">
                         <h1 class="font-bold text-lg my-2">Liste des demandes</h1>
 
-                        <form action="{{ route('temptation.filter') }}" method="post">
-                            @csrf
-                            <p class="text-sm mx-2">
-                                <span>Filtrer du </span>
-                                <input
-                                    class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg"
-                                    type="date" name="start" value="{{ request()->start }}">
-                                <span> au </span>
-                                <input
-                                    class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg"
-                                    type="date" name="end" value="{{ request()->end }}">
-                                <x-secondary-button class="py-3 border-gray-300 border-2 shadow-lg" type="submit">
-                                    Appliquer
-                                </x-secondary-button>
-                            </p>
-                        </form>
+                        <x-primary-button>
+                            <a href="{{ route('temptation.create') }}">Nouveau</a>
+                        </x-primary-button>
                     </div>
+
+                    <form action="{{ route('temptation.filter') }}" method="post">
+                        @csrf
+                        <p class="text-sm mx-2">
+                            <span>Filtrer du </span>
+                            <input
+                                class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg"
+                                type="date" name="start" value="{{ request()->start }}">
+                            <span> au </span>
+                            <input
+                                class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg"
+                                type="date" name="end" value="{{ request()->end }}">
+                            <x-secondary-button class="py-3 border-gray-300 border-2 shadow-lg" type="submit">
+                                Appliquer
+                            </x-secondary-button>
+                        </p>
+                    </form>
 
                     <div class="mt-4">
                         <x-tables.default :resources="$temptations" :mattributes="$my_attributes" type="temptation" :mactions="$my_actions" />
