@@ -25,6 +25,19 @@
         </x-nav-link>
     </li>
 
+    <li class="mx-2" data-te-nav-item-ref>
+        <x-nav-link
+            class="text-white block py-2 pr-2 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
+            :href="route('attendance_log.index')" :active="request()->routeIs('attendance_log.*')" data-te-ripple-init data-te-ripple-color="light">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+            </svg>&nbsp;
+            Pointages
+        </x-nav-link>
+    </li>
+
     <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
 
         <x-nav-link :active="request()->routeIs('absence.*')"
@@ -221,6 +234,49 @@
                         <x-nav-link href="{{ route('conflict.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             Liste des conflits
+                        </x-nav-link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+
+    {{-- recruitment --}}
+    <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
+        <x-nav-link :active="request()->routeIs('conflict.*')"
+            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
+            href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
+            data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 9.75v6.75m0 0l-3-3m3 3l3-3m-8.25 6a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+            </svg>
+            &nbsp;
+            Recrutements
+            <span class="ml-1 w-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                    <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
+                </svg>
+            </span>
+        </x-nav-link>
+
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+            aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
+            <div class="px-6 py-5 lg:px-8">
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    <div>
+                        <x-nav-link href="{{ route('coming-soon') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Interne
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('coming-soon') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Externe
                         </x-nav-link>
                     </div>
                 </div>

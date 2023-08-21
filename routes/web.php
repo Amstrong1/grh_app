@@ -43,6 +43,10 @@ use App\Http\Controllers\AttendanceScheduleController;
 //     symlink($targetFolder, $linkFolder);
 // });
 
+Route::get('coming-soon', function () {
+    return view('coming-soon');
+})->name('coming-soon');
+
 Route::get('password/first/{user}', [PasswordController::class, 'edit'])->name('password.first.edit');
 Route::post('password/first/update/{user}', [PasswordController::class, 'update'])->name('password.first.update');
 

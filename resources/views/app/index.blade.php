@@ -8,7 +8,7 @@
                             {{ __('E-GRH TABLEAU DE BORD') }}
                         </h1>
 
-                        @if (Auth::user()->role !== 'superadmin')
+                        @if (Auth::user()->role === 'admin' || Auth::user()->role === 'supervisor')
                             <form action="{{ route('dashboard.filter') }}" method="POST">
                                 @csrf
                                 <div class="md:flex text-sm mx-2">
@@ -164,7 +164,7 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Permissionnaires : {{ $absences }}
+                                        Permissionnaires : {{ $current_absences }}
                                     </p>
                                     <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     </p>

@@ -2,12 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Filler;
 use Livewire\Component;
-use App\Models\Department;
 use App\Enums\UserRoleEnum;
-use App\Models\HoldingWage;
-use App\Models\SalaryAdvantage;
 use Illuminate\Support\Facades\Auth;
 
 class SelectEmployee extends Component
@@ -51,10 +47,10 @@ class SelectEmployee extends Component
             ->where('role', '!=', UserRoleEnum::SuperAdmin)
             ->get();
 
-        $this->departments = Department::all();
-        $this->fillers = Filler::all();
-        $this->salaryAdvantages = SalaryAdvantage::all();
-        $this->holdingWages = HoldingWage::all();
+        $this->departments = $this->structure->departments()->get();
+        $this->fillers = $this->structure->fillers()->get();
+        $this->salaryAdvantages = $this->structure->salaryAdvantages()->get();
+        $this->holdingWages = $this->structure->holdingWages()->get();
     }
 
     public function render()

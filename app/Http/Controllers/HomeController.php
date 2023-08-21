@@ -24,7 +24,7 @@ class HomeController extends Controller
         $places = Place::where('structure_id', Auth::user()->structure_id)->count();
         $departments = Department::where('structure_id', Auth::user()->structure_id)->count();
         $conflicts = Conflict::where('structure_id', Auth::user()->structure_id)->count();
-        $absences = Absence::where('structure_id', Auth::user()->structure_id)->where('status', 'En attente')->count();
+        $current_absences = Absence::where('structure_id', Auth::user()->structure_id)->where('status', 'En attente')->count();
         $tasks = Task::where('structure_id', Auth::user()->structure_id)->where('status', 'En cours')->count();
         $sanctions = 0;
         $rewards = 0;
@@ -62,7 +62,7 @@ class HomeController extends Controller
                 'places',
                 'departments',
                 'conflicts',
-                'absences',
+                'current_absences',
                 'tasks',
                 'sanctions',
                 'rewards',

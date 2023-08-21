@@ -18,7 +18,7 @@
     </nav>
 </div>
 
-<!-- Sidenav -->
+{{-- <!-- Sidenav -->
 <nav id="sidenav-5"
     class="lg:hidden fixed left-0 top-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:translate-x-0 dark:bg-zinc-800"
     data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-accordion="true" style="background-color: #03224c">
@@ -47,4 +47,4 @@
         </svg>
     </span>
 </x-primary-button>
-<!-- Toggler -->
+<!-- Toggler --> --}}

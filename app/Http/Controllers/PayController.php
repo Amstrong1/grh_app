@@ -182,7 +182,7 @@ class PayController extends Controller
                 }
             }
 
-            //save payslip pdf
+            // save payslip pdf
             $payFillers = $pay->fillers()->get();
             $payHolders = $pay->holdingWages()->get();
             $payAds = $pay->salaryAdvantages()->get();
@@ -194,10 +194,10 @@ class PayController extends Controller
 
             $pay->payslip = $path;
 
-            if ($pay->save) {
+            if ($pay->save()) {
                 Alert::toast('Fiche de paie enregistrée', 'success');
-                $user = User::find($pay->user_id);
-                $user->notify(new NewPayslipNotification($pay->payslip, $pay->period_start, $pay->period_end));
+                // $user = User::find($pay->user_id);
+                // $user->notify(new NewPayslipNotification($pay->payslip, $pay->period_start, $pay->period_end));
                 return redirect('pay');
             }
         } else {

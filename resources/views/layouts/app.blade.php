@@ -81,8 +81,8 @@
             {{ $slot }}
         </main>
 
-        <footer class="w-full">
-
+        <footer class="fixed bottom-0 w-full">
+            @include('layouts.navigation-bottom')
         </footer>
     </div>
 

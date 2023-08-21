@@ -7,11 +7,11 @@
                         <h1 class="font-bold text-lg my-2">Notifications</h1>
 
                         <div>
-                            <x-primary-button>
+                            <x-primary-button class="w-full m-1">
                                 <a href="{{ route('notification.markAsRead') }}">Tout marquer comme lu</a>
                             </x-primary-button>
 
-                            <x-danger-button>
+                            <x-danger-button class="w-full m-1">
                                 <a href="{{ route('notification.remove') }}">Tout supprimer</a>
                             </x-danger-button>
                         </div>
