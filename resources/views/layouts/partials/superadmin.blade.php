@@ -3,6 +3,11 @@
         <x-nav-link
             class="text-white block py-2 pr-2 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('dashboard')" :active="request()->routeIs('dashboard')" data-te-ripple-init data-te-ripple-color="light">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>&nbsp;
             Accueil
         </x-nav-link>
     </li>
@@ -11,7 +16,13 @@
         <x-nav-link
             class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
-            data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>Structure
+            data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+            </svg>&nbsp;
+            Structure
             <span class="ml-2 w-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
                     <path fill-rule="evenodd"
@@ -33,6 +44,47 @@
                     </div>
                     <div>
                         <x-nav-link href="{{ route('structure.create') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Ajouter
+                            Nouveau</x-nav-link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+
+    <li class="static mx-2" data-te-nav-item-ref data-te-dropdown-ref>
+        <x-nav-link
+            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
+            href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
+            data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+            </svg>&nbsp;
+            News
+            <span class="ml-2 w-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                    <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
+                </svg>
+            </span>
+        </x-nav-link>
+
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-neutral-600 shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+            aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
+            <div class="px-6 py-5 lg:px-8">
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    <div>
+                        <x-nav-link href="{{ route('addon.index') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Liste
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('addon.create') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             Ajouter
                             Nouveau</x-nav-link>

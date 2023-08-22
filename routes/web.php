@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\AddonController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PlaceController;
@@ -57,6 +58,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(['superadmin'])->group(function () {
         Route::resource('structure', StructureController::class);
+        Route::resource('addon', AddonController::class);
     });
 
     Route::middleware(['admin'])->group(function () {

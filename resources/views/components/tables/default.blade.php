@@ -34,7 +34,7 @@
                         <tr class="text-gray-700 dark:text-gray-400">
                             @foreach ($mattributes as $column => $title)
                                 <td class="px-4 py-3 text-center">
-                                    @if ($column == 'avatar' || $column == 'image' || $column == 'photo' || $column == 'logo')
+                                    @if ($column == 'img' || $column == 'image' || $column == 'photo' || $column == 'logo')
                                         <a class="flex items-center justify-center text-sm hover:opacity-80">
                                             <!-- Avatar OR Image with inset shadow -->
                                             <div class="relative hidden h-12 w-12 mr-3 md:block">

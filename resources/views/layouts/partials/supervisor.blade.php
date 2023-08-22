@@ -49,7 +49,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
             </svg>&nbsp;
-            Absences
+            Demandes
             <span class="ml-2 w-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
                     <path fill-rule="evenodd"
@@ -144,6 +144,48 @@
                         <x-nav-link href="{{ route('regular_task.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             Tâches régulières
+                        </x-nav-link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+
+     {{-- vacation --}}
+     <li class="mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
+        <x-nav-link :active="request()->routeIs('leave.*')"
+            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
+            href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
+            data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525" />
+            </svg>&nbsp;
+            Congés
+            <span class="ml-1 w-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                    <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
+                </svg>
+            </span>
+        </x-nav-link>
+
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+            aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
+            <div class="px-6 py-5 lg:px-8">
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    <div>
+                        <x-nav-link href="{{ route('leave.index') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Voir l'agenda
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('leave.create') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Planifier
                         </x-nav-link>
                     </div>
                 </div>

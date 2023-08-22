@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\SendNewsController;
 use App\Http\Controllers\API\AttendanceLogController;
 
 /*
@@ -20,4 +21,6 @@ use App\Http\Controllers\API\AttendanceLogController;
 // });
 
 Route::apiResource('attendanceLogs', AttendanceLogController::class);
+
+Route::apiResource('news', SendNewsController::class);
 

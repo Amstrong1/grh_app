@@ -20,29 +20,13 @@
                         </x-primary-button>
                     </div>
 
-                    <form method="POST"
-                        @if (request()->routeIs('absence.allowed')) action="{{ route('absence.allowed.filter') }}"
-                        @elseif (request()->routeIs('absence.denied')) action="{{ route('absence.denied.filter') }}"
-                        @elseif (request()->routeIs('absence.index')) action="{{ route('absence.filter') }}" @endif>
-                        @csrf
-                        <div class="md:flex text-sm mx-2">
-                            <div class="p-2">Filtrer du </div>
-                            <div>
-                                <input
-                                    class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg"
-                                    type="date" name="start" value="{{ request()->start }}">
-                            </div>
-                            <div class="p-2"> au </div>
-                            <div>
-                                <input
-                                    class="p-2 border-gray-300 border-2 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-lg"
-                                    type="date" name="end" value="{{ request()->end }}">
-                            </div>
-                            <x-secondary-button class="py-3 border-gray-300 border-2 shadow-lg" type="submit">
-                                Appliquer
-                            </x-secondary-button>
-                        </div>
-                    </form>
+                    @if (request()->routeIs('absence.allowed'))
+                        <x-forms.filter :action="route('absence.allowed.filter')" />
+                    @elseif (request()->routeIs('absence.denied'))
+                        <x-forms.filter :action="route('absence.denied.filter')" />
+                    @elseif (request()->routeIs('absence.index'))
+                        <x-forms.filter :action="route('absence.filter')" />
+                    @endif
 
                     <div class="mt-4">
                         <x-tables.default :resources="$absences" :mattributes="$my_attributes" type="absence" :mactions="$my_actions" />

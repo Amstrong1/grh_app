@@ -70,15 +70,26 @@ class TemptationController extends Controller
     {
         $temptation = new Temptation();
 
+        if (Auth::user()->role === 'user') {
+            $user = Auth::user()->id;
+        } else {
+            $user = $request->user;
+        }
+        
+
         $temptation->structure_id = Auth::user()->structure->id;
-        $temptation->user_id = Auth::user()->id;
+        $temptation->user_id = $user;
         $temptation->object = $request->object;
         $temptation->message = $request->message;
 
         if ($temptation->save()) {
             Alert::toast("Données enregistrées", 'success');
-            $user = User::where('role', 'admin')->where('structure_id', Auth::user()->structure_id)->first();
-            $user->notify(new NewTemptationNotification($temptation->object));
+            if (Auth::user()->role === 'user') {
+                $userNotify = User::where('role', 'admin')->where('structure_id', Auth::user()->structure_id)->first();
+            } else {
+                $userNotify = User::where('id', $request->user)->first();
+            }
+            $userNotify->notify(new NewTemptationNotification($temptation->object));
             return redirect('temptation');
         } else {
             Alert::toast('Une erreur est survenue', 'error');
@@ -160,6 +171,7 @@ class TemptationController extends Controller
         if (Auth::user()->role === 'admin') {
             $actions = (object) array(
                 'show' => "Voir",
+                'edit' => "Modifier",
             );
         } else {
             $actions = (object) array(
@@ -173,17 +185,40 @@ class TemptationController extends Controller
 
     private function temptation_fields()
     {
-        $fields = [
-            'object' => [
-                'title' => 'Objet',
-                'field' => 'text',
-            ],
-            'message' => [
-                'title' => 'Message',
-                'field' => 'richtext',
-                'colspan' => true
-            ]
-        ];
+        $structure = Auth::user()->structure;
+        $users = $structure->users()->where('role', '!=', 'admin')->get('id', 'name');
+
+        if (Auth::user()->role === 'user') {
+            $fields = [
+                'object' => [
+                    'title' => 'Objet',
+                    'field' => 'text',
+                ],
+                'message' => [
+                    'title' => 'Message',
+                    'field' => 'richtext',
+                    'colspan' => true
+                ]
+            ];
+        } else {
+            $fields = [
+                'object' => [
+                    'title' => 'Objet',
+                    'field' => 'text',
+                ],
+                'user' => [
+                    'title' => 'Employé',
+                    'field' => 'model',
+                    'options' => $users,
+                ],
+                'message' => [
+                    'title' => 'Message',
+                    'field' => 'richtext',
+                    'colspan' => true
+                ]
+            ];
+        }
+        
         return $fields;
     }
 }

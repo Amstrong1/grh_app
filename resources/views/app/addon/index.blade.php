@@ -4,19 +4,14 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
-                        <h1 class="font-bold text-lg my-2">
-                            Agenda des congés
-                        </h1>
-
+                        <h1 class="font-bold text-lg my-2">Liste des news</h1>
                         <x-primary-button>
-                            <a href="{{ route('leave.create') }}">Nouveau</a>
+                            <a href="{{ route('addon.create') }}">Nouveau</a>
                         </x-primary-button>
                     </div>
 
-                    <x-forms.filter :action="route('leave.filter')" />
-
                     <div class="mt-4">
-                        <x-tables.default :resources="$leaves" :mattributes="$my_attributes" type="leave" :mactions="$my_actions" />
+                        <x-tables.default :resources="$addons" :mattributes="$my_attributes" type="addon" :mactions="$my_actions" />
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">Notifications</h1>
 
-                        <div>
+                        <div class="flex">
                             <x-primary-button class="w-full m-1">
                                 <a href="{{ route('notification.markAsRead') }}">Tout marquer comme lu</a>
                             </x-primary-button>
