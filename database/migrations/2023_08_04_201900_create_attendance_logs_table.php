@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('structure_id');
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('reader_id')->constrained();
+            $table->foreignId('reader_id')->nullable();
             $table->date('log_date');
             $table->time('log_time');
             $table->string('direction')->nullable();
