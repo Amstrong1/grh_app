@@ -28,7 +28,7 @@ class StoreStructureRequest extends FormRequest
             'email' => ['required', 'unique:structures', 'email:filter'],
             'ifu' => ['required', 'numeric', 'digits:13'],
             'rccm' => ['required', 'min:10', 'max:20'],
-            'logo' => ['required', 'image', 'max:512'],
+            'logo' => ['required', 'image', 'max:5000'],
         ];
     }
 }

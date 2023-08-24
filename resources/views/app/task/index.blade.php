@@ -33,9 +33,11 @@
                                 </p>
                             </form> --}}
                         @if (Auth::user()->role === 'admin' || Auth::user()->role === 'supervisor')
+                        <a href="{{ route('task.create') }}">
                             <x-primary-button>
-                                <a href="{{ route('task.create') }}">Nouveau</a>
-                            </x-primary-button>
+                                    Nouveau
+                                </x-primary-button>
+                            </a>
                         @endif
                         {{-- </div> --}}
 

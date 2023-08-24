@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\SendNewsController;
 use App\Http\Controllers\API\AttendanceLogController;
@@ -20,7 +20,12 @@ use App\Http\Controllers\API\AttendanceLogController;
 //     return $request->user();
 // });
 
-Route::apiResource('attendanceLogs', AttendanceLogController::class);
+Route::apiResources([
+    'attendanceLogs' => AttendanceLogController::class,
+    'news' => SendNewsController::class,
+]);
 
-Route::apiResource('news', SendNewsController::class);
+Route::get('users/{email}', function ($email) {
+    return User::where('email', $email)->first();
+});
 

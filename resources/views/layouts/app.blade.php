@@ -77,7 +77,7 @@
         </header>
 
         <!-- Page Content -->
-        <main>
+        <main class="pb-6">
             {{ $slot }}
         </main>
 

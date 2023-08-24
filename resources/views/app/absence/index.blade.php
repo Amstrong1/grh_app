@@ -15,9 +15,11 @@
                             @endif
                         </h1>
 
-                        <x-primary-button>
-                            <a href="{{ route('absence.create') }}">Nouveau</a>
-                        </x-primary-button>
+                        <a href="{{ route('absence.create') }}">
+                            <x-primary-button>
+                                Nouveau
+                            </x-primary-button>
+                        </a>
                     </div>
 
                     @if (request()->routeIs('absence.allowed'))

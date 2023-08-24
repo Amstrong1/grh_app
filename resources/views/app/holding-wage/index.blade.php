@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
-                        <h1 class="font-bold text-lg my-2">Liste des imputations sur salaire</h1>
+                        <h1 class="font-bold text-lg my-2">Liste des retenues sur salaire</h1>
 
                         <x-primary-button x-data=""
                             x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">

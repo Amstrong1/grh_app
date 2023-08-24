@@ -31,6 +31,14 @@
                 {{ __('Retour') }}
             </x-primary-button>
         </a>
+
+        @if (request()->routeIs('temptation.show'))
+            <a href="{{ route('temptation_back.create') }}">
+                <x-danger-button class="ml-4">
+                    {{ __('Répondre') }}
+                </x-danger-button>
+            </a>
+        @endif
     </div>
 </div>
 

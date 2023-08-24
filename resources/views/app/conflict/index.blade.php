@@ -5,12 +5,14 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">Liste des conflits</h1>
-                        <x-primary-button>
-                            <a href="{{ route('conflict.create') }}">Nouveau</a>
-                        </x-primary-button>
+                        <a href="{{ route('conflict.create') }}">
+                            <x-primary-button>
+                                Nouveau
+                            </x-primary-button>
+                        </a>
                     </div>
 
-                    <x-forms.filter :action=" route('conflict.filter')" />
+                    <x-forms.filter :action="route('conflict.filter')" />
 
                     <div class="mt-4">
                         <x-tables.default :resources="$conflicts" :mattributes="$my_attributes" type="conflict" :mactions="$my_actions" />

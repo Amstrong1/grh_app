@@ -24,7 +24,7 @@ class StoreAddonRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'min:3', 'max:255'],
             'url' => ['required', 'url'],
-            'img' => ['required', 'image', 'max:512'],
+            'img' => ['required', 'image', 'max:5000'],
             'autre' => ['required', 'string', 'min:3', 'max:255'],
             'active' => ['required'],
         ];

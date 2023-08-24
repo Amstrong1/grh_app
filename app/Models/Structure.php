@@ -104,4 +104,9 @@ class Structure extends Model
     {
         return $this->hasMany(Temptation::class);
     }
+
+    public function temptationBacks(): HasMany
+    {
+        return $this->hasMany(TemptationBack::class);
+    }
 }

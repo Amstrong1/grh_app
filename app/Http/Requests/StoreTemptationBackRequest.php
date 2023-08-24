@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateConflictRequest extends FormRequest
+class StoreTemptationBackRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class UpdateConflictRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'users' => ['required'],
-            'conflict_date' => ['required', 'date'],
-            'cause' => ['required', 'string', 'min:2'],
+            'object' => ['string', 'required'],
+            'message' => ['string', 'required']
         ];
     }
 }

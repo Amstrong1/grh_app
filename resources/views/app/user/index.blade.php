@@ -5,9 +5,11 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">Liste des employés</h1>
-                        <x-primary-button>
-                            <a href="{{ route('career.create') }}">Nouveau</a>
-                        </x-primary-button>
+                        <a href="{{ route('career.create') }}">
+                            <x-primary-button>
+                                Nouveau
+                            </x-primary-button>
+                        </a>
                     </div>
                     <div class="mt-4">
                         <x-tables.default :resources="$careers" :mattributes="$my_attributes" type="career" :mactions="$my_actions" />

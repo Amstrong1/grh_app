@@ -28,7 +28,7 @@ class UpdateStructureRequest extends FormRequest
             'email' => ['required', 'email:filter'],
             'ifu' => ['required', 'numeric', 'digits:13'],
             'rccm' => ['required', 'min:10', 'max:20'],
-            'logo' => ['image', 'max:512'],
+            'logo' => ['image', 'max:5000'],
         ];
     }
 }

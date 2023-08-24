@@ -22,6 +22,7 @@ use App\Http\Controllers\TemptationController;
 use App\Http\Controllers\HoldingWageController;
 use App\Http\Controllers\RegularTaskController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\TemptationBackController;
 use App\Http\Controllers\SalaryAdvantageController;
 use App\Http\Controllers\API\AttendanceLogController;
 use App\Http\Controllers\RegularTaskReportController;
@@ -112,7 +113,14 @@ Route::middleware('auth')->group(function () {
     Route::resource('absence', AbsenceController::class);
 
     Route::post('temptation/filter', [TemptationController::class, 'indexFilter'])->name('temptation.filter');
+    Route::post('temptation/sent/filter', [TemptationController::class, 'indexFilterSent'])->name('temptation.sent.filter');
+    Route::get('temptation/sent', [TemptationController::class, 'indexSent'])->name('temptation.sent');
     Route::resource('temptation', TemptationController::class);
+
+    Route::post('temptation_back/filter', [TemptationBackController::class, 'indexFilter'])->name('temptation_back.filter');
+    Route::post('temptation_back/sent/filter', [TemptationBackController::class, 'indexFilterSent'])->name('temptation_back.sent.filter');
+    Route::get('temptation_back/sent', [TemptationBackController::class, 'indexSent'])->name('temptation_back.sent');
+    Route::resource('temptation_back', TemptationBackController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -7,13 +7,17 @@
                         <h1 class="font-bold text-lg my-2">Notifications</h1>
 
                         <div class="flex">
-                            <x-primary-button class="w-full m-1">
-                                <a href="{{ route('notification.markAsRead') }}">Tout marquer comme lu</a>
-                            </x-primary-button>
+                            <a class="m-1" href="{{ route('notification.markAsRead') }}">
+                                <x-primary-button class="w-full">
+                                    Tout marquer comme lu
+                                </x-primary-button>
+                            </a>
 
-                            <x-danger-button class="w-full m-1">
-                                <a href="{{ route('notification.remove') }}">Tout supprimer</a>
-                            </x-danger-button>
+                            <a class="m-1" href="{{ route('notification.remove') }}">
+                                <x-danger-button class="w-full">
+                                    Tout supprimer
+                                </x-danger-button>
+                            </a>
                         </div>
                     </div>
                     @foreach (auth()->user()->notifications as $notification)

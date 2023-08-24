@@ -4,11 +4,22 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="md:flex justify-between">
-                        <h1 class="font-bold text-lg my-2">Liste des demandes</h1>
+                        <h1 class="font-bold text-lg my-2">
+                            Liste des demandes
+                            @if (request()->routeIs('temptation.index'))
+                                recus
+                            @elseif (request()->routeIs('temptation.sent'))
+                                envoyés
+                            @endif
+                        </h1>
 
-                        <x-primary-button>
-                            <a href="{{ route('temptation.create') }}">Nouveau</a>
-                        </x-primary-button>
+                        @if (request()->routeIs('temptation.sent'))
+                        <a href="{{ route('temptation.create') }}">
+                            <x-primary-button>
+                                    Nouveau
+                                </x-primary-button>
+                            </a>
+                        @endif
                     </div>
 
                     <x-forms.filter :action="route('temptation.filter')" />

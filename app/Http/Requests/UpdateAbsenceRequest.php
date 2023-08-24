@@ -29,7 +29,7 @@ class UpdateAbsenceRequest extends FormRequest
                 'start_hour' => ['required'],
                 'end_date' => ['required', 'date', 'after:start_date'],
                 'end_hour' => ['required'],
-                'cause' => ['required', 'string', 'max:255', 'min:2'],
+                'cause' => ['required', 'string', 'min:2'],
             ];
         } else {
             return [

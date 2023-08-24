@@ -10,9 +10,11 @@
                                 <a href="{{ route('regular_task_report.create') }}">Rapports</a>
                             </x-primary-button>
                         @else
-                            <x-primary-button>
-                                <a href="{{ route('regular_task.create') }}">Nouveau</a>
-                            </x-primary-button>
+                            <a href="{{ route('regular_task.create') }}">
+                                <x-primary-button>
+                                    Nouveau
+                                </x-primary-button>
+                            </a>
                         @endif
                     </div>
                     <div class="mt-4">

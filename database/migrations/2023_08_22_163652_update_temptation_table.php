@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permissions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->date('permission_date');
-            $table->string('cause');
-            $table->string('status');
-            $table->timestamps();
+        Schema::table('temptations', function (Blueprint $table) {
+            $table->unsignedBigInteger('recipient')->nullable();
         });
     }
 
@@ -26,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permissions');
+        //
     }
 };

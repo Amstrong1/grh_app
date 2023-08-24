@@ -3,8 +3,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h1>Ajouter un rapport de tâche régulière</h1>
-                    <x-forms.create :fields="$my_fields" type="regular_task_report" />
+                    <h1>Ajouter une réponse à une demande</h1>
+                    <x-forms.create :fields="$my_fields" type="temptation_back" />
                 </div>
             </div>
         </div>

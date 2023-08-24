@@ -5,9 +5,11 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">Liste des entreprises</h1>
-                        <x-primary-button>
-                            <a href="{{ route('structure.create') }}">Nouveau</a>
-                        </x-primary-button>
+                        <a href="{{ route('structure.create') }}">
+                            <x-primary-button>
+                                Nouveau
+                            </x-primary-button>
+                        </a>
                     </div>
                     <div class="mt-4">
                         <x-tables.default :resources="$structures" :mattributes="$my_attributes" type="structure" :mactions="$my_actions" />

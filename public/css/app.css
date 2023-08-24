@@ -677,6 +677,9 @@ video {
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
+.col-start-2 {
+  grid-column-start: 2;
+}
 .float-right {
   float: right;
 }
@@ -685,6 +688,9 @@ video {
 }
 .m-0 {
   margin: 0px;
+}
+.m-1 {
+  margin: 0.25rem;
 }
 .m-2 {
   margin: 0.5rem;
@@ -736,6 +742,9 @@ video {
 .mb-0 {
   margin-bottom: 0px;
 }
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
 .mb-12 {
   margin-bottom: 3rem;
 }
@@ -750,9 +759,6 @@ video {
 }
 .mb-4 {
   margin-bottom: 1rem;
-}
-.mb-5 {
-  margin-bottom: 1.25rem;
 }
 .mb-6 {
   margin-bottom: 1.5rem;
@@ -1522,6 +1528,9 @@ video {
 .overflow-visible {
   overflow: visible;
 }
+.overflow-scroll {
+  overflow: scroll;
+}
 .overflow-x-auto {
   overflow-x: auto;
 }
@@ -1740,6 +1749,10 @@ video {
 .border-primary-400 {
   --tw-border-opacity: 1;
   border-color: rgb(143 174 224 / var(--tw-border-opacity));
+}
+.border-slate-800 {
+  --tw-border-opacity: 1;
+  border-color: rgb(30 41 59 / var(--tw-border-opacity));
 }
 .border-transparent {
   border-color: transparent;
@@ -2448,10 +2461,6 @@ video {
   --tw-text-opacity: 1;
   color: rgb(67 56 202 / var(--tw-text-opacity));
 }
-.text-neutral-400 {
-  --tw-text-opacity: 1;
-  color: rgb(163 163 163 / var(--tw-text-opacity));
-}
 .text-neutral-500 {
   --tw-text-opacity: 1;
   color: rgb(115 115 115 / var(--tw-text-opacity));
@@ -2479,6 +2488,10 @@ video {
 .text-slate-500 {
   --tw-text-opacity: 1;
   color: rgb(100 116 139 / var(--tw-text-opacity));
+}
+.text-slate-700 {
+  --tw-text-opacity: 1;
+  color: rgb(51 65 85 / var(--tw-text-opacity));
 }
 .text-white {
   --tw-text-opacity: 1;
@@ -2508,6 +2521,9 @@ video {
 }
 .opacity-100 {
   opacity: 1;
+}
+.opacity-25 {
+  opacity: 0.25;
 }
 .opacity-50 {
   opacity: 0.5;
@@ -2990,13 +3006,13 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
-.hover\:bg-neutral-100:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
-}
 .hover\:bg-neutral-200:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(229 229 229 / var(--tw-bg-opacity));
+}
+.hover\:bg-neutral-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(212 212 212 / var(--tw-bg-opacity));
 }
 .hover\:bg-neutral-50:hover {
   --tw-bg-opacity: 1;
@@ -3005,10 +3021,6 @@ video {
 .hover\:bg-red-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-.hover\:bg-slate-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
 }
 .hover\:bg-slate-50:hover {
   --tw-bg-opacity: 1;
@@ -3163,10 +3175,6 @@ video {
 .focus\:bg-neutral-200:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(229 229 229 / var(--tw-bg-opacity));
-}
-.focus\:bg-slate-400:focus {
-  --tw-bg-opacity: 1;
-  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
 }
 .focus\:bg-slate-50:focus {
   --tw-bg-opacity: 1;
@@ -3410,10 +3418,6 @@ video {
 .active\:bg-red-700:active {
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
-}
-.active\:bg-slate-400:active {
-  --tw-bg-opacity: 1;
-  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
 }
 .active\:bg-slate-50:active {
   --tw-bg-opacity: 1;
@@ -3985,10 +3989,6 @@ video {
   --tw-text-opacity: 1;
   color: rgb(163 163 163 / var(--tw-text-opacity));
 }
-:is(.dark .dark\:text-neutral-600) {
-  --tw-text-opacity: 1;
-  color: rgb(82 82 82 / var(--tw-text-opacity));
-}
 :is(.dark .dark\:text-red-100) {
   --tw-text-opacity: 1;
   color: rgb(254 226 226 / var(--tw-text-opacity));
@@ -4222,6 +4222,10 @@ video {
     display: none;
   }
 
+  .sm\:h-4 {
+    height: 1rem;
+  }
+
   .sm\:w-full {
     width: 100%;
   }
@@ -4287,6 +4291,10 @@ video {
     border-radius: 0.5rem;
   }
 
+  .sm\:p-1 {
+    padding: 0.25rem;
+  }
+
   .sm\:p-8 {
     padding: 2rem;
   }
@@ -4331,12 +4339,20 @@ video {
     display: grid;
   }
 
+  .md\:h-10 {
+    height: 2.5rem;
+  }
+
   .md\:w-96 {
     width: 24rem;
   }
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:justify-center {
+    justify-content: center;
   }
 }
 @media (min-width: 1024px) {

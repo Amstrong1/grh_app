@@ -24,7 +24,7 @@ class StoreConflictRequest extends FormRequest
         return [
             'users' => ['required'],
             'conflict_date' => ['required', 'date'],
-            'cause' => ['required', 'string', 'min:2', 'max:255'],
+            'cause' => ['required', 'string', 'min:2'],
         ];
     }
 }

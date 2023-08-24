@@ -3,31 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Temptation;
 use Illuminate\Http\Request;
+use App\Models\TemptationBack;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\StoreTemptationRequest;
-use App\Http\Requests\UpdateTemptationRequest;
-use App\Notifications\NewTemptationNotification;
+use App\Http\Requests\StoreTemptationBackRequest;
+use App\Http\Requests\UpdateTemptationBackRequest;
+use App\Notifications\NewTemptationBackNotification;
 
-class TemptationController extends Controller
+class TemptationBackController extends Controller
 {
-    /**
+ /**
      * Display a listing of the resource.
      */
     public function index()
     {
         if (Auth::user()->role === 'admin') {
             $structure = Auth::user()->structure;
-            $temptations = $structure->temptations()->where('recipient', null)->get();
+            $temptationBacks = $structure->temptationBacks()->where('recipient', null)->get();
         } else {
-            $temptations = Temptation::where('recipient', Auth::user()->id)->get();
+            $temptationBacks = TemptationBack::where('recipient', Auth::user()->id)->get();
         }
 
-        return view('app.temptation.index', [
-            'temptations' => $temptations,
+        return view('app.temptation-back.index', [
+            'temptationBacks' => $temptationBacks,
             'my_actions' => $this->temptation_actions(),
             'my_attributes' => $this->temptation_columns(),
         ]);
@@ -35,10 +35,10 @@ class TemptationController extends Controller
 
     public function indexSent()
     {
-        $temptations = Temptation::where('user_id', Auth::user()->id)->get();
+        $temptationBacks = TemptationBack::where('user_id', Auth::user()->id)->get();
 
-        return view('app.temptation.index', [
-            'temptations' => $temptations,
+        return view('app.temptation-back.index', [
+            'temptationBacks' => $temptationBacks,
             'my_actions' => $this->temptation_actions_sent(),
             'my_attributes' => $this->temptation_columns(),
         ]);
@@ -56,19 +56,19 @@ class TemptationController extends Controller
         if (!$validate->fails()) {
             if (Auth::user()->role === 'admin') {
                 $structure = Auth::user()->structure;
-                $temptations = $structure->temptations()->where('recipient', null)->whereBetween('updated_at', [$request->start, $request->end])
+                $temptationBacks = $structure->temptationBacks()->where('recipient', null)->whereBetween('updated_at', [$request->start, $request->end])
                     ->get();
             } else {
-                $temptations = Temptation::where('recipient', Auth::user()->id)
+                $temptationBacks = TemptationBack::where('recipient', Auth::user()->id)
                     ->whereBetween('updated_at', [$request->start, $request->end])
                     ->get();
             }
         } else {
-            return redirect('temptation');
+            return redirect('temptation-back');
         }
 
-        return view('app.temptation.index', [
-            'temptations' => $temptations,
+        return view('app.temptation-back.index', [
+            'temptationBacks' => $temptationBacks,
             'my_actions' => $this->temptation_actions(),
             'my_attributes' => $this->temptation_columns(),
         ]);
@@ -81,15 +81,15 @@ class TemptationController extends Controller
             'end' => 'required|after:start'
         ]);
         if (!$validate->fails()) {
-            $temptations = Temptation::where('user_id', Auth::user()->id)
+            $temptationBacks = TemptationBack::where('user_id', Auth::user()->id)
                 ->whereBetween('updated_at', [$request->start, $request->end])
                 ->get();
         } else {
-            return redirect('temptation');
+            return redirect('temptation-back');
         }
 
-        return view('app.temptation.index', [
-            'temptations' => $temptations,
+        return view('app.temptation-back.index', [
+            'temptationBacks' => $temptationBacks,
             'my_actions' => $this->temptation_actions_sent(),
             'my_attributes' => $this->temptation_columns(),
         ]);
@@ -100,7 +100,7 @@ class TemptationController extends Controller
      */
     public function create()
     {
-        return view('app.temptation.create', [
+        return view('app.temptation-back.create', [
             'my_fields' => $this->temptation_fields(),
         ]);
     }
@@ -108,27 +108,28 @@ class TemptationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTemptationRequest $request)
+    public function store(StoreTemptationBackRequest $request)
     {
-        $temptation = new Temptation();
+        $temptationBack = new TemptationBack();
 
-        $temptation->structure_id = Auth::user()->structure->id;
-        $temptation->user_id = Auth::user()->id;
+        $temptationBack->structure_id = Auth::user()->structure->id;
+        // $temptationBack->temptation_id = $request->temptation;
+        $temptationBack->user_id = Auth::user()->id;
         if (Auth::user()->role === 'admin' || Auth::user()->role === 'supervisor') {
-            $temptation->recipient = $request->user;
+            $temptationBack->recipient = $request->user;
         }
-        $temptation->object = $request->object;
-        $temptation->message = $request->message;
+        $temptationBack->object = $request->object;
+        $temptationBack->message = $request->message;
 
-        if ($temptation->save()) {
+        if ($temptationBack->save()) {
             Alert::toast("Données enregistrées", 'success');
             if (Auth::user()->role === 'user') {
                 $userNotify = User::where('role', 'admin')->where('structure_id', Auth::user()->structure_id)->first();
             } else {
                 $userNotify = User::where('id', $request->user)->first();
             }
-            $userNotify->notify(new NewTemptationNotification($temptation->object));
-            return redirect('temptation/sent');
+            $userNotify->notify(new NewTemptationBackNotification($temptationBack->object));
+            return redirect('temptationBack/sent');
         } else {
             Alert::toast('Une erreur est survenue', 'error');
             return redirect()->back()->withInput($request->input());
@@ -138,11 +139,11 @@ class TemptationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Temptation $temptation)
+    public function show(TemptationBack $temptationBack)
     {
-        // dd($temptation);
-        return view('app.temptation.show', [
-            'temptation' => $temptation,
+        // dd($temptationBack);
+        return view('app.temptation-back.show', [
+            'temptationBack' => $temptationBack,
             'my_fields' => $this->temptation_fields(),
         ]);
     }
@@ -150,10 +151,10 @@ class TemptationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Temptation $temptation)
+    public function edit(TemptationBack $temptationBack)
     {
-        return view('app.temptation.edit', [
-            'temptation' => $temptation,
+        return view('app.temptation-back.edit', [
+            'temptationBack' => $temptationBack,
             'my_fields' => $this->temptation_fields(),
         ]);
     }
@@ -161,18 +162,16 @@ class TemptationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTemptationRequest $request, Temptation $temptation)
+    public function update(UpdateTemptationBackRequest $request, TemptationBack $temptationBack)
     {
-        $temptation = Temptation::find($temptation->id);
+        $temptationBack = TemptationBack::find($temptationBack->id);
 
-        $temptation->structure_id = Auth::user()->structure->id;
-        $temptation->user_id = Auth::id();
-        $temptation->object = $request->object;
-        $temptation->message = $request->message;
+        $temptationBack->object = $request->object;
+        $temptationBack->message = $request->message;
 
-        if ($temptation->save()) {
+        if ($temptationBack->save()) {
             Alert::toast('Les informations ont été modifiées', 'success');
-            return redirect('temptation');
+            return redirect('temptation_back');
         } else {
             Alert::toast('Une erreur est survenue', 'error');
             return redirect()->back()->withInput($request->input());
@@ -182,12 +181,12 @@ class TemptationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Temptation $temptation)
+    public function destroy(TemptationBack $temptationBack)
     {
         try {
-            $temptation = $temptation->delete();
+            $temptationBack = $temptationBack->delete();
             Alert::success('Opération effectuée', 'Suppression éffectué');
-            return redirect('temptation');
+            return redirect('temptation_back');
         } catch (\Exception $e) {
             Alert::error('Erreur', 'Element introuvable');
             return redirect()->back();
