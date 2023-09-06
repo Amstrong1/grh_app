@@ -243,7 +243,10 @@ class AbsenceController extends Controller
      */
     public function show(Absence $absence)
     {
-        // 
+        return view('app.absence.show', [
+            'absence' => $absence,
+            'my_fields' => $this->absence_show(),
+        ]);
     }
 
     /**
@@ -317,7 +320,7 @@ class AbsenceController extends Controller
             'start_hour' => 'Heure de départ',
             'formatted_end_date' => 'Date d\'arrivé',
             'end_hour' => 'Heure d\'arrivé',
-            'cause' => 'Motif',
+            // 'cause' => 'Motif',
             // 'status' => 'Statut',
         ];
         return $columns;
@@ -327,11 +330,13 @@ class AbsenceController extends Controller
     {
         if (Auth::user()->role === 'user') {
             $actions = (object) array(
+                'show' => 'Voir',
                 'edit' => 'Modifier',
                 'delete' => "Supprimer",
             );
         } else {
             $actions = (object) array(
+                'show' => 'Voir',
                 'edit' => 'Modifier',
             );
         }
@@ -377,6 +382,19 @@ class AbsenceController extends Controller
                 ],
             ];
         }
+
+        return $fields;
+    }
+
+    private function absence_show()
+    {
+        $fields = [
+            'cause' => [
+                'title' => 'Motif',
+                'field' => 'richtext',
+                'colspan' => true
+            ],
+        ];
 
         return $fields;
     }
