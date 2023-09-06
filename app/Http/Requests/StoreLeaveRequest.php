@@ -24,9 +24,9 @@ class StoreLeaveRequest extends FormRequest
         return [
             'leave_type' => ['required'],
             'user' => ['required'],
-            'date_start' => ['required', 'before:date_end'],
+            'date_start' => ['required', 'before_or_equal:date_end'],
             'hour_start' => ['required'],
-            'date_end' => ['required', 'after:date_start'],
+            'date_end' => ['required', 'after_or_equal:date_start'],
             'hour_end' => ['required'],
         ];
     }

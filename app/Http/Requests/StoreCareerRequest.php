@@ -34,7 +34,7 @@ class StoreCareerRequest extends FormRequest
             'diploma' => ['required', 'string', 'max:255', 'min:2'],
             'contract' => ['required'],
             'contract_start' => ['required'],
-            'contract_end' => ['exclude_if:contract,CDI', 'required', 'after:contract_start'],
+            'contract_end' => ['exclude_if:contract,CDI', 'required', 'after_or_equal:contract_start'],
         ];
     }
 }

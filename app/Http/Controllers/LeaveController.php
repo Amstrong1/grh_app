@@ -36,8 +36,8 @@ class LeaveController extends Controller
     public function indexFilter(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'start' => 'required|before:end',
-            'end' => 'required|after:start'
+            'start' => 'required|before_or_equal:end',
+            'end' => 'required|after_or_equal:start'
         ]);
         if (!$validate->fails()) {
             $leaves = Leave::where('structure_id', Auth::user()->structure_id)

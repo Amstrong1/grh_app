@@ -23,8 +23,8 @@ class StorePayRequest extends FormRequest
     {
         return [
             'user' => ['required'],
-            'period_start' => ['required', 'before:period_end'],
-            'period_end' => ['required', 'after:period_start'],
+            'period_start' => ['required', 'before_or_equal:period_end'],
+            'period_end' => ['required', 'after_or_equal:period_start'],
             'overtime_done' => ['required'],
             'overtime_done_week' => ['required'],
             'pay_date' => ['required'],

@@ -79,8 +79,8 @@ class HomeController extends Controller
         $departments = Department::where('structure_id', Auth::user()->structure_id)->count();
 
         $validate = Validator::make($request->all(), [
-            'start' => 'required|before:end',
-            'end' => 'required|after:start'
+            'start' => 'required|before_or_equal:end',
+            'end' => 'required|after_or_equal:start'
         ]);
         if (!$validate->fails()) {
             $conflicts = Conflict::where('structure_id', Auth::user()->structure_id)

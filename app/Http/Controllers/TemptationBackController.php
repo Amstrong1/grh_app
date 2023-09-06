@@ -50,8 +50,8 @@ class TemptationBackController extends Controller
     public function indexFilter(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'start' => 'required|before:end',
-            'end' => 'required|after:start'
+            'start' => 'required|before_or_equal:end',
+            'end' => 'required|after_or_equal:start'
         ]);
         if (!$validate->fails()) {
             if (Auth::user()->role === 'admin') {
@@ -77,8 +77,8 @@ class TemptationBackController extends Controller
     public function indexFilterSent(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'start' => 'required|before:end',
-            'end' => 'required|after:start'
+            'start' => 'required|before_or_equal:end',
+            'end' => 'required|after_or_equal:start'
         ]);
         if (!$validate->fails()) {
             $temptationBacks = TemptationBack::where('user_id', Auth::user()->id)

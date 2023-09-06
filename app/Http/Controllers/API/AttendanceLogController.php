@@ -37,8 +37,8 @@ class AttendanceLogController extends Controller
     {
         $structure = Auth::user()->structure;
         $validate = Validator::make($request->all(), [
-            'start' => 'required|before:end',
-            'end' => 'required|after:start'
+            'start' => 'required|before_or_equal:end',
+            'end' => 'required|after_or_equal:start'
         ]);
         if (!$validate->fails()) {
             $attendanceLogs = $structure->attendanceLogs()

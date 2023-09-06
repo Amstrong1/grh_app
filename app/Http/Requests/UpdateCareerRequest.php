@@ -35,7 +35,7 @@ class UpdateCareerRequest extends FormRequest
             'contract' => ['required'],
             'sex' => ['required'],
             'contract_start' => ['required', 'date'],
-            'contract_end' => ['exclude_if:contract,CDI', 'required', 'after:contract_start'],
+            'contract_end' => ['exclude_if:contract,CDI', 'required', 'after_or_equal:contract_start'],
         ];
     }
 }
