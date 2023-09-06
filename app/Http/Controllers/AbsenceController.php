@@ -27,12 +27,12 @@ class AbsenceController extends Controller
     {
         $structure = Auth::user()->structure;
 
-        if (Auth::user()->role === UserRoleEnum::User) {
+        if (Auth::user()->role === 'user') {
             $absences = $structure->absences()
                 ->where('user_id', Auth::id())
                 ->where('status', PermissionStatusEnum::Pending)
                 ->get();
-        } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+        } elseif (Auth::user()->role === 'supervisor') {
             $absences = $this->getAbsence(PermissionStatusEnum::Pending);
         } else {
             $absences = $structure->absences()
@@ -60,14 +60,14 @@ class AbsenceController extends Controller
             'end' => 'required|after:start'
         ]);
         if (!$validate->fails()) {
-            if (Auth::user()->role === UserRoleEnum::User) {
+            if (Auth::user()->role === 'user') {
                 $absences = $structure->absences()
                     ->where('user_id', Auth::id())
                     ->where('status', PermissionStatusEnum::Pending)
                     ->whereBetween('start_date', [$request->start, $request->end])
                     ->orWhereBetween('end_date', [$request->start, $request->end])
                     ->get();
-            } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+            } elseif (Auth::user()->role === 'supervisor') {
                 $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Pending, $request->start, $request->end);
             } else {
                 $absences = $structure->absences()
@@ -89,12 +89,12 @@ class AbsenceController extends Controller
     public function indexAllowed()
     {
         $structure = Auth::user()->structure;
-        if (Auth::user()->role === UserRoleEnum::User) {
+        if (Auth::user()->role === 'user') {
             $absences = $structure->absences()
                 ->where('user_id', Auth::id())
                 ->where('status', PermissionStatusEnum::Allowed)
                 ->get();
-        } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+        } elseif (Auth::user()->role === 'supervisor') {
             $absences = $this->getAbsence(PermissionStatusEnum::Allowed);
         } else {
             $absences = $structure->absences()
@@ -116,14 +116,14 @@ class AbsenceController extends Controller
             'end' => 'required|after:start'
         ]);
         if (!$validate->fails()) {
-            if (Auth::user()->role === UserRoleEnum::User) {
+            if (Auth::user()->role === 'user') {
                 $absences = $structure->absences()
                     ->where('user_id', Auth::id())
                     ->where('status', PermissionStatusEnum::Allowed)
                     ->whereBetween('start_date', [$request->start, $request->end])
                     ->orWhereBetween('end_date', [$request->start, $request->end])
                     ->get();
-            } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+            } elseif (Auth::user()->role === 'supervisor') {
                 $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Allowed, $request->start, $request->end);
             } else {
                 $absences = $structure->absences()
@@ -145,12 +145,12 @@ class AbsenceController extends Controller
     public function indexDenied()
     {
         $structure = Auth::user()->structure;
-        if (Auth::user()->role === UserRoleEnum::User) {
+        if (Auth::user()->role === 'user') {
             $absences = $structure->absences()
                 ->where('user_id', Auth::id())
                 ->where('status', PermissionStatusEnum::Denied)
                 ->get();
-        } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+        } elseif (Auth::user()->role === 'supervisor') {
             $absences = $this->getAbsence(PermissionStatusEnum::Denied);
         } else {
             $absences = $structure->absences()
@@ -172,14 +172,14 @@ class AbsenceController extends Controller
             'end' => 'required|after:start'
         ]);
         if (!$validate->fails()) {
-            if (Auth::user()->role === UserRoleEnum::User) {
+            if (Auth::user()->role === 'user') {
                 $absences = $structure->absences()
                     ->where('user_id', Auth::id())
                     ->where('status', PermissionStatusEnum::Denied)
                     ->whereBetween('start_date', [$request->start, $request->end])
                     ->orWhereBetween('end_date', [$request->start, $request->end])
                     ->get();
-            } elseif (Auth::user()->role === UserRoleEnum::Supervisor) {
+            } elseif (Auth::user()->role === 'supervisor') {
                 $absences = $this->getAbsenceFiltered(PermissionStatusEnum::Denied, $request->start, $request->end);
             } else {
                 $absences = $structure->absences()
