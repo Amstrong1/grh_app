@@ -46,7 +46,7 @@
                     <x-input-label for="{{ $attr }}" value="{!! $value['title'] !!}"></x-input-label>
 
                     <x-dynamic-component :component="$component" id="{{ $attr }}" name="{{ $attr }}[]"
-                        class="block mt-1 w-full border-2 p-2 rounded outline-0 capitalize">
+                        class="block mt-1 w-full border-2 p-2 rounded outline-0">
                         @foreach ($value['options'] as $item)
                             <option value="{{ $item->id }}" @selected(old($attr))>
                                 {{ $item->name }}</option>

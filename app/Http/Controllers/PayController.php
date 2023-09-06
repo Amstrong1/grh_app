@@ -42,20 +42,7 @@ class PayController extends Controller
      */
     public function create()
     {
-        $structure = Auth::user()->structure;
-        $users = $structure->users()
-            ->where('role', '!=', UserRoleEnum::Admin)
-            ->where('role', '!=', UserRoleEnum::SuperAdmin)
-            ->get();
-        $departments = Department::all();
-        $fillers = Filler::all();
-        $salaryAdvantages = SalaryAdvantage::all();
-        return view('app.pay.create', compact(
-            'users',
-            'departments',
-            'fillers',
-            'salaryAdvantages',
-        ));
+        return view('app.pay.create');
     }
 
     /**

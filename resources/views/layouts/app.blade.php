@@ -100,7 +100,6 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
-    <script defer src="{{ asset('js/twe-script.js') }}"></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script defer src="{{ asset('js/main.js') }}"></script>
