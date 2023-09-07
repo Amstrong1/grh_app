@@ -328,7 +328,7 @@ class AbsenceController extends Controller
 
     private function absence_actions()
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role === UserRoleEnum::User) {
             $actions = (object) array(
                 'show' => 'Voir',
                 'edit' => 'Modifier',
