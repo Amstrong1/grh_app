@@ -27,7 +27,7 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $allTasks = Auth::user()->tasks;
             $taskToDo = [];
 
@@ -38,7 +38,7 @@ class TaskController extends Controller
             }
 
             $tasks = $taskToDo;
-        } elseif (Auth::user()->role === 'supervisor') {
+        } elseif (Auth::user()->role == 'supervisor') {
             $tasks = $this->getTask('A faire');
         } else {
             $structure = Auth::user()->structure;
@@ -51,7 +51,7 @@ class TaskController extends Controller
                 'end' => 'required|after_or_equal:start'
             ]);
             if (!$validate->fails()) {
-                if (Auth::user()->role === 'user') {
+                if (Auth::user()->role == 'user') {
                     $allTasks = Auth::user()->tasks;
                     $taskToDo = [];
 
@@ -64,7 +64,7 @@ class TaskController extends Controller
                     }
 
                     $tasks = $taskToDo;
-                } elseif (Auth::user()->role === 'supervisor') {
+                } elseif (Auth::user()->role == 'supervisor') {
                     $tasks = $this->getTaskFiltered('A faire', $request->start, $request->end);
                 } else {
                     $structure = Auth::user()->structure;
@@ -85,7 +85,7 @@ class TaskController extends Controller
 
     public function indexPending(Request $request)
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $allTasks = Auth::user()->tasks;
             $taskPending = [];
 
@@ -96,7 +96,7 @@ class TaskController extends Controller
             }
 
             $tasks = $taskPending;
-        } elseif (Auth::user()->role === 'supervisor') {
+        } elseif (Auth::user()->role == 'supervisor') {
             $tasks = $this->getTask('En cours');
         } else {
             $structure = Auth::user()->structure;
@@ -109,7 +109,7 @@ class TaskController extends Controller
                 'end' => 'required|after_or_equal:start'
             ]);
             if (!$validate->fails()) {
-                if (Auth::user()->role === 'user') {
+                if (Auth::user()->role == 'user') {
                     $allTasks = Auth::user()->tasks;
                     $taskPending = [];
 
@@ -122,7 +122,7 @@ class TaskController extends Controller
                     }
 
                     $tasks = $taskPending;
-                } elseif (Auth::user()->role === 'supervisor') {
+                } elseif (Auth::user()->role == 'supervisor') {
                     $tasks = $this->getTaskFiltered('En cours', $request->start, $request->end);
                 } else {
                     $structure = Auth::user()->structure;
@@ -142,7 +142,7 @@ class TaskController extends Controller
 
     public function indexFinished(Request $request)
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $allTasks = Auth::user()->tasks;
             $taskFinished = [];
 
@@ -153,7 +153,7 @@ class TaskController extends Controller
             }
 
             $tasks = $taskFinished;
-        } elseif (Auth::user()->role === 'supervisor') {
+        } elseif (Auth::user()->role == 'supervisor') {
             $tasks = $this->getTask('Terminé');
         } else {
             $structure = Auth::user()->structure;
@@ -166,7 +166,7 @@ class TaskController extends Controller
                 'end' => 'required|after_or_equal:start'
             ]);
             if (!$validate->fails()) {
-                if (Auth::user()->role === 'user') {
+                if (Auth::user()->role == 'user') {
                     $allTasks = Auth::user()->tasks;
                     $taskFinished = [];
 
@@ -179,7 +179,7 @@ class TaskController extends Controller
                     }
 
                     $tasks = $taskFinished;
-                } elseif (Auth::user()->role === 'supervisor') {
+                } elseif (Auth::user()->role == 'supervisor') {
                     $tasks = $this->getTaskFiltered('Terminé', $request->start, $request->end);
                 } else {
                     $structure = Auth::user()->structure;
@@ -327,7 +327,7 @@ class TaskController extends Controller
 
     private function task_actions()
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $actions = (object) array(
                 'edit' => 'Modifier',
             );
@@ -343,7 +343,7 @@ class TaskController extends Controller
 
     private function task_fields()
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $status = ['En cours' => 'En cours', 'Terminé' => 'Terminé'];
             $fields = [
                 'status' => [

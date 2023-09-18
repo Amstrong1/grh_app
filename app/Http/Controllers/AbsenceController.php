@@ -104,7 +104,7 @@ class AbsenceController extends Controller
         return view('app.absence.index', [
             'absences' => $absences,
             'my_attributes' => $this->absence_columns(),
-            'my_actions' => [],
+            'my_actions' => $this->absence_actions(),
         ]);
     }
 
@@ -160,7 +160,7 @@ class AbsenceController extends Controller
         return view('app.absence.index', [
             'absences' => $absences,
             'my_attributes' => $this->absence_columns(),
-            'my_actions' => [],
+            'my_actions' => $this->absence_actions(),
         ]);
     }
 
