@@ -54,7 +54,7 @@
 
         <div class="flex items-center justify-start mt-4">
             <a href="/">
-                <x-danger-button class="ml-3">
+                <x-danger-button type='button' class="ml-3">
                     {{ __('Annuler') }}
                 </x-danger-button>
             </a>
