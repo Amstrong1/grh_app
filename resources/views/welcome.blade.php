@@ -177,13 +177,13 @@
                             </a>
                         </div>
                         <div class="m-2 flex justify-between items-center">
-                            <span class="mx-2"> <img src="{{ asset('assets/img/whatsapp.SVG') }}" alt="whatsapp">
+                            <span class="mx-2"> <img src="{{ asset('assets/img/whatsapp.svg') }}" alt="whatsapp">
                             </span>
-                            <span class="mx-2"> <img src="{{ asset('assets/img/facebook.SVG') }}" alt="facebook">
+                            <span class="mx-2"> <img src="{{ asset('assets/img/facebook.svg') }}" alt="facebook">
                             </span>
-                            <span class="mx-2"> <img src="{{ asset('assets/img/twitter.SVG') }}" alt="twitter">
+                            <span class="mx-2"> <img src="{{ asset('assets/img/twitter.svg') }}" alt="twitter">
                             </span>
-                            <span class="mx-2"> <img src="{{ asset('assets/img/linkedin.SVG') }}" alt="linkedin">
+                            <span class="mx-2"> <img src="{{ asset('assets/img/linkedin.svg') }}" alt="linkedin">
                             </span>
                         </div>
                     </div>
