@@ -94,7 +94,7 @@
         style="background-image:url('assets/img/hero.jpg');">
 
         <div class="w-full min-h-screen" style="background-color: rgba(3, 34, 76, .8)">
-            <div class="relative top-24 md:top-32">
+            <div class="relative top-20 md:top-32">
                 <!-- Page Content -->
                 <main class="pb-12">
                     {{ $slot }}
