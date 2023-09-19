@@ -183,7 +183,7 @@
                     </div>
 
                     <div
-                        class="flex flex-col md:grid md:grid-cols-3 w-full items-baseline md:justify-between pt-4 lg:pb-0 fade-in">
+                        class="flex flex-col md:grid md:grid-cols-3 w-full items-center md:items-baseline md:justify-between pt-4 lg:pb-0 fade-in">
                         <div class="m-2 flex justify-center">
                             <h4 class="text-white font-semibold text-center"></h4>
                             <div class="relative top-16 flex items-center">
@@ -192,7 +192,7 @@
                             </div>
                         </div>
 
-                        <div class="m-2">
+                        <div class="sm:mt-16 md:m-2">
                             <h4 class="text-white font-semibold text-center">Suivez nous</h4>
                             <div class="mt-4 flex justify-center items-center">
                                 <span class="mx-2"> <img src="{{ asset('assets/img/whatsapp.svg') }}"
