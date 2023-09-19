@@ -183,7 +183,7 @@
                             </span>
                             <span class="mx-2"> <img src="{{ asset('assets/img/twitter.svg') }}" alt="twitter">
                             </span>
-                            <span class="mx-2"> <img src="{{ asset('assets/img/linkedin.svg') }}" alt="linkedin">
+                            <span class="mx-2"> <img src="{{ asset('assets/img/linkedIn.svg') }}" alt="linkedIn">
                             </span>
                         </div>
                     </div>
