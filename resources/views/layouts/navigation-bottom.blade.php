@@ -2,7 +2,7 @@
         @include('layouts.partials.mobile.superadmin')
     @elseif (Auth::user()->role === 'admin')
         @include('layouts.partials.mobile.admin')
-    @elseif (Auth::user()->role === 'supervisor')
+    @elseif (Auth::user()->role == 'supervisor')
         @include('layouts.partials.mobile.supervisor')
     @else
         @include('layouts.partials.mobile.user')

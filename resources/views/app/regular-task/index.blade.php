@@ -5,7 +5,7 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">Liste des tâches régulières</h1>
-                        @if (Auth::user()->role === 'user')
+                        @if (Auth::user()->role == 'user')
                             <x-primary-button>
                                 <a href="{{ route('regular_task_report.create') }}">Rapports</a>
                             </x-primary-button>

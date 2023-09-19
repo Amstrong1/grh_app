@@ -25,9 +25,9 @@ class RegularTaskController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $regularTasks = Auth::user()->regularTasks;
-        } elseif (Auth::user()->role === 'supervisor') {
+        } elseif (Auth::user()->role == 'supervisor') {
             $departments = Auth::user()->departments;
             $places = new EloquentCollection();
             foreach ($departments as $department) {
@@ -197,7 +197,7 @@ class RegularTaskController extends Controller
 
     private function regularTask_actions()
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $actions = (object) array();
         } else {
             $actions = (object) array(

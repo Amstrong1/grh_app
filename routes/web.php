@@ -45,6 +45,10 @@ use App\Http\Controllers\AttendanceScheduleController;
 //     symlink($targetFolder, $linkFolder);
 // });
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::get('coming-soon', function () {
     return view('coming-soon');
 })->name('coming-soon');
@@ -53,7 +57,6 @@ Route::get('password/first/{user}', [PasswordController::class, 'edit'])->name('
 Route::post('password/first/update/{user}', [PasswordController::class, 'update'])->name('password.first.update');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', HomeController::class);
     Route::get('/dashboard', HomeController::class)->name('dashboard');
     Route::post('/dashboard/filter', HomeController::class)->name('dashboard.filter');
 

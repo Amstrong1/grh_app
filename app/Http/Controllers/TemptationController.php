@@ -114,7 +114,7 @@ class TemptationController extends Controller
 
         $temptation->structure_id = Auth::user()->structure->id;
         $temptation->user_id = Auth::user()->id;
-        if (Auth::user()->role === 'admin' || Auth::user()->role === 'supervisor') {
+        if (Auth::user()->role === 'admin' || Auth::user()->role == 'supervisor') {
             $temptation->recipient = $request->user;
         }
         $temptation->object = $request->object;
@@ -122,7 +122,7 @@ class TemptationController extends Controller
 
         if ($temptation->save()) {
             Alert::toast("Données enregistrées", 'success');
-            if (Auth::user()->role === 'user') {
+            if (Auth::user()->role == 'user') {
                 $userNotify = User::where('role', 'admin')->where('structure_id', Auth::user()->structure_id)->first();
             } else {
                 $userNotify = User::where('id', $request->user)->first();
@@ -227,7 +227,7 @@ class TemptationController extends Controller
         $structure = Auth::user()->structure;
         $users = $structure->users()->where('role', '!=', 'admin')->get();
 
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $fields = [
                 'object' => [
                     'title' => 'Objet',

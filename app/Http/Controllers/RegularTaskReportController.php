@@ -18,9 +18,9 @@ class RegularTaskReportController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $regularTaskReports = Auth::user()->regularTaskReports;
-        } elseif (Auth::user()->role === 'supervisor') {
+        } elseif (Auth::user()->role == 'supervisor') {
             $departments = Auth::user()->departments;
             $places = new EloquentCollection();
             foreach ($departments as $department) {
@@ -158,7 +158,7 @@ class RegularTaskReportController extends Controller
 
     private function regularTaskReport_actions()
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $actions = (object) array(
                 'edit' => 'Modifier',
                 'delete' => "Supprimer",

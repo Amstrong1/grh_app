@@ -115,7 +115,7 @@ class TemptationBackController extends Controller
         $temptationBack->structure_id = Auth::user()->structure->id;
         // $temptationBack->temptation_id = $request->temptation;
         $temptationBack->user_id = Auth::user()->id;
-        if (Auth::user()->role === 'admin' || Auth::user()->role === 'supervisor') {
+        if (Auth::user()->role === 'admin' || Auth::user()->role == 'supervisor') {
             $temptationBack->recipient = $request->user;
         }
         $temptationBack->object = $request->object;
@@ -123,7 +123,7 @@ class TemptationBackController extends Controller
 
         if ($temptationBack->save()) {
             Alert::toast("Données enregistrées", 'success');
-            if (Auth::user()->role === 'user') {
+            if (Auth::user()->role == 'user') {
                 $userNotify = User::where('role', 'admin')->where('structure_id', Auth::user()->structure_id)->first();
             } else {
                 $userNotify = User::where('id', $request->user)->first();
@@ -226,7 +226,7 @@ class TemptationBackController extends Controller
         $structure = Auth::user()->structure;
         $users = $structure->users()->where('role', '!=', 'admin')->get();
 
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $fields = [
                 'object' => [
                     'title' => 'Objet',

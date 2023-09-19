@@ -8,7 +8,7 @@
                             {{ __('E-GRH TABLEAU DE BORD') }}
                         </h1>
 
-                        @if (Auth::user()->role === 'admin' || Auth::user()->role === 'supervisor')
+                        @if (Auth::user()->role === 'admin' || Auth::user()->role == 'supervisor')
                             <x-forms.filter :action="route('dashboard.filter')" />
                         @endif
                     </div>

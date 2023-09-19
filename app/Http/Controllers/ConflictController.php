@@ -183,7 +183,7 @@ class ConflictController extends Controller
 
     private function conflict_actions()
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $actions = (object) array(
                 'edit' => "Modifier",
             );
@@ -218,7 +218,7 @@ class ConflictController extends Controller
 
     private function conflict_edit_fields()
     {
-        if (Auth::user()->role === 'user') {
+        if (Auth::user()->role == 'user') {
             $fields = [
                 'users' => [
                     'title' => 'Personnes en cause',

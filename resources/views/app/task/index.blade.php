@@ -32,7 +32,7 @@
                                     </x-secondary-button>
                                 </p>
                             </form> --}}
-                        @if (Auth::user()->role === 'admin' || Auth::user()->role === 'supervisor')
+                        @if (Auth::user()->role === 'admin' || Auth::user()->role == 'supervisor')
                         <a href="{{ route('task.create') }}">
                             <x-primary-button>
                                     Nouveau

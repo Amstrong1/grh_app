@@ -39,8 +39,31 @@
             top: 90%;
             left: 0;
         }
+
+        @font-face {
+            font-family: montserrat;
+            src: url('/assets/font/montserrat.ttf');
+        }
+
+        @font-face {
+            font-family: raleway;
+            src: url('/assets/font/raleway.ttf');
+        }
+
+        body {
+            font-family: raleway
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: montserrat
+        }
     </style>
-    
+
     @laravelPWA
 
     @livewireStyles
@@ -49,14 +72,6 @@
     <script src="https://cdn.tailwindcss.com/3.3.0"></script>
     <script>
         tailwind.config = {
-            darkMode: "class",
-            theme: {
-                fontFamily: {
-                    sans: ["Roboto", "sans-serif"],
-                    body: ["Roboto", "sans-serif"],
-                    mono: ["ui-monospace", "monospace"],
-                },
-            },
             corePlugins: {
                 preflight: false,
             },
