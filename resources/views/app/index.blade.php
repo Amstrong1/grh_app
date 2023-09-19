@@ -5,7 +5,7 @@
                 <div class="p-6 text-gray-900">
                     <div class="md:flex justify-between">
                         <h1 class="font-semibold text-lg m-4">
-                            {{ __('E-GRH TABLEAU DE BORD') }}
+                            {{ __('RH-IA TABLEAU DE BORD') }}
                         </h1>
 
                         @if (Auth::user()->role === 'admin' || Auth::user()->role == 'supervisor')

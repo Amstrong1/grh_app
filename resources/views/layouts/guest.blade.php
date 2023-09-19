@@ -14,8 +14,19 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+    <script src="https://cdn.tailwindcss.com/3.3.0"></script>
     <!-- Scripts -->
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            corePlugins: {
+                preflight: false,
+            },
+        };
+    </script>
 
     @laravelPWA
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -23,22 +34,26 @@
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center py-6 sm:pt-0 bg-gray-100">
+    <div class="w-full min-h-screen bg-fixed bg-center bg-cover" style="background-image:url('assets/img/hero.jpg');">
 
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center py-6 sm:pt-0"
+            style="background-color: rgba(3, 34, 76, .8)">
 
-            <div class="text-center py-6">
-                <div class="w-16 mx-auto">
-                    <a href="/">
-                        <x-application-logo class="fill-current text-gray-500" />
-                    </a>
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+
+                <div class="text-center py-6">
+                    <div class="w-16 mx-auto">
+                        <a href="/">
+                            <x-application-logo class="fill-current text-gray-500" />
+                        </a>
+                    </div>
+                    <h1 class="mb-12 mt-1 pb-1 text-md font-semibold">
+                        Bienvenu sur RH-IA, votre plateforme de gestion de ressources humaines
+                    </h1>
                 </div>
-                <h1 class="mb-12 mt-1 pb-1 text-md font-semibold">
-                    Bienvenu sur E-GRH, votre plateforme de gestion de ressources humaines
-                </h1>
-            </div>
 
-            {{ $slot }}
+                {{ $slot }}
+            </div>
         </div>
     </div>
 </body>

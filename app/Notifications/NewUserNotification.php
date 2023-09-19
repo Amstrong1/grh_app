@@ -36,7 +36,7 @@ class NewUserNotification extends Notification
     {
         return (new MailMessage)
             ->line('M/Mme ' . $notifiable->name . ' ' . $notifiable->firstname)
-            ->line('Vous avez été enregistré sur la plateforme E-GRH. Accédez à l\'application pour définir un mot de passe pour votre compte')
+            ->line('Vous avez été enregistré sur la plateforme RH-IA. Accédez à l\'application pour définir un mot de passe pour votre compte')
             ->action('Ouvrir l\'application', route('password.first.edit', [$notifiable->id]));
     }
 

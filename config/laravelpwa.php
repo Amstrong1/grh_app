@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'E-GRH App',
+    'name' => 'RH-IA App',
     'manifest' => [
         'name' => env('APP_NAME', 'My PWA App'),
         'short_name' => env('APP_NAME'),
@@ -59,7 +59,7 @@ return [
         ],
         'shortcuts' => [
             [
-                'name' => 'E-GRH',
+                'name' => 'RH-IA',
                 'description' => 'Application de gestion de ressources humaines',
                 'url' => '/',
                 'icons' => [
@@ -68,7 +68,7 @@ return [
                 ]
             ],
             [
-                'name' => 'E-GRH',
+                'name' => 'RH-IA',
                 'description' => 'Application de gestion de ressources humaines',
                 'url' => '/dashboard'
             ]

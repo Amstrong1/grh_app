@@ -72,6 +72,7 @@
     <script src="https://cdn.tailwindcss.com/3.3.0"></script>
     <script>
         tailwind.config = {
+            darkMode: "class",
             corePlugins: {
                 preflight: false,
             },
@@ -82,23 +83,28 @@
     <script src="{{ asset('assets/vendor/ckeditor5/build/ckeditor.js') }}"></script>
 </head>
 
-<body class="font-sans antialiased" style="background-color: #344168">
-    <div class="min-h-screen">
+<body class="font-sans antialiased">
+    <!-- Page Heading -->
+    <header class="fixed z-50 w-full bg-white text-white shadow" style="background-color: #03224c">
+        @include('layouts.navigation-top')
+        @include('layouts.navigation')
+    </header>
 
-        <!-- Page Heading -->
-        <header class="bg-white text-white shadow" style="background-color: #03224c">
-            @include('layouts.navigation-top')
-            @include('layouts.navigation')
-        </header>
+    <div class="w-full min-h-screen bg-fixed bg-center bg-cover flex flex-col sm:justify-center items-center"
+        style="background-image:url('assets/img/hero.jpg');">
 
-        <!-- Page Content -->
-        <main class="pb-6">
-            {{ $slot }}
-        </main>
+        <div class="w-full min-h-screen" style="background-color: rgba(3, 34, 76, .8)">
+            <div class="relative top-16 md:top-32">
+                <!-- Page Content -->
+                <main class="pb-12">
+                    {{ $slot }}
+                </main>
 
-        <footer class="fixed bottom-0 w-full">
-            @include('layouts.navigation-bottom')
-        </footer>
+                <footer class="fixed bottom-0 w-full">
+                    @include('layouts.navigation-bottom')
+                </footer>
+            </div>
+        </div>
     </div>
 
     @include('sweetalert::alert')

@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
         M/Mme {{ $user->name . ' ' . $user->firstname }} <br>
-        Bienvenue sur E-GRH, veuillez définir un mot de passe pour votre compte utilisateur
+        Bienvenue sur RH-IA, veuillez définir un mot de passe pour votre compte utilisateur
     </div>
 
     <form method="POST" action="{{ route('password.first.update', [$user->id]) }}">
