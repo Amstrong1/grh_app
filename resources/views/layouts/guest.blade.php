@@ -56,6 +56,25 @@
             </div>
         </div>
     </div>
+
+    @include('sweetalert::alert')
+
+    <script src="{{ asset('assets/vendor/ckeditor5/build/ckeditor.js') }}"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+    <script async src="//www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("form").submit();
+        }
+    </script>
 </body>
 
 </html>

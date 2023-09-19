@@ -12,6 +12,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\FillerController;
 use App\Http\Controllers\ReaderController;
 use App\Http\Controllers\AbsenceController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ConflictController;
 use App\Http\Controllers\PasswordController;
@@ -52,6 +53,10 @@ Route::get('/', function () {
 Route::get('coming-soon', function () {
     return view('coming-soon');
 })->name('coming-soon');
+
+Route::get('contact-us', [ContactController::class, 'index']);
+Route::post('contact-us', [ContactController::class, 'store'])->name('contact');
+
 
 Route::get('password/first/{user}', [PasswordController::class, 'edit'])->name('password.first.edit');
 Route::post('password/first/update/{user}', [PasswordController::class, 'update'])->name('password.first.update');

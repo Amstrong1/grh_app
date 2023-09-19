@@ -147,11 +147,12 @@
                 <div class="flex flex-col w-full justify-center items-center lg:items-start py-4">
                     <div class="xl:w-2/5">
                         <h1
-                            class="my-4 text-3xl md:text-4xl text-white font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
-                            RH-IA, votre partenaire RH en progrès</h1>
+                            class="my-4 text-xl text-white font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
+                            RH-IA, vivifiez vos ressources humaines avec l'automatisation intelligente</h1>
                         <p
                             class="leading-normal text-base text-white md:text-md mb-8 text-center md:text-left slide-in-bottom-subtitle">
-                            Vivifiez vos ressources humaines avec l'automatisation intelligente.
+                            Découvrez le trio gagnant de l'efficacité, de l'engagement des employés et de l'excellence
+                            opérationnelle avec notre application de gestion des ressources humaines simplifiée.
                         </p>
 
                         <a class="m-2" href="{{ route('dashboard') }}">
@@ -161,7 +162,7 @@
                             </button>
                         </a>
 
-                        <a class="m-2" href="">
+                        <a class="m-2" href="{{ route('contact') }}">
                             <button class="uppercase text-white text-md font-semibold rounded-full py-1 px-6"
                                 style="background-color: #fb8c00">
                                 CONTACTEZ-NOUS
@@ -169,7 +170,7 @@
                         </a>
                     </div>
 
-                    <div class="w-full fade-in flex items-center my-8">
+                    <div class="w-full fade-in flex items-center my-6">
                         <div class="w-1/3 md:w-1/5 h-10 flex items-center justify-center"
                             style="background-color: #ff9800">
                             <h2 class="font-bold text-sm md:text-md">Avis d'information</h2>
@@ -185,9 +186,9 @@
                         class="flex flex-col md:grid md:grid-cols-3 w-full items-baseline md:justify-between pt-6 lg:pb-0 fade-in">
                         <div class="m-2 flex justify-center">
                             <h4 class="text-white font-semibold text-center"></h4>
-                            <div class="relative top-16 flex">
-                                <img src="{{ asset('assets/img/vibecro.png') }}" class="h-12 m-2 bounce-top-icons">
-                                <img src="{{ asset('assets/img/playstore.svg') }}" class="h-12 m-2 bounce-top-icons">
+                            <div class="relative top-16 flex items-center">
+                                <img src="{{ asset('assets/img/vibecro.png') }}" class="h-16 m-2 bounce-top-icons">
+                                <img src="{{ asset('assets/img/playstore.svg') }}" class="h-10 m-2 bounce-top-icons">
                             </div>
                         </div>
 
