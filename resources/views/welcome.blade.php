@@ -69,7 +69,7 @@
                                     <a class="flex items-center no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
                                         href="/">
                                         <img class="w-14 rounded-full" src="{{ asset('assets/img/eGRH.png') }}"
-                                            alt="eGRH">
+                                            alt="RH-IA"> &nbsp; RH-IA
                                     </a>
                                 </div>
 
@@ -170,7 +170,7 @@
                         </a>
                     </div>
 
-                    <div class="w-full fade-in flex items-center my-6">
+                    <div class="w-full fade-in flex items-center">
                         <div class="w-1/3 md:w-1/5 h-10 flex items-center justify-center"
                             style="background-color: #ff9800">
                             <h2 class="font-bold text-sm md:text-md">Avis d'information</h2>
@@ -183,7 +183,7 @@
                     </div>
 
                     <div
-                        class="flex flex-col md:grid md:grid-cols-3 w-full items-baseline md:justify-between pt-6 lg:pb-0 fade-in">
+                        class="flex flex-col md:grid md:grid-cols-3 w-full items-baseline md:justify-between pt-4 lg:pb-0 fade-in">
                         <div class="m-2 flex justify-center">
                             <h4 class="text-white font-semibold text-center"></h4>
                             <div class="relative top-16 flex items-center">
