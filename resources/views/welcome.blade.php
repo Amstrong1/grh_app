@@ -66,7 +66,7 @@
 
                             <div class="w-full flex items-center justify-between">
                                 <div>
-                                    <a class="flex items-center no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
+                                    <a class="flex items-center no-underline hover:no-underline font-bold text-2xl lg:text-4xl text-white"
                                         href="/">
                                         <img class="w-14 rounded-full" src="{{ asset('assets/img/eGRH.png') }}"
                                             alt="RH-IA"> &nbsp; RH-IA
