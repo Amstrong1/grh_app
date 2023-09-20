@@ -93,10 +93,10 @@
     <div class="w-full min-h-screen bg-fixed bg-center bg-cover flex flex-col sm:justify-center items-center"
         style="background-image:url('assets/img/hero.jpg');">
 
-        <div class="w-full min-h-screen pt-16 md:pt-40 pb-16 mb-0" style="background-color: rgba(3, 34, 76, .8)">
+        <div class="w-full min-h-screen pt-16 md:pt-40 mb-0" style="background-color: rgba(3, 34, 76, .8)">
             <div class="">
                 <!-- Page Content -->
-                <main class="min-h-screen">
+                <main class="">
                     {{ $slot }}
                 </main>
 
