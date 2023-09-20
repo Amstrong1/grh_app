@@ -104,19 +104,19 @@
                     @include('layouts.navigation-bottom')
 
                     @if (request()->routeIs('dashboard'))
-                        <div class="bg-white text-center lg:text-left grid grid-cols-6">
+                        <div class="text-center lg:text-left grid grid-cols-6" style="background-color: #03224c">
                             <div class=""></div>
-                            <div class="border-x-2 col-span-4 p-2 text-center text-neutral-700">
+                            <div class="col-span-4 p-2 text-center text-white">
                                 <marquee behavior="" direction="">
                                     Licence accordée à l'entreprise {{ Auth::user()->structure->name }}. Validité 1an :
                                     Du 01/01/2023 au 01/12/2023
                                 </marquee>
-
-                                <div class="flex justify-end font-semibold p-2">
-                                    Support Technique : &nbsp; <a href="tel:+22958282558"> 58 28 25 58 </a>
-                                </div>
                             </div>
                             <div class=""></div>
+                        </div>
+
+                        <div class="flex justify-end font-semibold p-2 text-white" style="background-color: #03224c">
+                            Support Technique : &nbsp; <a href="tel:+22958282558"> 58 28 25 58 </a>
                         </div>
                     @endif
                 </footer>

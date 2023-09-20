@@ -85,3 +85,11 @@ if (datasTable2.find("tbody tr").length > 0) {
     console.log("The table is empty.");
 }
 
+function showPassword() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
