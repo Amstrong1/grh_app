@@ -211,11 +211,12 @@
                         </div>
 
                         <div class="m-2 flex flex-col">
-                            <form action="" method="post">
+                            <form action="{{ route('subscribe') }}" method="post">
+                                @csrf
                                 <h4 class="text-white font-semibold text-center">Abonnez vous à notre newsletter</h4>
                                 <div class="relative mt-4 flex flex-wrap items-stretch">
                                     @csrf
-                                    <input type="mail"
+                                    <input type="mail" name="email"
                                         class="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-white bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-white outline-none transition duration-200 ease-in-out focus:z-[3] focus:outline-none"
                                         placeholder="Email" aria-label="Email" aria-describedby="button-addon2" />
                                     <button
@@ -227,6 +228,7 @@
                                                 d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                                         </svg>
                                     </button>
+                                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                 </div>
                             </form>
                         </div>
@@ -235,6 +237,7 @@
             </div>
         </div>
     </header>
+    @include('sweetalert::alert')
 </body>
 
 </html>

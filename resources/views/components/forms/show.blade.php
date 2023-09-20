@@ -17,7 +17,7 @@
                 </textarea>
             @elseif ($value['field'] === 'model')
                 <x-text-input class="block mt-1 w-full border-2 p-2 rounded outline-0"
-                    value="{{ $fill->name }} {{ $fill->firstname ?? '' }}" readonly />
+                    value="{{ $item->name ?? $item->task }} {{ $item->firstname ?? '' }}" readonly />
             @else
                 <x-text-input class="block mt-1 w-full border-2 p-2 rounded outline-0" value="{{ old($attr) ?? $fill }}"
                     readonly />

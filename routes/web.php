@@ -19,6 +19,7 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\StructureController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\TemptationController;
 use App\Http\Controllers\HoldingWageController;
 use App\Http\Controllers\RegularTaskController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\SalaryAdvantageController;
 use App\Http\Controllers\API\AttendanceLogController;
 use App\Http\Controllers\RegularTaskReportController;
 use App\Http\Controllers\AttendanceScheduleController;
+use App\Http\Controllers\NewsletterSubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +59,8 @@ Route::get('coming-soon', function () {
 Route::get('contact-us', [ContactController::class, 'index']);
 Route::post('contact-us', [ContactController::class, 'store'])->name('contact');
 
+Route::post('subscribe', [NewsletterSubscriberController::class, 'store'])->name('subscribe');
+
 
 Route::get('password/first/{user}', [PasswordController::class, 'edit'])->name('password.first.edit');
 Route::post('password/first/update/{user}', [PasswordController::class, 'update'])->name('password.first.update');
@@ -68,6 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['superadmin'])->group(function () {
         Route::resource('structure', StructureController::class);
         Route::resource('addon', AddonController::class);
+
+        Route::get('newsletter/pending', [NewsletterController::class, 'indexPending'])->name('newsletter.pending');
+        Route::resource('newsletter', NewsletterController::class);
     });
 
     Route::middleware(['admin'])->group(function () {

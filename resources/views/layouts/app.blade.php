@@ -93,15 +93,32 @@
     <div class="w-full min-h-screen bg-fixed bg-center bg-cover flex flex-col sm:justify-center items-center"
         style="background-image:url('assets/img/hero.jpg');">
 
-        <div class="w-full min-h-screen" style="background-color: rgba(3, 34, 76, .8)">
-            <div class="relative top-20 md:top-32">
+        <div class="w-full min-h-screen pt-16 md:pt-40 pb-16 mb-0" style="background-color: rgba(3, 34, 76, .8)">
+            <div class="">
                 <!-- Page Content -->
-                <main class="pb-12">
+                <main class="min-h-screen">
                     {{ $slot }}
                 </main>
 
                 <footer class="fixed bottom-0 w-full">
                     @include('layouts.navigation-bottom')
+
+                    @if (request()->routeIs('dashboard'))
+                        <div class="bg-white text-center lg:text-left grid grid-cols-6">
+                            <div class=""></div>
+                            <div class="border-x-2 col-span-4 p-2 text-center text-neutral-700">
+                                <marquee behavior="" direction="">
+                                    Licence accordée à l'entreprise {{ Auth::user()->structure->name }}. Validité 1an :
+                                    Du 01/01/2023 au 01/12/2023
+                                </marquee>
+
+                                <div class="flex justify-end font-semibold p-2">
+                                    Support Technique : &nbsp; <a href="tel:+22958282558"> 58 28 25 58 </a>
+                                </div>
+                            </div>
+                            <div class=""></div>
+                        </div>
+                    @endif
                 </footer>
             </div>
         </div>

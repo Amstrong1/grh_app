@@ -19,7 +19,7 @@
                         <option value="">Cliquer pour sélectionner</option>
                         @foreach ($value['options'] as $data)
                             <option value="{{ $data->id }}" @selected(old($attr) ?? $fill === $data->name)>
-                                {{ $data->name }}  {{ $data->firstname ?? '' }}
+                                {{ $item->name ?? $item->task }} {{ $item->firstname ?? '' }}
                             </option>
                         @endforeach
                     </x-dynamic-component>
@@ -49,7 +49,8 @@
                         class="block mt-1 w-full border-2 p-2 rounded outline-0">
                         @foreach ($value['options'] as $item)
                             <option value="{{ $item->id }}" @selected(old($attr))>
-                                {{ $item->name }}</option>
+                                {{ $item->name ?? $item->task }} {{ $item->firstname ?? '' }}
+                            </option>
                         @endforeach
                     </x-dynamic-component>
                     @error($attr)
@@ -79,6 +80,14 @@
                             {{ $message }}
                         </p>
                     @enderror
+                @elseif ($value['field'] === 'checkbox')
+                    <div class="flex items-center">
+                        <x-dynamic-component :component="$component" id="{{ $attr }}" name="{{ $attr }}"
+                            type="{{ $value['field'] }}" class="mt-1 border-2 p-2 rounded outline-0" />
+
+                        <x-input-label for="{{ $attr }}" value="{!! $value['title'] !!}" class="ml-3">
+                        </x-input-label>
+                    </div>
                 @else
                     <x-input-label for="{{ $attr }}" value="{!! $value['title'] !!}"></x-input-label>
 
