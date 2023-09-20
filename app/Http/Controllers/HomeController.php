@@ -12,6 +12,7 @@ use App\Models\Structure;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Enums\PermissionStatusEnum;
+use App\Models\NewsletterSubscriber;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,6 +29,7 @@ class HomeController extends Controller
         $tasks = Task::where('structure_id', Auth::user()->structure_id)->where('status', 'En cours')->count();
         $sanctions = 0;
         $rewards = 0;
+        $subscribers = NewsletterSubscriber::all()->count();
 
         $leaveSolds = LeaveType::where('assign_to_all', true)->get();
         $leaveSold = 0;
@@ -67,6 +69,7 @@ class HomeController extends Controller
                 'sanctions',
                 'rewards',
                 'leaveSold',
+                'subscribers'
             )
         );
     }
