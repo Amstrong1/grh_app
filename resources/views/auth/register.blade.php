@@ -59,15 +59,24 @@
         </div>
 
         <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox"
-                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+            <label for="password_show" class="inline-flex items-center">
+                <input id="password_show" type="checkbox" onchange="showPassword()"
+                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                <span class="ml-2 text-sm text-gray-600">{{ __('Voir le mot de passe') }}</span>
+            </label>
+        </div>
+
+        <div class="block mt-4">
+            <label for="accept" class="inline-flex items-center">
+                <input id="accept" type="checkbox" required
+                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="accept">
                 <span class="ml-2 text-sm text-gray-600">
                     J'ai lu, compris et accepté les conditions d'utilisation et la <a class="text-indigo-500"
                         href="{{ route('coming-soon') }}">politique de
                         confidentialité</a> de RH-IA et j'accepte de recevoir des emails de RH-IA
                 </span>
             </label>
+            <x-input-error :messages="$errors->get('accept')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">

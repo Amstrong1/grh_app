@@ -38,6 +38,7 @@ class RegisteredUserController extends Controller
             'email_struct' => ['required', 'string', 'email', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'accept' => ['required']
         ]);
 
         $structure = Structure::where('email', $request->email_struct)->first();
