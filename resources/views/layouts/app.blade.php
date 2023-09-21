@@ -96,7 +96,7 @@
         <div class="w-full min-h-screen pt-16 md:pt-40 mb-0" style="background-color: rgba(3, 34, 76, .8)">
             <div class="">
                 <!-- Page Content -->
-                <main class="pb-4">
+                <main class="pb-16">
                     {{ $slot }}
                 </main>
 
@@ -115,7 +115,7 @@
                             <div class=""></div>
                         </div>
 
-                        <div class="flex justify-end font-semibold p-2 text-sm text-white" style="background-color: #03224c">
+                        <div class="flex justify-end font-semibold p-4 md:p-2 text-sm text-white" style="background-color: #03224c">
                             Support Technique : &nbsp; <a href="tel:+22958282558"> 58 28 25 58 </a>
                         </div>
                     @endif
