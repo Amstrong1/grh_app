@@ -96,7 +96,7 @@
         <div class="w-full min-h-screen pt-16 md:pt-40 mb-0" style="background-color: rgba(3, 34, 76, .8)">
             <div class="">
                 <!-- Page Content -->
-                <main class="pb-16">
+                <main class="pb-16 md:pb-8">
                     {{ $slot }}
                 </main>
 
