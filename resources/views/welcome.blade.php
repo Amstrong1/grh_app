@@ -142,7 +142,7 @@
                 </div>
             </nav>
 
-            <div class="px-8 md:px-14 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+            <div class="px-4 md:px-14 mx-auto flex flex-wrap flex-col md:flex-row items-center">
 
                 <div class="flex flex-col w-full justify-center items-center lg:items-start py-4">
                     <div class="xl:w-2/5">
@@ -170,10 +170,10 @@
                         </a>
                     </div>
 
-                    <div class="w-full fade-in flex items-center">
+                    <div class="w-full fade-in flex items-center mt-8 md:mt-0">
                         <div class="w-1/3 md:w-1/5 h-10 flex items-center justify-center"
                             style="background-color: #ff9800">
-                            <h2 class="font-bold text-sm md:text-md">Avis d'information</h2>
+                            <h2 class="font-bold text-xs md:text-md">Avis d'information</h2>
                         </div>
                         <div class="bg-white w-2/3 md:w-4/5 h-10 flex items-center">
                             <marquee behavior="" direction="">
@@ -186,7 +186,7 @@
                         class="flex flex-col md:grid md:grid-cols-3 w-full items-center md:items-baseline md:justify-between pt-4 lg:pb-0 fade-in">
                         <div class="m-2 flex justify-center">
                             <h4 class="text-white font-semibold text-center"></h4>
-                            <div class="relative top-16 flex items-center">
+                            <div class="relative md:top-16 flex items-center">
                                 <img src="{{ asset('assets/img/vibecro.png') }}" class="h-16 m-2 bounce-top-icons">
                                 <img src="{{ asset('assets/img/playstore.svg') }}" class="h-10 m-2 bounce-top-icons">
                             </div>
@@ -210,7 +210,7 @@
                             </div>
                         </div>
 
-                        <div class="m-2 flex flex-col">
+                        <div class="m-4 md:m-2 flex flex-col">
                             <form action="{{ route('subscribe') }}" method="post">
                                 @csrf
                                 <h4 class="text-white font-semibold text-center">Abonnez vous à notre newsletter</h4>
@@ -220,7 +220,7 @@
                                         class="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-white bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-white outline-none transition duration-200 ease-in-out focus:z-[3] focus:outline-none"
                                         placeholder="Email" aria-label="Email" aria-describedby="button-addon2" />
                                     <button
-                                        class="z-[2] inline-block rounded-r bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:z-[3] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                                        class="z-[2] inline-block rounded-r bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:z-[3] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] border border-solid border-white "
                                         data-te-ripple-init type="submit" id="button-addon2">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
