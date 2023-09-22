@@ -629,9 +629,6 @@ video {
 .top-1\/2 {
   top: 50%;
 }
-.top-16 {
-  top: 4rem;
-}
 .top-2 {
   top: 0.5rem;
 }
@@ -1250,10 +1247,6 @@ video {
 }
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-.translate-x-0 {
-  --tw-translate-x: 0px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .translate-x-2\/4 {
@@ -2003,10 +1996,6 @@ video {
   padding-left: 1.75rem;
   padding-right: 1.75rem;
 }
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
 .px-\[0\.2rem\] {
   padding-left: 0.2rem;
   padding-right: 0.2rem;
@@ -2097,6 +2086,9 @@ video {
 .pb-1 {
   padding-bottom: 0.25rem;
 }
+.pb-16 {
+  padding-bottom: 4rem;
+}
 .pb-2 {
   padding-bottom: 0.5rem;
 }
@@ -2105,9 +2097,6 @@ video {
 }
 .pb-3\.5 {
   padding-bottom: 0.875rem;
-}
-.pb-4 {
-  padding-bottom: 1rem;
 }
 .pb-6 {
   padding-bottom: 1.5rem;
@@ -3610,10 +3599,6 @@ video {
   --tw-translate-x: -0px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-.data-\[te-sidenav-hidden\=\'false\'\]\:translate-x-0[data-te-sidenav-hidden='false'] {
-  --tw-translate-x: 0px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
 .data-\[te-input-state-active\]\:scale-\[0\.8\][data-te-input-state-active] {
   --tw-scale-x: 0.8;
   --tw-scale-y: 0.8;
@@ -4290,6 +4275,10 @@ video {
 }
 @media (min-width: 768px) {
 
+  .md\:top-16 {
+    top: 4rem;
+  }
+
   .md\:m-2 {
     margin: 0.5rem;
   }
@@ -4362,6 +4351,10 @@ video {
     justify-content: space-between;
   }
 
+  .md\:p-2 {
+    padding: 0.5rem;
+  }
+
   .md\:p-4 {
     padding: 1rem;
   }
@@ -4381,8 +4374,8 @@ video {
     padding-right: 1.5rem;
   }
 
-  .md\:pt-40 {
-    padding-top: 10rem;
+  .md\:pb-20 {
+    padding-bottom: 5rem;
   }
 
   .md\:text-left {
@@ -4435,6 +4428,14 @@ video {
 
   .lg\:pb-0 {
     padding-bottom: 0px;
+  }
+
+  .lg\:pb-12 {
+    padding-bottom: 3rem;
+  }
+
+  .lg\:pt-40 {
+    padding-top: 10rem;
   }
 
   .lg\:text-left {
