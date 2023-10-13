@@ -29,3 +29,7 @@ Route::get('users/{email}', function ($email) {
     return User::where('email', $email)->first();
 });
 
+Route::get('users', function () {
+    return User::all();
+});
+
