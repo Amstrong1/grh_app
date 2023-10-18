@@ -15,6 +15,7 @@ use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ConflictController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\StructureController;
@@ -126,6 +127,8 @@ Route::middleware('auth')->group(function () {
     Route::get('absence/denied', [AbsenceController::class, 'indexDenied'])->name('absence.denied');
 
     Route::resource('absence', AbsenceController::class);
+
+    Route::resource('material', MaterialController::class);
 
     Route::post('temptation/filter', [TemptationController::class, 'indexFilter'])->name('temptation.filter');
     Route::post('temptation/sent/filter', [TemptationController::class, 'indexFilterSent'])->name('temptation.sent.filter');

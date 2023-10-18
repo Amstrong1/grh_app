@@ -371,7 +371,8 @@ class AbsenceController extends Controller
             ];
         } else {
             $status = [
-                'Accordé' => PermissionStatusEnum::Allowed,
+                'Accordé sans modifier congé' => PermissionStatusEnum::Allowed,
+                'Accordé et modifier congé' => PermissionStatusEnum::AllowedAndModify,
                 'Refusé' => PermissionStatusEnum::Denied,
             ];
             $fields = [

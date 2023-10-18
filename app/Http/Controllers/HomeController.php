@@ -41,7 +41,7 @@ class HomeController extends Controller
         $structure = Auth::user()->structure;
         $absences = $structure->absences()
             ->where('user_id', Auth::id())
-            ->where('status', PermissionStatusEnum::Allowed)
+            ->where('status', PermissionStatusEnum::AllowedAndModify)
             ->get();
 
         $last = 0;

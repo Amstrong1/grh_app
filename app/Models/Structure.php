@@ -109,4 +109,9 @@ class Structure extends Model
     {
         return $this->hasMany(TemptationBack::class);
     }
+
+    public function materials(): HasMany
+    {
+        return $this->hasMany(Material::class);
+    }
 }
