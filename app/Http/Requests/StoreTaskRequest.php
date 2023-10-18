@@ -24,7 +24,7 @@ class StoreTaskRequest extends FormRequest
         return [
             'users' => ['required'],
             'due_date' => ['required', 'date'],
-            'task' => ['required', 'string', 'min:3', 'max:255'],
+            'task' => ['required', 'string', 'min:3'],
         ];
     }
 }

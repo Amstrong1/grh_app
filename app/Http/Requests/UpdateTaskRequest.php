@@ -30,7 +30,7 @@ class UpdateTaskRequest extends FormRequest
             return [                
                 'user' => ['required'],
                 'due_date' => ['required', 'date'],
-                'task' => ['required', 'string', 'min:3', 'max:255'],
+                'task' => ['required', 'string', 'min:3'],
             ];
         }
         

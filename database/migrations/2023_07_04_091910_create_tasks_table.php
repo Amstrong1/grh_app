@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('structure_id')->constrained();
-            $table->string('task');
+            $table->text('task');
             $table->date('due_date');
             $table->time('due_time');
             $table->string('status');
