@@ -10,7 +10,7 @@ class Material extends Model
 {
     use HasFactory;
 
-    protected $append = ['users_fullname'];
+    // protected $append = ['users_fullname'];
 
 
     public function users(): BelongsToMany
@@ -18,13 +18,13 @@ class Material extends Model
         return $this->belongsToMany(User::class, 'material_users');
     }
 
-    public function getUsersFullnameAttribute() //users_fullname
-    {
-        $users_fullname = [];
-        $getUsers = $this->users()->get();
-        foreach ($getUsers as $getUser) {
-            $users_fullname[] = $getUser->name . ' ' . $getUser->firstname;
-        }
-        return $users_fullname;
-    }
+    // public function getUsersFullnameAttribute() //users_fullname
+    // {
+    //     $users_fullname = [];
+    //     $getUsers = $this->users()->get();
+    //     foreach ($getUsers as $getUser) {
+    //         $users_fullname[] = $getUser->name . ' ' . $getUser->firstname;
+    //     }
+    //     return $users_fullname;
+    // }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('structure_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('material_id')->constrained();
+            // $table->integer('quantity');
            $table->timestamps();
         });
     }

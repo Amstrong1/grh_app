@@ -150,7 +150,7 @@
     </li>
 
     {{-- logistic --}}
-    <li class="mx-1 static" data-te-nav-item-ref>
+    {{-- <li class="mx-1 static" data-te-nav-item-ref>
         <x-nav-link
             class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
             :href="route('coming-soon')" :active="request()->routeIs('coming-soon')" data-te-ripple-init data-te-ripple-color="light">
@@ -161,6 +161,73 @@
             </svg> &nbsp;
             Logistique
         </x-nav-link>
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
+        <div class="px-6 py-5 lg:px-8">
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                <div>
+                    <x-nav-link href="{{ route('pay.create') }}" aria-current="true"
+                        class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                        Listes des Materiels
+                    </x-nav-link>
+                </div>
+                <div>
+                    <x-nav-link href="{{ route('pay.index') }}" aria-current="true"
+                        class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                        Historique des fiches
+                    </x-nav-link>
+                </div>
+            </div>
+        </div>
+    </div>
+    </li> --}}
+    <li class="mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
+
+        <x-nav-link :active="request()->routeIs('material.*')"
+            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
+            data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
+            &nbsp;
+            Logistique
+        </x-nav-link>
+
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+            aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
+            <div class="px-6 py-5 lg:px-8">
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    <div>
+                        <x-nav-link href="{{ route('material.index') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Listes des Materiels
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('material.create') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Ajouter Materiel
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('material-users.create') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Attribuer Materiel a un employé
+                        </x-nav-link>
+                    </div>
+                    <div>
+                        <x-nav-link href="{{ route('material-users.index') }}" aria-current="true"
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            Listes Des Materiels atribuées aux Employés
+                        </x-nav-link>
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
     </li>
 
     {{-- pay --}}

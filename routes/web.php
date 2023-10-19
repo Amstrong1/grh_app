@@ -24,6 +24,7 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\TemptationController;
 use App\Http\Controllers\HoldingWageController;
 use App\Http\Controllers\RegularTaskController;
+use App\Http\Controllers\MaterialUserController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TemptationBackController;
 use App\Http\Controllers\SalaryAdvantageController;
@@ -129,6 +130,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('absence', AbsenceController::class);
 
     Route::resource('material', MaterialController::class);
+    Route::resource('material-users', MaterialUserController::class);
 
     Route::post('temptation/filter', [TemptationController::class, 'indexFilter'])->name('temptation.filter');
     Route::post('temptation/sent/filter', [TemptationController::class, 'indexFilterSent'])->name('temptation.sent.filter');

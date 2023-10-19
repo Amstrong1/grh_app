@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Material;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+
+
 use App\Http\Requests\StoreMaterialRequest;
 use App\Http\Requests\UpdateMaterialRequest;
-
-
-use App\Models\User;
 
 class MaterialController extends Controller
 {
@@ -18,7 +19,7 @@ class MaterialController extends Controller
     public function index()
     {
         $structure = Auth::user()->structure;
-        $materials = $structure->materials()->all();
+        $materials = $structure->materials()->get();
 
         return view('app.material.index', [
             'materials' => $materials,
@@ -42,7 +43,32 @@ class MaterialController extends Controller
      */
     public function store(StoreMaterialRequest $request)
     {
-        //
+        $material = new Material();
+
+        $material->structure_id = Auth::user()->structure->id;
+        $material->name = $request->name;
+        $material->quantity = $request->quantity;
+        $material->state = $request->state;
+      
+        if ($material->save()) {
+
+            // foreach ($request->users as $user) {
+            //     materialUser::create([
+            //         'user_id' => $user,
+            //         'id' =>  $material->id,
+            //         'structure_id' => Auth::user()->structure->id,
+            //     ]);
+
+            //     $user = User::where('id', $user)->first();
+            //    $user->notify(new NewmaterialNotification());
+            // }
+
+            Alert::toast("Données enregistrées", 'success');
+            return redirect('material');
+        } else {
+            Alert::toast('Une erreur est survenue', 'error');
+            return redirect()->back()->withInput($request->input());
+        }
     }
 
     /**
@@ -69,7 +95,36 @@ class MaterialController extends Controller
      */
     public function update(UpdateMaterialRequest $request, Material $material)
     {
-        //
+        $material = Material::find($material->id);
+             $material->name = $request->name;
+             $material->quantity = $request->quantity;
+             $material->state = $request->state;
+
+        // if (Auth::user()->role === 'admin') {
+        //     $material->name = $request->name;
+        //     $material->quantity = $request->quantity;
+        //     $material->state = $request->state;
+
+        //     foreach ($request->users as $user) {
+        //         materialUser::where('id', $material->id)->delete();
+        //         materialUser::create([
+        //             'user_id' => $user,
+        //             'id' => $material->id,
+        //             'structure_id' => Auth::user()->structure->id,
+        //         ]);
+        //     }
+        // } else {
+        //     $material->status = $request->status;
+        //     $material->report = $request->report;
+        // }
+
+        if ($material->save()) {
+            Alert::toast('Les informations ont été modifiées', 'success');
+            return redirect('material');
+        } else {
+            Alert::toast('Une erreur est survenue', 'error');
+            return redirect()->back()->withInput($request->input());
+        }
     }
 
     /**
@@ -77,7 +132,20 @@ class MaterialController extends Controller
      */
     public function destroy(Material $material)
     {
-        //
+        // try {
+        //     $usersDel = Material::where('id', $material->id)->delete();
+        //     if ($usersDel) {
+        //         $material = $material->delete();
+        //         Alert::success('Opération effectuée', 'Suppression éffectué');
+        //         return redirect('material');
+        //     } else {
+        //         Alert::error('Erreur', 'Element introuvable');
+        //         return redirect()->back();
+        //     }
+        // } catch (\Exception $e) {
+        //     Alert::error('Erreur', 'Element introuvable');
+        //     return redirect()->back();
+        // }
     }
 
     private function material_fields()
@@ -102,7 +170,27 @@ class MaterialController extends Controller
                 
             ];
         
-
         return $fields;
+    }
+    private function material_columns()
+    {
+        $columns = (object) [
+            'name' => 'Nom',
+            'quantity' => 'Stock',
+            'state' => 'Etat',
+           
+        ];
+        return $columns;
+    }
+    private function material_actions()
+    {
+       
+            $actions = (object) array(
+                'edit' => 'Modifier',
+                // 'delete' => "Supprimer",
+            );
+        
+
+        return $actions;
     }
 }
