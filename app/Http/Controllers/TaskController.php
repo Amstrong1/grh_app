@@ -246,7 +246,10 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        return view('app.task.show', [
+            'task' => $task,
+            'my_fields' => $this->task_show(),
+        ]);
     }
 
     /**
@@ -335,6 +338,7 @@ class TaskController extends Controller
     {
         if (Auth::user()->role == 'user') {
             $actions = (object) array(
+                'show' => 'Voir',
                 'edit' => 'Modifier',
             );
         } else {
@@ -407,6 +411,20 @@ class TaskController extends Controller
                 ],
             ];
         }
+
+        return $fields;
+    }
+
+    private function task_show()
+    {
+        $fields = [
+            'task' => [
+                'title' => 'Tache',
+                'field' => 'richtext',
+                'colspan' => true
+            ],
+
+        ];
 
         return $fields;
     }
