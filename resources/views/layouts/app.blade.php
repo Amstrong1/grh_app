@@ -62,6 +62,29 @@
         h6 {
             font-family: montserrat
         }
+
+        .buttons-excel {
+            padding-bottom: 0.625rem;
+            padding-top: 0.625rem;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            background-color: rgb(4 108 78/1);
+            border-radius: 0.5rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .pagination {
+            display: inline-flex;
+        }
+
+        .pagination li {
+            padding: 8px;
+            box-sizing: border-box;
+            border-width: .5px;
+            border-style: solid;
+            border-color: #E5E7EB;
+        }
     </style>
 
     @laravelPWA
@@ -106,7 +129,8 @@
                     @if (request()->routeIs('dashboard'))
                         <div class="text-center lg:text-left grid grid-cols-6 h-6" style="background-color: #03224c">
                             <div class=""></div>
-                            <div class="col-span-4 m-2 mb-0 text-center text-white text-md bg-white font-medium" style="color: #03224c">
+                            <div class="col-span-4 m-2 mb-0 text-center text-white text-md bg-white font-medium"
+                                style="color: #03224c">
                                 <marquee behavior="" direction="">
                                     Licence accordée à l'entreprise {{ Auth::user()->structure->name }}. Validité 1an :
                                     Du 01/01/2023 au 01/12/2023
@@ -115,7 +139,8 @@
                             <div class=""></div>
                         </div>
 
-                        <div class="flex justify-end font-semibold p-4 md:p-2 text-sm text-white" style="background-color: #03224c">
+                        <div class="flex justify-end font-semibold p-4 md:p-2 text-sm text-white"
+                            style="background-color: #03224c">
                             Support Technique : &nbsp; <a href="tel:+22958282558"> 58 28 25 58 </a>
                         </div>
                     @endif

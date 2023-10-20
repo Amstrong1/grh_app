@@ -70,8 +70,8 @@ class MaterialUserController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(MaterialUser $materialUser)
-    {   
-       //dd($materialUser);
+    {
+        //dd($materialUser);
         return view('app.user-material.edit', [
             'materialUser' => $materialUser,
             'my_fields' => $this->material_user_fields(),
@@ -100,7 +100,7 @@ class MaterialUserController extends Controller
     {
         $users = User::where('structure_id', Auth::user()->structure->id)->get();
         $materials = Material::where('structure_id', Auth::user()->structure->id)->get();
-        
+
         $fields = [
             'user_id' => [
                 'title' => 'Selectionné l\'employer',
@@ -112,17 +112,16 @@ class MaterialUserController extends Controller
                 'field' => 'model',
                 'options' => $materials,
             ],
-
             'quantity' => [
                 'title' => 'Selectionné la quantité',
                 'field' => 'number',
-               
-            ],
-            
-        ];
-    
 
-    return $fields;
+            ],
+
+        ];
+
+
+        return $fields;
     }
 
     private function materials_users_columns()
@@ -131,19 +130,16 @@ class MaterialUserController extends Controller
             'users_fullname' => 'Nom employé',
             'materials_fullname' => 'Nom Materiel',
             'quantity' => 'Nombre De Materiel',
-           
+
         ];
         return $columns;
     }
     private function materials_users_actions()
     {
-       
-            $actions = (object) array(
-                // 'edit' => 'Modifier',
-                // 'delete' => "Supprimer",
-            );
-        
-
+        $actions = (object) array(
+            'edit' => 'Modifier',
+            'delete' => "Supprimer",
+        );
         return $actions;
     }
 }

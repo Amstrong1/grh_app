@@ -99,7 +99,11 @@ Route::middleware('auth')->group(function () {
 
         Route::get('attendance_log', [AttendanceLogController::class, 'display'])->name('attendance_log.index');
         Route::post('attendance_log/filter', [AttendanceLogController::class, 'filter'])->name('attendance_log.filter');
+
     });
+
+    Route::resource('material', MaterialController::class);
+    Route::resource('material_user', MaterialUserController::class);
 
     Route::resource('career', CareerController::class);
 
@@ -130,9 +134,6 @@ Route::middleware('auth')->group(function () {
     Route::get('absence/denied', [AbsenceController::class, 'indexDenied'])->name('absence.denied');
 
     Route::resource('absence', AbsenceController::class);
-
-    Route::resource('material', MaterialController::class);
-    Route::resource('material-users', MaterialUserController::class);
 
     Route::post('temptation/filter', [TemptationController::class, 'indexFilter'])->name('temptation.filter');
     Route::post('temptation/sent/filter', [TemptationController::class, 'indexFilterSent'])->name('temptation.sent.filter');

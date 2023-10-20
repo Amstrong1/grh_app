@@ -4,17 +4,15 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
-                        <h1 class="font-bold text-lg my-2">
-                            Liste des matériels attribuées aux employés
-                        </h1>
-                        <a href="{{ route('material-users.create') }}">
+                        <h1 class="font-bold text-lg my-2">Liste des employés</h1>
+                        <a href="{{ route('material_user.create') }}">
                             <x-primary-button>
-                                    Nouveau
+                                Nouveau
                             </x-primary-button>
                         </a>
                     </div>
                     <div class="mt-4">
-                        <x-tables.default :resources="$materialsUsers" :mattributes="$my_attributes" type="material-users" :mactions="$my_actions" />
+                        <x-tables.default :resources="$materialsUsers" :mattributes="$my_attributes" type="material_user" :mactions="$my_actions" />
                     </div>
                 </div>
             </div>
