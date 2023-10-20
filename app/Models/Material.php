@@ -15,7 +15,7 @@ class Material extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'material_users');
+        return $this->belongsToMany(User::class, 'material_user');
     }
 
     // public function getUsersFullnameAttribute() //users_fullname

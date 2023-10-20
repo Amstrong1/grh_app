@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h1>Modifier les informations </h1>
-                    <x-forms.update :item="$materialUser" :fields="$my_fields" type="material-users" />
+                    <x-forms.update :item="$materialUser" :fields="$my_fields" type="material_user" />
                 </div>
             </div>
         </div>
