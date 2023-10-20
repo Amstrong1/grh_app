@@ -8,6 +8,9 @@ class NotificationController extends Controller
 {
     public function index()
     {
+        foreach (auth()->user()->notifications as $notification) {
+            $notification->markAsRead();
+        }
         return view('app.notification.index');
     }
 

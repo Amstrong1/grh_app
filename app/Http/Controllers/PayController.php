@@ -183,8 +183,8 @@ class PayController extends Controller
 
             if ($pay->save()) {
                 Alert::toast('Fiche de paie enregistrée', 'success');
-                // $user = User::find($pay->user_id);
-                // $user->notify(new NewPayslipNotification($pay->payslip, $pay->period_start, $pay->period_end));
+                $user = User::find($pay->user_id);
+                $user->notify(new NewPayslipNotification($pay->payslip, $pay->period_start, $pay->period_end));
                 return redirect('pay');
             }
         } else {

@@ -14,6 +14,7 @@ use App\Http\Requests\UpdateTaskRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\NewTaskNotification;
+use App\Notifications\NewReportNotification;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class TaskController extends Controller
@@ -282,6 +283,11 @@ class TaskController extends Controller
         } else {
             $task->status = $request->status;
             $task->report = $request->report;
+
+            $users = User::where('structure_id', Auth::user()->structure_id)->where('role', 'admin')->get();
+            foreach ($users as $user) {
+                $user->notify(new NewReportNotification());
+            };
         }
 
         if ($task->save()) {

@@ -7,22 +7,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewPayslipNotification extends Notification
+class NewReportNotification extends Notification
 {
     use Queueable;
-
-    public $payslip;
-    public $period_start;
-    public $period_end;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($payslip, $period_start, $period_end)
+    public function __construct()
     {
-        $this->payslip = $payslip;
-        $this->period_start = $period_start;
-        $this->period_end = $period_end;
+        //
     }
 
     /**
@@ -32,7 +26,7 @@ class NewPayslipNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail', 'database'];
+        return ['database','mail'];
     }
 
     /**
@@ -41,9 +35,9 @@ class NewPayslipNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Nouvelle fiche de paie.')
-            ->action('Notification Action', url('/'))
-            ->attach(public_path('storage/payslips/' . $this->payslip));
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**
@@ -54,7 +48,7 @@ class NewPayslipNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => 'Nouvelle fiche de paie (période du' . $this->period_start . 'au' . $this->period_end . ')'
+            'message' => 'New Report'
         ];
     }
 }

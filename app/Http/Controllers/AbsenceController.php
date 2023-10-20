@@ -229,8 +229,11 @@ class AbsenceController extends Controller
             $absence->save();
 
             Alert::toast("Données enregistrées", 'success');
-            $user = User::where('structure_id', Auth::user()->structure_id)->where('role', 'admin')->first();
-            $user->notify(new NewPermissionNotification());
+            $users = User::where('structure_id', Auth::user()->structure_id)->where('role', 'admin')->get();
+            foreach ($users as $user) {
+                $user->notify(new NewPermissionNotification());
+            };
+            //$user->notify(new NewPermissionNotification());
             return redirect('absence');
         } else {
             Alert::toast('Une erreur est survenue', 'error');

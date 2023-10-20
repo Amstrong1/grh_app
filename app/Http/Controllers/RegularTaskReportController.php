@@ -7,6 +7,7 @@ use App\Models\Career;
 use App\Models\RegularTaskReport;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Notifications\NewReportNotification;
 use App\Http\Requests\StoreRegularTaskReportRequest;
 use App\Http\Requests\UpdateRegularTaskReportRequest;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -83,6 +84,7 @@ class RegularTaskReportController extends Controller
 
             if ($regularTaskReport->save()) {
                 Alert::toast('Les données ont été enregistrées', 'success');
+               
                 return redirect('regular_task_report');
             } else {
                 Alert::toast('Les données ont été enregistrées', 'error');
@@ -124,7 +126,14 @@ class RegularTaskReportController extends Controller
 
         if ($regularTaskReport->save()) {
             Alert::toast('Les informations ont été modifiées', 'success');
+            
+            $users = User::where('structure_id', Auth::user()->structure_id)->where('role', 'admin')->get();
+            foreach ($users as $user) {
+                $user->notify(new NewReportNotification());
+            };
+
             return redirect('regular_task_report');
+            
         } else {
             Alert::toast('Une erreur est survenue', 'error');
             return redirect()->back()->withInput($request->input());

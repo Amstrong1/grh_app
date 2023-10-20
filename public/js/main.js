@@ -44,16 +44,45 @@ let deleteConfirmation = function (e) {
     // e.submit();
 };
 
+// DATATABLES
+// let datasTable = $("#datas-table")
+//     .DataTable({
+//         // responsive: true,
+//         // dom: 'rlftip',
+//         pageLength: 25,
+//         dom: 't<"grid p-4 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800" <"flex items-center col-span-3" i><"col-span-2"> <"flex col-span-4 mt-2 sm:mt-auto sm:justify-end"p>><"clear">',
+//         language: {
+//             decimal: "",
+//             emptyTable: "Aucun élément disponible",
+//             info: "Affichage de START à END parmi TOTAL élements",
+//             infoEmpty: "Aucun élément",
+//             infoFiltered: "(filtrés parmi MAX éléments)",
+//             infoPostFix: "",
+//             thousands: ",",
+//             lengthMenu: "Affichage de MENU éléments",
+//             loadingRecords: "Chargement",
+//             processing: "",
+//             search: "Rechercher:",
+//             paginate: {
+//                 first: "First",
+//                 last: "Last",
+//                 next: "Suivant",
+//                 previous: "Précédent ",
+//             },
+//         },
+//     })
+//     .columns.adjust()
+//     .responsive.recalc()
+
 var datasTable2 = $("#datas-table-buttons");
 if (datasTable2.find("tbody tr").length > 0) {
     // Initialize DataTables or perform any operations
     const dataTableInstance2 = datasTable2
         .DataTable({
-            // responsive: true,
-            // dom: 'rlftbp',
-            pageLength: 25,
-            buttons: [{ extend: "", text: "" }],
-            dom: '',
+            responsive: true,
+            dom: 't<"grid p-4 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800" <"flex items-center col-span-3" i><"col-span-2"> <"flex col-span-4 mt-2 sm:mt-auto sm:justify-end"p>><"clear">',            
+            pageLength: 20,
+            buttons: [{ extend: "excel", text: "Exporter en PDF" }],
             language: {
                 decimal: "",
                 emptyTable: "Aucun élément disponible",
