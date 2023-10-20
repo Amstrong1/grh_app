@@ -8,6 +8,7 @@ use App\Http\Controllers\AddonController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\StateController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\FillerController;
 use App\Http\Controllers\ReaderController;
@@ -49,6 +50,7 @@ use App\Http\Controllers\NewsletterSubscriberController;
 //     $linkFolder = $SERVER['DOCUMENT_ROOT'] . '/storage';
 //     symlink($targetFolder, $linkFolder);
 // });
+Route::get('state', [StateController::class, 'indexstate'])->name('state.index');
 
 Route::get('/', function () {
     return view('welcome');
