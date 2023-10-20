@@ -139,8 +139,8 @@ class MaterialUserController extends Controller
     {
        
             $actions = (object) array(
-                'edit' => 'Modifier',
-                'delete' => "Supprimer",
+                // 'edit' => 'Modifier',
+                // 'delete' => "Supprimer",
             );
         
 
