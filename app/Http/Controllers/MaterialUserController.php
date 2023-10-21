@@ -55,7 +55,7 @@ class MaterialUserController extends Controller
         ]);
 
         Alert::toast("Données enregistrées", 'success');
-        return back();
+        return redirect('material_user');
     }
 
     /**
@@ -90,9 +90,16 @@ class MaterialUserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(MaterialUser $materialUser)
     {
-        //
+        try {
+            $materialUser = $materialUser->delete();
+            Alert::success('Opération effectuée', 'Suppression éffectué');
+            return redirect('material_user');
+        } catch (\Exception $e) {
+            Alert::error('Erreur', 'Element introuvable');
+            return redirect()->back();
+        }
     }
 
 
