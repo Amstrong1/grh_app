@@ -49,6 +49,7 @@ class MaterialController extends Controller
         $material->name = $request->name;
         $material->quantity = $request->quantity;
         $material->state = $request->state;
+        $material->description = $request->description;
       
         if ($material->save()) {
 
@@ -99,6 +100,7 @@ class MaterialController extends Controller
              $material->name = $request->name;
              $material->quantity = $request->quantity;
              $material->state = $request->state;
+             $material->description = $request->description;
 
         // if (Auth::user()->role === 'admin') {
         //     $material->name = $request->name;
@@ -157,6 +159,7 @@ class MaterialController extends Controller
                     'title' => 'Nom',
                     'field' => 'text',
                 ],
+                
                 'quantity' => [
                     'title' => 'Stock',
                     'field' => 'number',
@@ -166,6 +169,10 @@ class MaterialController extends Controller
                     'title' => 'Sélectionner Etat',
                     'field' => 'select',
                     'options' => $states,
+                ],
+                'description' => [
+                    'title' => 'Description',
+                    'field' => 'text',
                 ],
                 
             ];
@@ -178,6 +185,7 @@ class MaterialController extends Controller
             'name' => 'Nom',
             'quantity' => 'Stock',
             'state' => 'Etat',
+            'description' => 'Description',
            
         ];
         return $columns;

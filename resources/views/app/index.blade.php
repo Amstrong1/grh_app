@@ -4,9 +4,24 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="md:flex justify-between">
-                        <h1 class="font-semibold text-lg m-4">
-                            {{ __('RH-IA TABLEAU DE BORD') }}
+                        <h1 class="font-semibold text-lg m-1">
+                            
+                               {{ __('RH-IA TABLEAU DE BORD') }}
                         </h1>
+                        <span>
+                            <a  href="{{ route('state.index') }}">
+                                
+                                
+                                
+                                <button
+                                type="button"
+                                data-te-ripple-init
+                                data-te-ripple-color="light"
+                                class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                                Statistique
+                              </button>
+                            </a>
+                        </span>
 
                         @if (Auth::user()->role === 'admin' || Auth::user()->role == 'supervisor')
                             <x-forms.filter :action="route('dashboard.filter')" />
