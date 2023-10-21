@@ -161,6 +161,7 @@ class MaterialController extends Controller
             'name' => 'Nom',
             'quantity' => 'Stock',
             'state' => 'Etat',
+            'description' => 'Description',
 
         ];
         return $columns;
