@@ -53,17 +53,6 @@ class MaterialController extends Controller
       
         if ($material->save()) {
 
-            // foreach ($request->users as $user) {
-            //     materialUser::create([
-            //         'user_id' => $user,
-            //         'id' =>  $material->id,
-            //         'structure_id' => Auth::user()->structure->id,
-            //     ]);
-
-            //     $user = User::where('id', $user)->first();
-            //    $user->notify(new NewmaterialNotification());
-            // }
-
             Alert::toast("Données enregistrées", 'success');
             return redirect('material');
         } else {
@@ -102,24 +91,6 @@ class MaterialController extends Controller
              $material->state = $request->state;
              $material->description = $request->description;
 
-        // if (Auth::user()->role === 'admin') {
-        //     $material->name = $request->name;
-        //     $material->quantity = $request->quantity;
-        //     $material->state = $request->state;
-
-        //     foreach ($request->users as $user) {
-        //         materialUser::where('id', $material->id)->delete();
-        //         materialUser::create([
-        //             'user_id' => $user,
-        //             'id' => $material->id,
-        //             'structure_id' => Auth::user()->structure->id,
-        //         ]);
-        //     }
-        // } else {
-        //     $material->status = $request->status;
-        //     $material->report = $request->report;
-        // }
-
         if ($material->save()) {
             Alert::toast('Les informations ont été modifiées', 'success');
             return redirect('material');
@@ -134,24 +105,29 @@ class MaterialController extends Controller
      */
     public function destroy(Material $material)
     {
-        // try {
-        //     $usersDel = Material::where('id', $material->id)->delete();
-        //     if ($usersDel) {
-        //         $material = $material->delete();
-        //         Alert::success('Opération effectuée', 'Suppression éffectué');
-        //         return redirect('material');
-        //     } else {
-        //         Alert::error('Erreur', 'Element introuvable');
-        //         return redirect()->back();
-        //     }
-        // } catch (\Exception $e) {
-        //     Alert::error('Erreur', 'Element introuvable');
-        //     return redirect()->back();
-        // }
+        //
     }
 
     private function material_fields()
     {
+        $states = ["Neuf" => "Neuf", "Usagé" => "Usagé", "Occasion" => "Occasion"];
+        $fields = [
+            'name' => [
+                'title' => 'Nom',
+                'field' => 'text',
+            ],
+            'quantity' => [
+                'title' => 'Stock',
+                'field' => 'number',
+            ],
+            'state' => [
+                'title' => 'Sélectionner Etat',
+                'field' => 'select',
+                'options' => $states,
+            ],
+
+        ];
+
        // $users = User::where('structure_id', Auth::user()->structure->id)->get();
             $states = ["Neuf"=>"Neuf", "Usagé"=>"Usagé", "Occasion"=>"Occasion"];
             $fields = [
@@ -185,20 +161,15 @@ class MaterialController extends Controller
             'name' => 'Nom',
             'quantity' => 'Stock',
             'state' => 'Etat',
-            'description' => 'Description',
-           
+
         ];
         return $columns;
     }
     private function material_actions()
     {
-       
-            $actions = (object) array(
-                'edit' => 'Modifier',
-                // 'delete' => "Supprimer",
-            );
-        
-
+        $actions = (object) array(
+            'edit' => 'Modifier',
+        );
         return $actions;
     }
 }
