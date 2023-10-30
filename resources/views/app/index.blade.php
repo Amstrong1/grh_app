@@ -4,10 +4,10 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="md:flex justify-between">
-                        {{-- <h1 class="font-semibold text-lg m-1">
+                        <h1 class="font-semibold text-lg m-1">
                             
                                {{ __('RH-IA TABLEAU DE BORD') }}
-                        </h1> --}}
+                        </h1>
                         <span>
                             <a  href="{{ route('state.index') }}">
                                 
