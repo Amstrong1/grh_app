@@ -20,7 +20,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
         
-        $tasks = Task::where('status', 'A faire')->get();
+        $tasks = Task::where('status', 'En cours')
+                     ->where('status', 'A faire')
+                     ->get();
 
         foreach ($tasks as $task) {
             $users = $task->users;
@@ -30,7 +32,7 @@ class Kernel extends ConsoleKernel
                 info('Notification envoyée à : ' . $user->name);
             }
         }
-            })->everyMinute();
+            })->daily();
     }
 
     /**
