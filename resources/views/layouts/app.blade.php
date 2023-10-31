@@ -21,6 +21,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <style>
+        .select2 {
+            display: block;
+            width: 100%;
+        }
+
         input,
         .select2-container .select2-selection--single,
         .select2-container .select2-selection--multiple {
