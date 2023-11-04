@@ -37,7 +37,7 @@ class NewTaskNotification extends Notification
         return (new MailMessage)
                     ->line('Une nouvelle tâche vous a été assignée')
                     ->action('Voir dans l\'application', url('/task/pending'))
-                    ->line('Thank you for using our application!');
+                    ->line('Merci d\'utiliser notre application!');
     }
 
     /**

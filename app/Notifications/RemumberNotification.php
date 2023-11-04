@@ -37,7 +37,7 @@ class RemumberNotification extends Notification
         return (new MailMessage)
                     ->line('Vous Aviez Une Tache en Cours.')
                     ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Merci d\'utiliser notre application!');
     }
 
     /**

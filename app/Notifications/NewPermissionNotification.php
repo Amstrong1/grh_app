@@ -37,7 +37,7 @@ class NewPermissionNotification extends Notification
         return (new MailMessage)
                     ->line('Vous Aviez recu une Nouvelle demande de Permission.')
                     ->action('Notification Action', url('/'));
-                    // ->line('Thank you for using our application!');
+                    // ->line('Merci d\'utiliser notre application!');
     }
 
     /**
