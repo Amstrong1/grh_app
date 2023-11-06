@@ -30,9 +30,10 @@ class Kernel extends ConsoleKernel
                
                 $user->notify(new RemumberNotification());
                 info('Notification envoyée à : ' . $user->name);
+                
+                }
             }
-        }
-            })->daily();
+           })->daily();
     }
 
     /**

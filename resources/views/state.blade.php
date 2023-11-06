@@ -41,9 +41,11 @@
     ];
     
     const chartCanvas = document.getElementById('chart');
+
     const ctx = chartCanvas.getContext('2d');
     
     const chart = new Chart(ctx, {
+
         type: 'pie',
         data: {
             labels: labels,
@@ -52,11 +54,14 @@
                 data: counts,
                 backgroundColor: backgroundColors
             }]
+
         },
+
         options: {
+
             onClick: function(event, elements) {
                 if (elements.length > 0) {
-                    const index = elements[0]._index;
+                    const index = elements[3]._index;
                     
                     const url = urls[index];
                     
