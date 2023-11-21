@@ -47,7 +47,7 @@ class NoticeController extends Controller
 
         if ($notice->save()) {
             $structure = Auth::user()->structure;
-            $users = $structure->users()->get();
+            $users = $structure->users()->where('role', '!=', 'admin')->get();
             foreach ($users as $user) {
                 $user->notify(new NewNotice());
             }
