@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img class="h-14" src="{{ url('storage/' . Auth::user()->structure->logo) }}"
+                        <img class="h-14" src="{{ url('assets/img/vinci.jpg') }}"
                             alt="{{ Auth::user()->structure->name }}" loading="lazy">
                     </a>
                 </div>
