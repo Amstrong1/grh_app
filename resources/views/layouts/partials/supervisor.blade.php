@@ -308,7 +308,7 @@
     </li>
 
     {{-- recruitment --}}
-    <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
+    {{-- <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('conflict.*')"
             class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
@@ -348,5 +348,5 @@
                 </div>
             </div>
         </div>
-    </li>
+    </li> --}}
 </ul>

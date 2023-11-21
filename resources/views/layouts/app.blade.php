@@ -131,7 +131,7 @@
                 <footer class="fixed bottom-0 w-full">
                     @include('layouts.navigation-bottom')
 
-                    @if (request()->routeIs('dashboard'))
+                    {{-- @if (request()->routeIs('dashboard'))
                         <div class="text-center lg:text-left grid grid-cols-6 h-6" style="background-color: #03224c">
                             <div class=""></div>
                             <div class="col-span-4 m-2 mb-0 text-center text-white text-md bg-white font-medium"
@@ -148,7 +148,7 @@
                             style="background-color: #03224c">
                             Support Technique : &nbsp; <a href="tel:+22958282558"> 58 28 25 58 </a>
                         </div>
-                    @endif
+                    @endif --}}
                 </footer>
             </div>
         </div>
