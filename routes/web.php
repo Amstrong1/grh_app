@@ -11,6 +11,7 @@ use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\FillerController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ReaderController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\ContactController;
@@ -51,6 +52,7 @@ use App\Http\Controllers\NewsletterSubscriberController;
 //     symlink($targetFolder, $linkFolder);
 // });
 Route::get('state', [StateController::class, 'indexstate'])->name('state.index');
+Route::resource('notice', NoticeController::class);
 
 Route::get('coming-soon', function () {
     return view('coming-soon');

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Career;
 use App\Models\Absence;
-use App\Enums\UserRoleEnum;
 use Illuminate\Http\Request;
 use App\Enums\PermissionStatusEnum;
 use Illuminate\Support\Facades\Auth;
