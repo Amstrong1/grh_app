@@ -113,7 +113,7 @@
 
 <body class="font-sans antialiased">
     <!-- Page Heading -->
-    <header class="fixed z-50 w-full bg-white text-white shadow" style="background-color: #646464">
+    <header class="fixed z-50 w-full bg-white text-white shadow" style="background-color: #e9e9e9">
         @include('layouts.navigation-top')
         @include('layouts.navigation')
     </header>
@@ -132,10 +132,10 @@
                     @include('layouts.navigation-bottom')
 
                     {{-- @if (request()->routeIs('dashboard'))
-                        <div class="text-center lg:text-left grid grid-cols-6 h-6" style="background-color: #646464">
+                        <div class="text-center lg:text-left grid grid-cols-6 h-6" style="background-color: #e9e9e9">
                             <div class=""></div>
                             <div class="col-span-4 m-2 mb-0 text-center text-white text-md bg-white font-medium"
-                                style="color: #646464">
+                                style="color: #e9e9e9">
                                 <marquee behavior="" direction="">
                                     Licence accordée à l'entreprise {{ Auth::user()->structure->name }}. Validité 1an :
                                     Du 01/01/2023 au 01/12/2023
@@ -145,7 +145,7 @@
                         </div>
 
                         <div class="flex justify-end font-semibold p-4 md:p-2 text-sm text-white"
-                            style="background-color: #646464">
+                            style="background-color: #e9e9e9">
                             Support Technique : &nbsp; <a href="tel:+22958282558"> 58 28 25 58 </a>
                         </div>
                     @endif --}}

@@ -1,7 +1,7 @@
 <ul class="flex flex-row justify-center" data-te-navbar-nav-ref>
     <li class="mx-1 static" data-te-nav-item-ref>
         <x-nav-link
-            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black"
             :href="route('dashboard')" :active="request()->routeIs('dashboard')" data-te-ripple-init data-te-ripple-color="light">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-4 h-4">
@@ -17,7 +17,7 @@
     <li class="mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
 
         <x-nav-link :active="request()->routeIs('absence.*')"
-            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -29,49 +29,49 @@
             Demandes
         </x-nav-link>
 
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('absence.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Permissions absences en attente
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('absence.allowed') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Permissions absences validées
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('absence.denied') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Permissions absences refusées
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('temptation.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Demandes recus
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('temptation.sent') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Demandes envoyés
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('temptation_back.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Réponses demandes recus
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('temptation_back.sent') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Réponses demandes envoyés
                         </x-nav-link>
                     </div>
@@ -83,7 +83,7 @@
     {{-- vacation --}}
     <li class="mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('leave.*')"
-            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -94,19 +94,19 @@
             Congés
         </x-nav-link>
 
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('leave.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Voir l'agenda
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('leave.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Planifier
                         </x-nav-link>
                     </div>
@@ -118,7 +118,7 @@
     {{-- conflict --}}
     <li class="mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('conflict.*')"
-            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -129,19 +129,19 @@
             Conflits
         </x-nav-link>
 
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('conflict.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Nouveau conflit
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('conflict.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Liste des conflits
                         </x-nav-link>
                     </div>
@@ -153,7 +153,7 @@
     {{-- logistic --}}
     {{-- <li class="mx-1 static" data-te-nav-item-ref>
         <x-nav-link
-            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black"
             :href="route('coming-soon')" :active="request()->routeIs('coming-soon')" data-te-ripple-init data-te-ripple-color="light">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-4 h-4">
@@ -162,19 +162,19 @@
             </svg> &nbsp;
             Logistique
         </x-nav-link>
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
         aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
         <div class="px-6 py-5 lg:px-8">
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                 <div>
                     <x-nav-link href="{{ route('pay.create') }}" aria-current="true"
-                        class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                        class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                         Listes des Materiels
                     </x-nav-link>
                 </div>
                 <div>
                     <x-nav-link href="{{ route('pay.index') }}" aria-current="true"
-                        class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                        class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                         Historique des fiches
                     </x-nav-link>
                 </div>
@@ -185,7 +185,7 @@
     <li class="mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
 
         <x-nav-link :active="request()->routeIs('material.*')"
-            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -197,31 +197,31 @@
             Logistique
         </x-nav-link>
 
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('material.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Listes des Materiels
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('material.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Ajouter Materiel
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('material_user.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Attribuer Materiel a un employé
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('material_user.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Materiels atribuées aux Employés
                         </x-nav-link>
                     </div>
@@ -234,7 +234,7 @@
     {{-- pay --}}
     <li class="mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('pay.*')"
-            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -245,19 +245,19 @@
             Paies
         </x-nav-link>
 
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('pay.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Nouvelle fiche
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('pay.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Historique des fiches
                         </x-nav-link>
                     </div>
@@ -267,9 +267,9 @@
     </li>
 
     {{-- User --}}
-    <li class="text-white mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
+    <li class="text-black mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link
-            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -280,37 +280,37 @@
             Personnels
         </x-nav-link>
 
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('career.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Liste des Employés
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('career.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Ajouter Employé
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('admin.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Listes des Superviseurs
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('admin.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Ajouter Superviseur
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('attendance_log.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Pointages
                         </x-nav-link>
                     </div>
@@ -322,7 +322,7 @@
     {{-- task --}}
     <li class="mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('task.*')"
-            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -333,37 +333,37 @@
             Tâches
         </x-nav-link>
 
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('task.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Nouvelle tâche
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('regular_task.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Tâches à faire
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('task.pending') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Tâches en cours
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('task.finished') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Tâches finis
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('regular_task.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Tâches régulières
                         </x-nav-link>
                     </div>
@@ -375,7 +375,7 @@
     {{-- recruitment --}}
     {{-- <li class="mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('coming-soon.*')"
-            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -386,19 +386,19 @@
             Recrutements
         </x-nav-link>
 
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('coming-soon') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Interne
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('coming-soon') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Externe
                         </x-nav-link>
                     </div>
@@ -410,7 +410,7 @@
     {{-- settings --}}
     <li class="mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link
-            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white"
+            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -421,55 +421,55 @@
             Paramètres
         </x-nav-link>
 
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('department.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Départements
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('place.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Postes
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('attendance_schedule.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Emploi du temps
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('filler.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Imputations salaires
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('holding_wage.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Retenus salaires
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('salary_advantage.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Avantages salariaux
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('leave_type.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Types Congés
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('reader.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
                             Lecteur d'accès
                         </x-nav-link>
                     </div>

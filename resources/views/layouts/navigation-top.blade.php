@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white text-white" style="background-color: #646464">
+<nav x-data="{ open: false }" class="text-black" style="background-color: #e9e9e9">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -16,7 +16,7 @@
                 <!-- Navigation Links -->
                 <div class="space-x-8 sm:-my-px sm:ml-10 hidden md:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
-                        class="text-white focus:text-white hover:text-white">
+                        class="text-black focus:text-black hover:text-black">
                         {{ Auth::user()->structure->name }}
                     </x-nav-link>
                 </div>
@@ -44,7 +44,7 @@
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
-                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white focus:text-white hover:text-white focus:outline-none transition ease-in-out duration-150">
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black focus:text-black hover:text-black focus:outline-none transition ease-in-out duration-150">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
