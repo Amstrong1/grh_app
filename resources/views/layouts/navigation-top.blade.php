@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white text-white" style="background-color: #03224c">
+<nav x-data="{ open: false }" class="bg-white text-white" style="background-color: #646464">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -6,16 +6,17 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img class="h-14" src="{{ url('storage/' . Auth::user()->structure->logo) }}"
-                            alt="{{ Auth::user()->structure->name }}" loading="lazy">
-                            {{-- <img class="h-14" src="{{ url('assets/img/vinci.jpg') }}"
+                        {{-- <img class="h-14" src="{{ url('storage/' . Auth::user()->structure->logo) }}"
                             alt="{{ Auth::user()->structure->name }}" loading="lazy"> --}}
+                        <img class="h-14" src="{{ url('assets/img/vinci.jpg') }}"
+                            alt="{{ Auth::user()->structure->name }}" loading="lazy">
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="space-x-8 sm:-my-px sm:ml-10 hidden md:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white focus:text-white hover:text-white">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
+                        class="text-white focus:text-white hover:text-white">
                         {{ Auth::user()->structure->name }}
                     </x-nav-link>
                 </div>

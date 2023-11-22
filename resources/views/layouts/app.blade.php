@@ -113,7 +113,7 @@
 
 <body class="font-sans antialiased">
     <!-- Page Heading -->
-    <header class="fixed z-50 w-full bg-white text-white shadow" style="background-color: #03224c">
+    <header class="fixed z-50 w-full bg-white text-white shadow" style="background-color: #646464">
         @include('layouts.navigation-top')
         @include('layouts.navigation')
     </header>
@@ -121,7 +121,7 @@
     <div class="w-full min-h-screen bg-fixed bg-center bg-cover flex flex-col sm:justify-center items-center"
         style="background-image:url('assets/img/hero.jpg');">
 
-        <div class="w-full min-h-screen pt-16 md:pt-30 lg:pt-40 mb-0" style="background-color: rgba(3, 34, 76, .8)">
+        <div class="w-full min-h-screen pt-16 md:pt-30 lg:pt-40 mb-0" style="background-color: rgba(100, 100, 100, .8)">
             <div class="">
                 <!-- Page Content -->
                 <main class="pb-16 md:pb-20 lg:pb-12">
@@ -132,10 +132,10 @@
                     @include('layouts.navigation-bottom')
 
                     {{-- @if (request()->routeIs('dashboard'))
-                        <div class="text-center lg:text-left grid grid-cols-6 h-6" style="background-color: #03224c">
+                        <div class="text-center lg:text-left grid grid-cols-6 h-6" style="background-color: #646464">
                             <div class=""></div>
                             <div class="col-span-4 m-2 mb-0 text-center text-white text-md bg-white font-medium"
-                                style="color: #03224c">
+                                style="color: #646464">
                                 <marquee behavior="" direction="">
                                     Licence accordée à l'entreprise {{ Auth::user()->structure->name }}. Validité 1an :
                                     Du 01/01/2023 au 01/12/2023
@@ -145,7 +145,7 @@
                         </div>
 
                         <div class="flex justify-end font-semibold p-4 md:p-2 text-sm text-white"
-                            style="background-color: #03224c">
+                            style="background-color: #646464">
                             Support Technique : &nbsp; <a href="tel:+22958282558"> 58 28 25 58 </a>
                         </div>
                     @endif --}}
