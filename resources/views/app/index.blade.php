@@ -6,13 +6,13 @@
                     <div class="md:flex justify-between">
                         <h1 class="font-semibold text-lg m-1">
 
-                            {{ __('RH-IA TABLEAU DE BORD') }}
+                            RH-IA {{ __('message.dashboard') }}
                         </h1>
                         <span>
                             <a href="{{ route('state.index') }}">
                                 <button type="button" data-te-ripple-init data-te-ripple-color="light"
                                     class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-                                    Statistique
+                                    {{ __('message.statistics') }}
                                 </button>
                             </a>
                         </span>
@@ -52,7 +52,7 @@
                                     </p>
                                     <hr>
                                     <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="{{ route('structure.index') }}">Voir plus</a>
+                                        <a href="{{ route('structure.index') }}">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -69,13 +69,13 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Abonnés Newsletter : {{ $subscribers }}
+                                        Newsletter {{ __('message.subscribers') }} : {{ $subscribers }}
                                     </p>
                                     <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     </p>
                                     <hr>
                                     {{-- <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="">Voir plus</a>
+                                        <a href="">{{ __('message.more') }}</a>
                                     </p> --}}
                                 </div>
                             </div>
@@ -95,13 +95,13 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Nombre de départements : {{ $departments }}
+                                        {{ __('message.department') }} : {{ $departments }}
                                     </p>
                                     <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     </p>
                                     <hr>
                                     <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="{{ route('department.index') }}">Voir plus</a>
+                                        <a href="{{ route('department.index') }}">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -117,13 +117,13 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Nombre de postes : {{ $places }}
+                                        {{ __('message.job') }} : {{ $places }}
                                     </p>
                                     <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     </p>
                                     <hr>
                                     <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="{{ route('place.index') }}">Voir plus</a>
+                                        <a href="{{ route('place.index') }}">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -139,14 +139,14 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Nombre d'utilisateurs : {{ $users }}
+                                        {{ __('message.staff') }} : {{ $users }}
                                     </p>
                                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">
                                     </p>
                                     <hr>
                                     <p
                                         class="inline-block align-baseline mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="{{ route('career.index') }}">Voir plus</a>
+                                        <a href="{{ route('career.index') }}">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -162,14 +162,14 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Conflits signalés : {{ $conflicts }}
+                                        {{ __('message.conflicts') }} : {{ $conflicts }}
                                     </p>
                                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">
                                     </p>
                                     <hr>
                                     <p
                                         class="inline-block align-baseline mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="{{ route('conflict.index') }}">Voir plus</a>
+                                        <a href="{{ route('conflict.index') }}">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -185,13 +185,13 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Permissionnaires : {{ $current_absences }}
+                                        {{ __('message.abs_permissions') }} : {{ $current_absences }}
                                     </p>
                                     <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     </p>
                                     <hr>
                                     <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="{{ route('absence.index') }}">Voir plus</a>
+                                        <a href="{{ route('absence.index') }}">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -207,13 +207,13 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Tâches en cours : {{ $tasks }}
+                                        {{ __('message.tasks') }} {{ __('message.pending') }}  : {{ $tasks }}
                                     </p>
                                     <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     </p>
                                     <hr>
                                     <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="{{ route('task.pending') }}">Voir plus</a>
+                                        <a href="{{ route('task.pending') }}">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -229,14 +229,14 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Sanctions : {{ $sanctions }}
+                                        {{ __('message.tasks') }} : {{ $sanctions }}
                                     </p>
                                     <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
 
                                     </p>
                                     <hr>
                                     <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="">Voir plus</a>
+                                        <a href="">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -258,7 +258,7 @@
                                     </p>
                                     <hr>
                                     <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="">Voir plus</a>
+                                        <a href="">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -277,13 +277,13 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Tâches en cours : {{ $tasks }}
+                                        {{ __('message.tasks') }} {{ __('message.in_progress') }} : {{ $tasks }}
                                     </p>
                                     <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     </p>
                                     <hr>
                                     <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="{{ route('task.pending') }}">Voir plus</a>
+                                        <a href="{{ route('task.pending') }}">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -306,7 +306,7 @@
                                     </p>
                                     <hr>
                                     <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="">Voir plus</a>
+                                        <a href="">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -328,7 +328,7 @@
                                     </p>
                                     <hr>
                                     <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="">Voir plus</a>
+                                        <a href="">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>
@@ -344,13 +344,13 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Solde Congés : {{ $leaveSold }}
+                                        {{ __('message.sold') }} {{ __('message.leaves') }} : {{ $leaveSold }}
                                     </p>
                                     <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     </p>
                                     <hr>
                                     <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        <a href="">Voir plus</a>
+                                        <a href="">{{ __('message.more') }}</a>
                                     </p>
                                 </div>
                             </div>

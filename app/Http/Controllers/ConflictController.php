@@ -7,6 +7,7 @@ use App\Models\Conflict;
 use App\Models\ConflictUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreConflictRequest;
@@ -86,12 +87,12 @@ class ConflictController extends Controller
                     'structure_id' => Auth::user()->structure->id,
                 ]);
             }
-            Alert::toast("Données enregistrées", 'success');
+            Alert::toast(Lang::get('message.success'), 'success');
             $user = User::where('structure_id', Auth::user()->structure_id)->where('role', 'admin')->first();
             $user->notify(new NewConflictNotification());
             return redirect('conflict');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -141,10 +142,10 @@ class ConflictController extends Controller
         }
 
         if ($conflict->save()) {
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.edited'), 'success');
             return redirect('conflict');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -159,14 +160,14 @@ class ConflictController extends Controller
 
             if ($usersDel) {
                 $conflict = $conflict->delete();
-                Alert::success('Opération effectuée', 'Suppression éffectué');
+                Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
                 return redirect('conflict');
             } else {
-                Alert::error('Erreur', 'Element introuvable');
+                Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
                 return redirect()->back();
             }
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
             return redirect()->back();
         }
     }

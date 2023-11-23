@@ -50,6 +50,7 @@ if (datasTable2.find("tbody tr").length > 0) {
     // Initialize DataTables or perform any operations
     const dataTableInstance2 = datasTable2
         .DataTable({
+            ordering: false,
             // responsive: true,
             // dom: 'rlftbp',
             pageLength: 25,

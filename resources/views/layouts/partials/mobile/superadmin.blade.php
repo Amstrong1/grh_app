@@ -9,7 +9,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>
-                Accueil
+                {{ 'message.home' }}
             </div>
         </x-nav-link>
     </li>
@@ -30,12 +30,12 @@
             class="dropup hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mb-1">
             <x-nav-link href="{{ route('structure.index') }}"
                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700">
-                Liste
+                            {{ 'message.list' }}
             </x-nav-link>
             <div class="h-0 my-2 border border-solid border-t-0 border-slate-800 opacity-25"></div>
             <x-nav-link href="{{ route('structure.create') }}"
                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700">
-                Ajouter Nouveau
+                            {{ 'message.create' }}
             </x-nav-link>
         </div>
     </li>
@@ -56,12 +56,12 @@
             class="dropup hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mb-1">
             <x-nav-link href="{{ route('addon.index') }}"
                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700">
-                Liste
+                            {{ 'message.list' }}
             </x-nav-link>
             <div class="h-0 my-2 border border-solid border-t-0 border-slate-800 opacity-25"></div>
             <x-nav-link href="{{ route('addon.create') }}"
                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700">
-                Ajouter Nouveau
+                            {{ 'message.create' }}
             </x-nav-link>
         </div>
     </li>
@@ -82,17 +82,17 @@
             class="dropup hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mb-1">
             <x-nav-link href="{{ route('newsletter.index') }}"
                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700">
-                Newsletter envoyés
+                Newsletter {{ 'message.sent' }}
             </x-nav-link>
             <div class="h-0 my-2 border border-solid border-t-0 border-slate-800 opacity-25"></div>
             <x-nav-link href="{{ route('newsletter.pending') }}"
                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700">
-                Newsletter en cours
+                Newsletter {{ 'message.pending' }}
             </x-nav-link>
             <div class="h-0 my-2 border border-solid border-t-0 border-slate-800 opacity-25"></div>
             <x-nav-link href="{{ route('newsletter.create') }}"
                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700">
-                Ajouter Nouveau
+                {{ 'message.create' }}
             </x-nav-link>
         </div>
     </li>

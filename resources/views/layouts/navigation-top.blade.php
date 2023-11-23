@@ -39,6 +39,23 @@
                     </a>
                 </li>
 
+                <!-- languages -->
+                <li class="relative">
+                    @php
+                        $user = Auth::user();
+                        $lang = $user->locale ? $user->locale->lang : 'fr';
+                    @endphp
+                    <form method="POST" action="{{ route('user_lang.store') }}">
+                        @csrf
+                        <select
+                            class="rounded-full px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-black"
+                            name="lang" onchange="this.form.submit()">
+                            <option value="fr" @if ($lang == 'fr') selected @endif>FR</option>
+                            <option value="en" @if ($lang == 'en') selected @endif>EN</option>
+                        </select>
+                    </form>
+                </li>
+
                 <!-- Profile menu -->
                 <div class="sm:flex sm:items-center sm:ml-6 mt-6">
                     <x-dropdown align="right" width="48">
@@ -70,7 +87,7 @@
                                             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                     &nbsp;
-                                    {{ __('Profil') }}
+                                    {{ __('message.profile') }}
                                 </div>
                             </x-dropdown-link>
 
@@ -86,7 +103,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
                                         </svg> &nbsp;
-                                        {{ __('Déconnexion') }}
+                                        {{ __('message.logout') }}
                                     </div>
                                 </x-dropdown-link>
                             </form>

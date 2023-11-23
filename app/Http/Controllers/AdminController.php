@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Enums\UserRoleEnum;
 use App\Models\DepartmentUser;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -70,7 +71,7 @@ class AdminController extends Controller
             Alert::toast("Nouveau superviseur enregistré", 'success');
             return redirect()->route('admin.index');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }

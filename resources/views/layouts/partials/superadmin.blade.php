@@ -8,7 +8,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>&nbsp;
-            Accueil
+            {{ 'message.home' }}
         </x-nav-link>
     </li>
 
@@ -22,7 +22,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
             </svg>&nbsp;
-            Structure
+            Structures
             <span class="ml-2 w-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
                     <path fill-rule="evenodd"
@@ -39,14 +39,14 @@
                     <div>
                         <x-nav-link href="{{ route('structure.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
-                            Liste
+                            {{ 'message.list' }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('structure.create') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
-                            Ajouter
-                            Nouveau</x-nav-link>
+                            {{ 'message.create' }}
+                        </x-nav-link>
                     </div>
                 </div>
             </div>
@@ -80,14 +80,14 @@
                     <div>
                         <x-nav-link href="{{ route('addon.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
-                            Liste
+                            {{ 'message.list' }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('addon.create') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
-                            Ajouter
-                            Nouveau</x-nav-link>
+                            {{ 'message.create' }}
+                        </x-nav-link>
                     </div>
                 </div>
             </div>
@@ -121,20 +121,20 @@
                     <div>
                         <x-nav-link href="{{ route('newsletter.index') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
-                            Newsletter envoyés
+                            Newsletter {{ 'message.sent' }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('newsletter.pending') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
-                            Newsletter en cours
+                            Newsletter {{ 'message.pending' }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('newsletter.create') }}" aria-current="true"
                             class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
-                            Ajouter
-                            Nouveau</x-nav-link>
+                            {{ 'message.create' }}
+                        </x-nav-link>
                     </div>
                 </div>
             </div>

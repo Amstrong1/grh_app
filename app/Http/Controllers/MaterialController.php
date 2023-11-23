@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Material;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
+
+
 use RealRashid\SweetAlert\Facades\Alert;
-
-
 use App\Http\Requests\StoreMaterialRequest;
 use App\Http\Requests\UpdateMaterialRequest;
 
@@ -53,10 +54,10 @@ class MaterialController extends Controller
       
         if ($material->save()) {
 
-            Alert::toast("Données enregistrées", 'success');
+            Alert::toast(Lang::get('message.success'), 'success');
             return redirect('material');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -92,10 +93,10 @@ class MaterialController extends Controller
              $material->description = $request->description;
 
         if ($material->save()) {
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.edited'), 'success');
             return redirect('material');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }

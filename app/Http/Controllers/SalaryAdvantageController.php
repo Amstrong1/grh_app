@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SalaryAdvantage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreSalaryAdvantageRequest;
 use App\Http\Requests\UpdateSalaryAdvantageRequest;
@@ -50,11 +51,11 @@ class SalaryAdvantageController extends Controller
         $salaryAdvantage->amount = $request->amount;
 
         if ($salaryAdvantage->save()) {
-            Alert::toast('Les données ont été enregistrées', 'success');
+            Alert::toast(Lang::get('message.success'), 'success');
             return redirect('salary_advantage');
         }
         else {
-            Alert::toast('Les données ont été enregistrées', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -90,10 +91,10 @@ class SalaryAdvantageController extends Controller
         $salaryAdvantage->amount = $request->amount;
         
         if ($salaryAdvantage->save()) {
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.edited'), 'success');
             return redirect('salary_advantage');
         }else {            
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -105,10 +106,10 @@ class SalaryAdvantageController extends Controller
     {
         try {
             $salaryAdvantages = $salaryAdvantages->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('salary_advantage');
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
             return redirect()->back();
         }
     }

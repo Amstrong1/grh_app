@@ -5,11 +5,11 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">
-                            Agenda des congés
+                            Agenda {{ __('message.leaves') }}
                         </h1>
 
                         <x-primary-button>
-                            <a href="{{ route('leave.create') }}">Nouveau</a>
+                            <a href="{{ route('leave.create') }}">{{ __('message.create') }}</a>
                         </x-primary-button>
                     </div>
 

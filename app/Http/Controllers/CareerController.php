@@ -7,6 +7,7 @@ use App\Models\Place;
 use App\Models\Career;
 use App\Enums\UserRoleEnum;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreCareerRequest;
 use App\Http\Requests\UpdateCareerRequest;
@@ -107,11 +108,11 @@ class CareerController extends Controller
             ]);
 
             if ($career) {
-                Alert::toast("Données enregistrées", 'success');
+                Alert::toast(Lang::get('message.success'), 'success');
                 $user->notify(new NewUserNotification());
                 return redirect('career');
             } else {
-                Alert::toast('Une erreur est survenue', 'error');
+                Alert::toast(Lang::get('message.error'), 'error');
                 $get_user = User::where('email', $request->email)->first();
                 $get_user->delete();
             }
@@ -171,12 +172,12 @@ class CareerController extends Controller
             ]);
 
         if ($career_update && $user_update) {
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.edited'), 'success');
             $user = User::find($career->user_id);
             $user->notify(new UpdateUserNotification());
             return redirect('career');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }

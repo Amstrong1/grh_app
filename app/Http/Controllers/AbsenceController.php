@@ -8,6 +8,7 @@ use App\Models\Absence;
 use Illuminate\Http\Request;
 use App\Enums\PermissionStatusEnum;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Notifications\PermissionResponse;
 use Illuminate\Support\Facades\Validator;
@@ -227,7 +228,7 @@ class AbsenceController extends Controller
             $absence->reference = 'ABS00' . $absence->id;
             $absence->save();
 
-            Alert::toast("Données enregistrées", 'success');
+            Alert::toast(Lang::get('message.success'), 'success');
             $users = User::where('structure_id', Auth::user()->structure_id)->where('role', 'admin')->get();
             foreach ($users as $user) {
                 $user->notify(new NewPermissionNotification());
@@ -235,7 +236,7 @@ class AbsenceController extends Controller
             //$user->notify(new NewPermissionNotification());
             return redirect('absence');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -277,22 +278,22 @@ class AbsenceController extends Controller
             $absence->cause = $request->cause;
 
             if ($absence->save()) {
-                Alert::toast('Les informations ont été modifiées', 'success');
+                Alert::toast(Lang::get('message.edited'), 'success');
                 return redirect('absence');
             } else {
-                Alert::toast('Une erreur est survenue', 'error');
+                Alert::toast(Lang::get('message.error'), 'error');
                 return back()->withInput($request->input());
             }
         } else {
             $absence->status = $request->status;
 
             if ($absence->save()) {
-                Alert::toast('Les informations ont été modifiées', 'success');
+                Alert::toast(Lang::get('message.edited'), 'success');
                 $user = $absence->user;
                 $user->notify(new PermissionResponse($absence->status));
                 return redirect('absence');
             } else {
-                Alert::toast('Une erreur est survenue', 'error');
+                Alert::toast(Lang::get('message.error'), 'error');
                 return back()->withInput($request->input());
             }
         }
@@ -305,10 +306,10 @@ class AbsenceController extends Controller
     {
         try {
             $absence = $absence->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('absence');
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
             return redirect()->back();
         }
     }

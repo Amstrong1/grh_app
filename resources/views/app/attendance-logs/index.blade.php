@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="md:flex justify-between">
-                        <h1 class="font-bold text-lg my-2">Liste des pointages</h1>
+                        <h1 class="font-bold text-lg my-2">{{ __('message.list') }}</h1>
 
                         <x-forms.filter :action="route('attendance_log.filter')" />
                             

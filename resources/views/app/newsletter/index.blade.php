@@ -5,17 +5,17 @@
                 <div class="p-6 text-gray-900">
                     <div class="md:flex justify-between">
                         <h1 class="font-bold text-lg my-2">
-                            Liste des newsletter
+                            Newsletter
                             @if (request()->routeIs('newsletter.pending'))
-                                en attente
+                            {{ __('message.pending') }}
                             @elseif (request()->routeIs('newsletter.index'))
-                                envoyés
+                            {{ __('message.sent') }}
                             @endif
                         </h1>
 
                         <a href="{{ route('newsletter.create') }}">
                             <x-primary-button>
-                                Nouveau
+                                {{ __('message.create') }}
                             </x-primary-button>
                         </a>
                     </div>

@@ -116,4 +116,9 @@ class User extends Authenticatable
         }
         return $departmentName;
     }
+
+    public function locale() : HasOne
+    {
+        return $this->hasOne(UserLang::class);
+    }
 }

@@ -5,11 +5,11 @@
                 <div class="p-6 text-gray-900">
                     <div class="md:flex justify-between">
                         <h1 class="font-bold text-lg my-2">
-                            Liste des réponses de demandes
+                            {{ __('message.answers') }}
                             @if (request()->routeIs('temptation_back.index'))
-                                recus
+                                {{ __('message.received') }}
                             @elseif (request()->routeIs('temptation_back.sent'))
-                                envoyés
+                                {{ __('message.sent') }}
                             @endif
                         </h1>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\NewsletterSubscriber;
+use Illuminate\Support\Facades\Lang;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreNewsletterSubscriberRequest;
 use App\Http\Requests\UpdateNewsletterSubscriberRequest;
@@ -35,10 +36,10 @@ class NewsletterSubscriberController extends Controller
         $newsletterSubscriber->email = $request->email;
 
         if ( $newsletterSubscriber->save()) {
-            Alert::toast("Mail enregistré", 'success');
+            Alert::toast(Lang::get('message.mail_save'), 'success');
             return redirect('/');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }

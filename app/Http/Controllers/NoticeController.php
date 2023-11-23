@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notice;
+use App\Notifications\NewNotice;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreNoticeRequest;
 use App\Http\Requests\UpdateNoticeRequest;
-use App\Notifications\NewNotice;
 
 class NoticeController extends Controller
 {
@@ -51,10 +52,10 @@ class NoticeController extends Controller
             foreach ($users as $user) {
                 $user->notify(new NewNotice());
             }
-            Alert::toast("Données enregistrées", 'success');
+            Alert::toast(Lang::get('message.success'), 'success');
             return redirect('notice');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -90,7 +91,7 @@ class NoticeController extends Controller
         $notice->description = $request->description;
         
         if ($notice->save()) {
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.edited'), 'success');
             return redirect('notice');
         };
     }
@@ -102,10 +103,10 @@ class NoticeController extends Controller
     {
         try {
             $notice = $notice->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('notice');
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
             return redirect()->back();
         }
     }

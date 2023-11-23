@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Career;
 use App\Models\RegularTaskReport;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Notifications\NewReportNotification;
 use App\Http\Requests\StoreRegularTaskReportRequest;
@@ -83,11 +84,11 @@ class RegularTaskReportController extends Controller
             $regularTaskReport->report = $request->report;
 
             if ($regularTaskReport->save()) {
-                Alert::toast('Les données ont été enregistrées', 'success');
+                Alert::toast(Lang::get('message.success'), 'success');
                
                 return redirect('regular_task_report');
             } else {
-                Alert::toast('Les données ont été enregistrées', 'error');
+                Alert::toast(Lang::get('message.error'), 'error');
                 return redirect()->back()->withInput($request->input());
             }
         }
@@ -125,7 +126,7 @@ class RegularTaskReportController extends Controller
         $regularTaskReport->report = $request->report;
 
         if ($regularTaskReport->save()) {
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.edited'), 'success');
             
             $users = User::where('structure_id', Auth::user()->structure_id)->where('role', 'admin')->get();
             foreach ($users as $user) {
@@ -135,7 +136,7 @@ class RegularTaskReportController extends Controller
             return redirect('regular_task_report');
             
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -147,10 +148,10 @@ class RegularTaskReportController extends Controller
     {
         try {
             $regularTaskReport = $regularTaskReport->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('regular_task_report');
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
             return redirect()->back();
         }
     }

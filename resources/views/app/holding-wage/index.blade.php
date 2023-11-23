@@ -4,11 +4,11 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
-                        <h1 class="font-bold text-lg my-2">Liste des retenues sur salaire</h1>
+                        <h1 class="font-bold text-lg my-2">{{ __('message.list') }}</h1>
 
                         <x-primary-button x-data=""
                             x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
-                            {{ __('Nouveau') }}</x-primary-button>
+                            {{ __('message.create') }}</x-primary-button>
 
                         <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
                             <div class="p-4">
