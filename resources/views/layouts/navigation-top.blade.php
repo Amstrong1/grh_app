@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <ul class="flex items-center flex-shrink-0 space-x-6">
+            <ul class="flex items-center flex-shrink-0 space-x-2">
 
                 <!-- Notifications menu -->
                 <li class="relative">
@@ -40,24 +40,53 @@
                 </li>
 
                 <!-- languages -->
-                <li class="relative">
-                    @php
-                        $user = Auth::user();
-                        $lang = $user->locale ? $user->locale->lang : 'fr';
-                    @endphp
-                    <form method="POST" action="{{ route('user_lang.store') }}">
-                        @csrf
-                        <select
-                            class="rounded-full px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-black"
-                            name="lang" onchange="this.form.submit()">
-                            <option value="fr" @if ($lang == 'fr') selected @endif>FR</option>
-                            <option value="en" @if ($lang == 'en') selected @endif>EN</option>
-                        </select>
-                    </form>
-                </li>
+                <div class="sm:flex sm:items-center sm:ml-2 mt-6">
+                    <x-dropdown align="right">
+                        <x-slot name="trigger">
+                            <button
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black focus:text-black hover:text-black focus:outline-none transition ease-in-out duration-150">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </x-slot>
+
+                        <x-slot name="content">
+                            <!-- french form -->
+                            <form method="POST" action="{{ route('user_lang.store') }}">
+                                @csrf
+                                <input type="hidden" name="lang" value="fr">
+                                <button type="submit">
+                                    <div class="flex items-center p-4">
+                                        <img class="w-8" src="{{ asset('assets/img/fr.png') }}" alt="fr">
+                                        &nbsp;
+                                        {{ __('FR') }}
+                                    </div>
+                                </button>
+                            </form>
+
+                            <!-- english form -->
+                            <form method="POST" action="{{ route('user_lang.store') }}">
+                                @csrf
+                                <input type="hidden" name="lang" value="en">
+                                <button type="submit">
+                                    <div class="flex items-center p-4">
+                                        <img class="w-8" src="{{ asset('assets/img/en.png') }}" alt="en">
+                                        &nbsp;
+                                        {{ __('EN') }}
+                                    </div>
+                                </button>
+                            </form>
+                        </x-slot>
+                    </x-dropdown>
+                </div>
 
                 <!-- Profile menu -->
-                <div class="sm:flex sm:items-center sm:ml-6 mt-6">
+                <div class="sm:flex sm:items-center sm:ml-2 mt-6">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
