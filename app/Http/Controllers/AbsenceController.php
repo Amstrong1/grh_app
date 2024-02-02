@@ -317,12 +317,12 @@ class AbsenceController extends Controller
     private function absence_columns()
     {
         $columns = (object) [
-            'reference' => 'Référence',
-            'user_fullname' => 'Nom et prénoms',
-            'formatted_start_date' => 'Date de départ',
-            'start_hour' => 'Heure de départ',
-            'formatted_end_date' => 'Date d\'arrivé',
-            'end_hour' => 'Heure d\'arrivé',
+            'reference' => Lang::get('message.reference'),
+            'user_fullname' => Lang::get('message.user_fullname'),
+            'formatted_departure_date' => Lang::get('message.formatted_start_date'),
+            'departure_hour' => Lang::get('message.start_hour'),
+            'formatted_arrival_date' => Lang::get('message.formatted_end_date'),
+            'arrival_hour' => Lang::get('message.end_hour'),
             // 'cause' => 'Motif',
             // 'status' => 'Statut',
         ];
@@ -352,19 +352,19 @@ class AbsenceController extends Controller
         if (Auth::user()->role == 'user') {
             $fields = [
                 'start_date' => [
-                    'title' => 'Date de départ',
+                    'title' => Lang::get('message.formatted_start_date'),
                     'field' => 'date'
                 ],
                 'start_hour' => [
-                    'title' => 'Heure de départ',
+                    'title' => Lang::get('message.start_hour'),
                     'field' => 'time'
                 ],
                 'end_date' => [
-                    'title' => 'Date de retour',
+                    'title' => Lang::get('message.formatted_end_date'),
                     'field' => 'date'
                 ],
                 'end_hour' => [
-                    'title' => 'Heure de retour',
+                    'title' => Lang::get('message.end_hour'),
                     'field' => 'time'
                 ],
                 'cause' => [
@@ -374,9 +374,9 @@ class AbsenceController extends Controller
             ];
         } else {
             $status = [
-                'Accordé sans modifier congé' => PermissionStatusEnum::Allowed,
-                'Accordé et modifier congé' => PermissionStatusEnum::AllowedAndModify,
-                'Refusé' => PermissionStatusEnum::Denied,
+                Lang::get('message.allowed_no_modified') => PermissionStatusEnum::Allowed,
+                Lang::get('message.allowed_modified') => PermissionStatusEnum::AllowedAndModify,
+                Lang::get('message.denied') => PermissionStatusEnum::Denied,
             ];
             $fields = [
                 'status' => [

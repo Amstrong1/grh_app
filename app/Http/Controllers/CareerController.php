@@ -7,13 +7,13 @@ use App\Models\Place;
 use App\Models\Career;
 use App\Enums\UserRoleEnum;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Lang;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreCareerRequest;
 use App\Http\Requests\UpdateCareerRequest;
 use App\Notifications\NewUserNotification;
 use App\Notifications\UpdateUserNotification;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Facades\Lang;
 
 class CareerController extends Controller
 {
@@ -192,12 +192,12 @@ class CareerController extends Controller
     private function user_columns()
     {
         $columns = (object) [
-            'user_name' => 'Nom',
-            'user_firstname' => 'Prenom',
+            'user_name' => Lang::get('message.name'),
+            'user_firstname' => Lang::get('message.firstname'),
             'user_email' => 'Email',
-            'contact' => 'Contact',
-            'department_name' => 'Département',
-            'post_name' => 'Poste',
+            'contact' => 'Tel',
+            'department_name' => Lang::get('message.department'),
+            'post_name' => Lang::get('message.job'),
         ];
         return $columns;
     }
@@ -216,14 +216,14 @@ class CareerController extends Controller
     {
 
         $sex = [
-            'Féminin' => 'Féminin',
-            'Masculin' => 'Masculin'
+            'F' => 'F',
+            'M' => 'M'
         ];
         $ms = [
-            'Célibataire' => 'Célibataire',
-            'Marié(e)' => 'Marié(e)',
-            'Divorcé(e)' => 'Divorcé(e)',
-            'Veuf(ve)' => 'Veuf(ve)'
+            Lang::get('message.single') => Lang::get('message.single'),
+            Lang::get('message.married') => Lang::get('message.married'),
+            Lang::get('message.divorce') => Lang::get('message.divorce'),
+            Lang::get('message.widow') => Lang::get('message.widow')
         ];
         $contract = [
             'CDD' => 'CDD',

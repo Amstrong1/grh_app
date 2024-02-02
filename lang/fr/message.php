@@ -96,5 +96,53 @@ return [
     'mail_save_send' => 'Mail enregistré et envoyé',
     'payslip_save' => 'Fiche de paie enregistrée',
     'payslip_save_send' => 'Fiche de paie enregistrée et envoyée',
-    'delete_success' => 'Données supprimées',
+
+    'del_success1' => 'Opération effectuée',
+    'del_success2' => 'Suppression éffectué',
+    'del_error1' => 'Erreur',
+    'del_error2' => 'Element introuvable',
+
+    'from' => 'Période du',
+    'to' => 'au',
+    'apply' => 'Appliquer',
+
+    'reference' => 'Référence',
+    'user_fullname' => 'Nom et prénoms',
+    'formatted_departure_date' => 'Date de départ',
+    'departure_hour' => 'Heure de départ',
+    'formatted_arrival_date' => 'Date d\'arrivé',
+    'arrival_hour' => 'Heure d\'arrivé',
+
+    'allowed_no_modified' => 'Accordé sans modifier congé',
+    'allowed_modified' => 'Accordé et modifier congé',
+
+    'title' => 'Titre',
+    'url' => 'URL',
+    'other' => 'Autre',
+    'formatted_active' => 'Statut',
+    'formatted_created_at' => 'Date d\'enregistrement',
+
+    'active' => 'Actif',
+    'not_active' => 'Non actif',
+
+    'name' => 'Nom',
+    'firstname' => 'Prenom',
+
+    'choose' => 'Choisir une option',
+
+    'day' => 'Jour',
+    'day_start' => 'Début de journée',
+    'break_start' => 'Début de pause',
+    'break_end' => 'Fin de pause',
+    'day_end' => 'Fin de journée',
+
+    'single' => 'Célibataire',
+    'married' => 'Marié(e)',
+    'Divorce' => 'Divorcé(e)',
+    'widow' => 'Veuf(ve)',
+
+    'CDD' => 'CDD',
+    'CDI' => 'CDI',
+    'Stage' => 'Stage',
+    'Internat' => 'Internat'
 ];

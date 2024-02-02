@@ -129,11 +129,11 @@ class AttendanceScheduleController extends Controller
     private function attendanceSchedule_columns()
     {
         $columns = (object) [
-            'day' => 'Jour',
-            'hour_start' => 'Début de journée',
-            'break_start' => 'Début de pause',
-            'break_end' => 'Fin de pause',
-            'hour_end' => 'Fin de journée',
+            'day' => Lang::get('message.day'),
+            'hour_start' => Lang::get('message.day_start'),
+            'break_start' => Lang::get('message.break_start'),
+            'break_end' => Lang::get('message.break_end'),
+            'hour_end' => Lang::get('message.day_end'),
         ];
         return $columns;
     }
@@ -156,43 +156,43 @@ class AttendanceScheduleController extends Controller
         if (request()->routeIs('attendance_schedule.create')) {
             $fields = [
                 'days' => [
-                    'title' => 'Jour',
+                    'title' => Lang::get('message.day'),
                     'field' => 'multiple-select',
                     'options' => Day::all('id', 'name'),
                 ],
                 'hour_start' => [
-                    'title' => 'Début de journée',
+                    'title' => Lang::get('message.day_start'),
                     'field' => 'time',
                 ],
                 'break_start' => [
-                    'title' => 'Début de pause',
+                    'title' => Lang::get('message.break_start'),
                     'field' => 'time',
                 ],
                 'break_end' => [
-                    'title' => 'Fin de pause',
+                    'title' => Lang::get('message.break_end'),
                     'field' => 'time',
                 ],
                 'hour_end' => [
-                    'title' => 'Fin de journée',
+                    'title' => Lang::get('message.day_end'),
                     'field' => 'time',
                 ],
             ];
         } else {
             $fields = [
                 'hour_start' => [
-                    'title' => 'Début de journée',
+                    'title' => Lang::get('message.day_start'),
                     'field' => 'time',
                 ],
                 'break_start' => [
-                    'title' => 'Début de pause',
+                    'title' => Lang::get('message.break_start'),
                     'field' => 'time',
                 ],
                 'break_end' => [
-                    'title' => 'Fin de pause',
+                    'title' => Lang::get('message.break_end'),
                     'field' => 'time',
                 ],
                 'hour_end' => [
-                    'title' => 'Fin de journée',
+                    'title' => Lang::get('message.day_end'),
                     'field' => 'time',
                 ],
             ];

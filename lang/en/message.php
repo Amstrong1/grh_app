@@ -97,8 +97,52 @@ return [
     'payslip_save' => 'Payslip saved successfully',
     'payslip_save_send' => 'Payslip saved and sent successfully',
 
-    'del_success1' => 'Opération effectuée',
-    'del_success2' => 'Suppression éffectué',
-    'del_error1' => 'Erreur',
-    'del_error2' => 'Element introuvable',
+    'del_success1' => 'Operation carried out',
+    'del_success2' => 'Deletion completed',
+    'del_error1' => 'Error',
+    'del_error2' => 'Item not found',
+
+    'from' => 'From',
+    'to' => 'to',
+    'apply' => 'Apply',
+
+    'reference' => 'Reference',
+    'user_fullname' => 'Name',
+    'formatted_departure_date' => 'Date of departure',
+    'departure_hour' => 'Departure time',
+    'formatted_arrival_date' => 'Date of arrival',
+    'arrival_hour' => 'Arrival time',
+
+    'allowed_no_modified' => 'Granted without modifying leave',
+    'allowed_modified' => 'Granted and modify leave',
+
+    'title' => 'Title',
+    'url' => 'URL',
+    'other' => 'Other',
+    'formatted_active' => 'Status',
+    'formatted_created_at' => 'Registration Date',
+
+    'active' => 'Active',
+    'not_active' => 'Not active',
+
+    'name' => 'Name',
+    'firstname' => 'Firstname',
+
+    'choose' => 'Choose an option',
+
+    'day' => 'Day',
+    'day_start' => 'Start of the day',
+    'break_start' => 'Start of break',
+    'break_end' => 'End of break',
+    'day_end' => 'End of the day',
+
+    'single' => 'Single',
+    'married' => 'Married',
+    'divorce' => 'Divorce',
+    'widow' => 'Widow(ed)',
+
+    'CDD' => 'CDD',
+    'CDI' => 'CDI',
+    'Stage' => 'Stage',
+    'Internat' => 'Internat'
 ];

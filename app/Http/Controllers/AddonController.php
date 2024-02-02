@@ -113,7 +113,7 @@ class AddonController extends Controller
             Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('addon');
         } catch (\Exception $e) {
-            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'),);
             return redirect()->back();
         }
     }
@@ -122,11 +122,11 @@ class AddonController extends Controller
     {
         $columns = (object) [
             'img' => '',
-            'title' => 'Titre',
-            'url' => 'URL',
-            'autre' => 'Autre',
-            'formatted_active' => 'Statut',
-            'formatted_created_at' => 'Date d\'enregistrement',
+            'title' => Lang::get('message.title'),
+            'url' => Lang::get('message.url'),
+            'autre' => Lang::get('message.other'),
+            'formatted_active' => Lang::get('message.formatted_active'),
+            'formatted_created_at' => Lang::get('message.formatted_created_at'),
         ];
         return $columns;
     }
@@ -142,27 +142,27 @@ class AddonController extends Controller
 
     private function addon_fields()
     {
-        $status = ['0' => 'Non Actif', '1' => 'Actif'];
+        $status = ['0' => Lang::get('message.active'), '1' => Lang::get('message.not_active')];
         $fields = [
             'img' => [
                 'title' => 'Image',
                 'field' => 'file'
             ],
             'title' => [
-                'title' => 'Titre',
+                'title' => Lang::get('message.title'),
                 'field' => 'text'
             ],
             'url' => [
-                'title' => 'URL',
+                'title' => Lang::get('message.url'),
                 'field' => 'url'
             ],
             'active' => [
-                'title' => 'Statut',
+                'title' => Lang::get('message.formatted_active'),
                 'field' => 'select',
                 'options' => $status
             ],
             'autre' => [
-                'title' => 'Autre',
+                'title' => Lang::get('message.other'),
                 'field' => 'textarea'
             ],
         ];
