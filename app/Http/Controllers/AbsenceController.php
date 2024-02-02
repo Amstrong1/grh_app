@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Career;
 use App\Models\Absence;
-use App\Enums\UserRoleEnum;
 use Illuminate\Http\Request;
 use App\Enums\PermissionStatusEnum;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Notifications\PermissionResponse;
 use Illuminate\Support\Facades\Validator;
@@ -228,7 +228,7 @@ class AbsenceController extends Controller
             $absence->reference = 'ABS00' . $absence->id;
             $absence->save();
 
-            Alert::toast("Données enregistrées", 'success');
+            Alert::toast(Lang::get('message.success'), 'success');
             $users = User::where('structure_id', Auth::user()->structure_id)->where('role', 'admin')->get();
             foreach ($users as $user) {
                 $user->notify(new NewPermissionNotification());
@@ -236,7 +236,7 @@ class AbsenceController extends Controller
             //$user->notify(new NewPermissionNotification());
             return redirect('absence');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -278,22 +278,22 @@ class AbsenceController extends Controller
             $absence->cause = $request->cause;
 
             if ($absence->save()) {
-                Alert::toast('Les informations ont été modifiées', 'success');
+                Alert::toast(Lang::get('message.edited'), 'success');
                 return redirect('absence');
             } else {
-                Alert::toast('Une erreur est survenue', 'error');
+                Alert::toast(Lang::get('message.error'), 'error');
                 return back()->withInput($request->input());
             }
         } else {
             $absence->status = $request->status;
 
             if ($absence->save()) {
-                Alert::toast('Les informations ont été modifiées', 'success');
+                Alert::toast(Lang::get('message.edited'), 'success');
                 $user = $absence->user;
                 $user->notify(new PermissionResponse($absence->status));
                 return redirect('absence');
             } else {
-                Alert::toast('Une erreur est survenue', 'error');
+                Alert::toast(Lang::get('message.error'), 'error');
                 return back()->withInput($request->input());
             }
         }
@@ -306,10 +306,10 @@ class AbsenceController extends Controller
     {
         try {
             $absence = $absence->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('absence');
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
             return redirect()->back();
         }
     }
@@ -317,12 +317,12 @@ class AbsenceController extends Controller
     private function absence_columns()
     {
         $columns = (object) [
-            'reference' => 'Référence',
-            'user_fullname' => 'Nom et prénoms',
-            'formatted_start_date' => 'Date de départ',
-            'start_hour' => 'Heure de départ',
-            'formatted_end_date' => 'Date d\'arrivé',
-            'end_hour' => 'Heure d\'arrivé',
+            'reference' => Lang::get('message.reference'),
+            'user_fullname' => Lang::get('message.user_fullname'),
+            'formatted_departure_date' => Lang::get('message.formatted_start_date'),
+            'departure_hour' => Lang::get('message.start_hour'),
+            'formatted_arrival_date' => Lang::get('message.formatted_end_date'),
+            'arrival_hour' => Lang::get('message.end_hour'),
             // 'cause' => 'Motif',
             // 'status' => 'Statut',
         ];
@@ -352,19 +352,19 @@ class AbsenceController extends Controller
         if (Auth::user()->role == 'user') {
             $fields = [
                 'start_date' => [
-                    'title' => 'Date de départ',
+                    'title' => Lang::get('message.formatted_start_date'),
                     'field' => 'date'
                 ],
                 'start_hour' => [
-                    'title' => 'Heure de départ',
+                    'title' => Lang::get('message.start_hour'),
                     'field' => 'time'
                 ],
                 'end_date' => [
-                    'title' => 'Date de retour',
+                    'title' => Lang::get('message.formatted_end_date'),
                     'field' => 'date'
                 ],
                 'end_hour' => [
-                    'title' => 'Heure de retour',
+                    'title' => Lang::get('message.end_hour'),
                     'field' => 'time'
                 ],
                 'cause' => [
@@ -374,9 +374,9 @@ class AbsenceController extends Controller
             ];
         } else {
             $status = [
-                'Accordé sans modifier congé' => PermissionStatusEnum::Allowed,
-                'Accordé et modifier congé' => PermissionStatusEnum::AllowedAndModify,
-                'Refusé' => PermissionStatusEnum::Denied,
+                Lang::get('message.allowed_no_modified') => PermissionStatusEnum::Allowed,
+                Lang::get('message.allowed_modified') => PermissionStatusEnum::AllowedAndModify,
+                Lang::get('message.denied') => PermissionStatusEnum::Denied,
             ];
             $fields = [
                 'status' => [

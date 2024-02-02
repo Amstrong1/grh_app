@@ -5,18 +5,18 @@
                 <div class="p-6 text-gray-900">
                     <div class="md:flex justify-between">
                         <h1 class="font-bold text-lg my-2">
-                            Liste des demandes
+                            {{ __('message.asks') }}
                             @if (request()->routeIs('temptation.index'))
-                                recus
+                                {{ __('message.create') }}
                             @elseif (request()->routeIs('temptation.sent'))
-                                envoyés
+                                {{ __('message.sent') }}
                             @endif
                         </h1>
 
                         @if (request()->routeIs('temptation.sent'))
-                        <a href="{{ route('temptation.create') }}">
-                            <x-primary-button>
-                                    Nouveau
+                            <a href="{{ route('temptation.create') }}">
+                                <x-primary-button>
+                                    {{ __('message.create') }}
                                 </x-primary-button>
                             </a>
                         @endif

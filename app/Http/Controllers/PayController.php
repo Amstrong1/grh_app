@@ -9,13 +9,14 @@ use App\Models\User;
 use App\Models\Filler;
 use App\Models\FillerPay;
 use App\Models\Department;
-use App\Models\HoldingWage;
 use App\Enums\UserRoleEnum;
+use App\Models\HoldingWage;
 use Illuminate\Support\Str;
 use App\Models\HoldingWagePay;
 use App\Models\SalaryAdvantage;
 use App\Models\PaySalaryAdvantage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use App\Http\Requests\StorePayRequest;
 use App\Http\Requests\UpdatePayRequest;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -182,13 +183,13 @@ class PayController extends Controller
             $pay->payslip = $path;
 
             if ($pay->save()) {
-                Alert::toast('Fiche de paie enregistrée', 'success');
+                Alert::toast(Lang::get('pay.success'), 'success');
                 $user = User::find($pay->user_id);
                 $user->notify(new NewPayslipNotification($pay->payslip, $pay->period_start, $pay->period_end));
                 return redirect('pay');
             }
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return back();
         }
     }
@@ -233,10 +234,10 @@ class PayController extends Controller
             PaySalaryAdvantage::where('pay_id', $pay->id)->delete();
 
             $pay = $pay->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('pay');
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
             return redirect()->back();
         }
     }

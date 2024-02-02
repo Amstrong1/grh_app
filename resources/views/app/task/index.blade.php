@@ -5,13 +5,13 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">
-                            Liste des tâches
+                            {{ __('message.tasks') }}
                             @if (request()->routeIs('task.pending'))
-                                en cours
+                                {{ __('message.pending') }}
                             @elseif (request()->routeIs('task.finished'))
-                                finies
+                                {{ __('message.done') }}
                             @else
-                                à faire
+                                {{ __('message.to_do') }}
                             @endif
                         </h1>
 
@@ -33,9 +33,9 @@
                                 </p>
                             </form> --}}
                         @if (Auth::user()->role === 'admin' || Auth::user()->role == 'supervisor')
-                        <a href="{{ route('task.create') }}">
-                            <x-primary-button>
-                                    Nouveau
+                            <a href="{{ route('task.create') }}">
+                                <x-primary-button>
+                                    {{ __('message.create') }}
                                 </x-primary-button>
                             </a>
                         @endif

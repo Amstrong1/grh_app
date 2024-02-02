@@ -23,11 +23,11 @@ class StoreStructureRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:255'],
-            'adresse' => ['required', 'string', 'min:3', 'max:255'],
-            'contact' => ['required'],
+            // 'adresse' => ['required', 'string', 'min:3', 'max:255'],
+            // 'contact' => ['required'],
             'email' => ['required', 'unique:structures', 'email:filter'],
-            'ifu' => ['required', 'numeric', 'digits:13'],
-            'rccm' => ['required', 'min:10', 'max:20'],
+            // 'ifu' => ['required', 'numeric', 'digits:13'],
+            // 'rccm' => ['required', 'min:10', 'max:20'],
             'logo' => ['required', 'image', 'max:5000'],
         ];
     }

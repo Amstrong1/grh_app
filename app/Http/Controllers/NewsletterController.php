@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Newsletter;
+use App\Mail\NewsletterMail;
 use App\Models\NewsletterSubscriber;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreNewsletterRequest;
 use App\Http\Requests\UpdateNewsletterRequest;
-use App\Mail\NewsletterMail;
 
 class NewsletterController extends Controller
 {
@@ -75,14 +76,14 @@ class NewsletterController extends Controller
                     Mail::to($subscriber->email)->send(new NewsletterMail($newsletter));
                 }
 
-                Alert::toast("Mail enregistré et envoyé", 'success');
+                Alert::toast(Lang::get('message.mail_save_send'), 'success');
                 return redirect('newsletter');
             } else {
-                Alert::toast("Mail enregistré", 'success');
+                Alert::toast(Lang::get('message.mail_save'), 'success');
                 return redirect('newsletter/pending');
             }
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -133,10 +134,10 @@ class NewsletterController extends Controller
                     Mail::to($subscriber->email)->send(new NewsletterMail($newsletter));
                 }
 
-                Alert::toast("Mail enregistré et envoyé", 'success');
+                Alert::toast(Lang::get('message.mail_save_send'), 'success');
                 return redirect('newsletter');
             } else {
-                Alert::toast("Mail enregistré", 'success');
+                Alert::toast(Lang::get('message.mail_save'), 'success');
                 return redirect('newsletter/pending');
             }
         };
@@ -149,10 +150,10 @@ class NewsletterController extends Controller
     {
         try {
             $newsletter = $newsletter->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('newsletter');
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
             return redirect()->back();
         }
     }

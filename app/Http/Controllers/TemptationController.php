@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Temptation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreTemptationRequest;
@@ -121,7 +122,7 @@ class TemptationController extends Controller
         $temptation->message = $request->message;
 
         if ($temptation->save()) {
-            Alert::toast("Données enregistrées", 'success');
+            Alert::toast(Lang::get('message.success'), 'success');
             if (Auth::user()->role == 'user') {
                 $userNotify = User::where('role', 'admin')->where('structure_id', Auth::user()->structure_id)->first();
             } else {
@@ -130,7 +131,7 @@ class TemptationController extends Controller
             $userNotify->notify(new NewTemptationNotification($temptation->object));
             return redirect('temptation/sent');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -171,10 +172,10 @@ class TemptationController extends Controller
         $temptation->message = $request->message;
 
         if ($temptation->save()) {
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.edited'), 'success');
             return redirect('temptation');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -186,10 +187,10 @@ class TemptationController extends Controller
     {
         try {
             $temptation = $temptation->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('temptation');
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
             return redirect()->back();
         }
     }

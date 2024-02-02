@@ -1,20 +1,20 @@
 <ul class="mr-auto flex flex-row" data-te-navbar-nav-ref>
     <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
-            class="text-white block py-2 pr-2 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-black block py-2 pr-2 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
             :href="route('dashboard')" :active="request()->routeIs('dashboard')" data-te-ripple-init data-te-ripple-color="light">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>&nbsp;
-            Accueil
+            {{ 'message.home' }}
         </x-nav-link>
     </li>
 
     <li class="static mx-2" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link
-            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-black flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -22,7 +22,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
             </svg>&nbsp;
-            Structure
+            Structures
             <span class="ml-2 w-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
                     <path fill-rule="evenodd"
@@ -38,15 +38,15 @@
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('structure.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Liste
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            {{ 'message.list' }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('structure.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Ajouter
-                            Nouveau</x-nav-link>
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            {{ 'message.create' }}
+                        </x-nav-link>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
 
     <li class="static mx-2" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link
-            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-black flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -79,15 +79,15 @@
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('addon.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Liste
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            {{ 'message.list' }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('addon.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Ajouter
-                            Nouveau</x-nav-link>
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            {{ 'message.create' }}
+                        </x-nav-link>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
 
     <li class="static mx-2" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link
-            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
+            class="text-black flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -120,21 +120,21 @@
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('newsletter.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Newsletter envoyés
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            Newsletter {{ 'message.sent' }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('newsletter.pending') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Newsletter en cours
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            Newsletter {{ 'message.pending' }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('newsletter.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
-                            Ajouter
-                            Nouveau</x-nav-link>
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            {{ 'message.create' }}
+                        </x-nav-link>
                     </div>
                 </div>
             </div>

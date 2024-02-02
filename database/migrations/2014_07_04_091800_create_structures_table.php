@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('structures', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('adresse');
-            $table->string('contact');
+            $table->string('adresse')->nullable();
+            $table->string('contact')->nullable();
             $table->string('email');
-            $table->string('ifu');
-            $table->string('rccm');
+            $table->string('ifu')->nullable();
+            $table->string('rccm')->nullable();
             $table->string('logo');
             $table->timestamps();
         });

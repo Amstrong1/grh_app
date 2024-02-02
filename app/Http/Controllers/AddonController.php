@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Addon;
+use Illuminate\Support\Facades\Lang;
 use App\Http\Requests\StoreAddonRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\UpdateAddonRequest;
@@ -48,10 +49,10 @@ class AddonController extends Controller
         $addon->active = $request->active;
 
         if ($addon->save()) {
-            Alert::toast("Données enregistrées", 'success');
+            Alert::toast(Lang::get('message.success'), 'success');
             return redirect('addon');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -97,7 +98,7 @@ class AddonController extends Controller
         }
 
         if ($addon->save()) {
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.edited'), 'success');
             return redirect('addon');
         };
     }
@@ -109,10 +110,10 @@ class AddonController extends Controller
     {
         try {
             $addon = $addon->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('addon');
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'),);
             return redirect()->back();
         }
     }
@@ -121,11 +122,11 @@ class AddonController extends Controller
     {
         $columns = (object) [
             'img' => '',
-            'title' => 'Titre',
-            'url' => 'URL',
-            'autre' => 'Autre',
-            'formatted_active' => 'Statut',
-            'formatted_created_at' => 'Date d\'enregistrement',
+            'title' => Lang::get('message.title'),
+            'url' => Lang::get('message.url'),
+            'autre' => Lang::get('message.other'),
+            'formatted_active' => Lang::get('message.formatted_active'),
+            'formatted_created_at' => Lang::get('message.formatted_created_at'),
         ];
         return $columns;
     }
@@ -141,27 +142,27 @@ class AddonController extends Controller
 
     private function addon_fields()
     {
-        $status = ['0' => 'Non Actif', '1' => 'Actif'];
+        $status = ['0' => Lang::get('message.active'), '1' => Lang::get('message.not_active')];
         $fields = [
             'img' => [
                 'title' => 'Image',
                 'field' => 'file'
             ],
             'title' => [
-                'title' => 'Titre',
+                'title' => Lang::get('message.title'),
                 'field' => 'text'
             ],
             'url' => [
-                'title' => 'URL',
+                'title' => Lang::get('message.url'),
                 'field' => 'url'
             ],
             'active' => [
-                'title' => 'Statut',
+                'title' => Lang::get('message.formatted_active'),
                 'field' => 'select',
                 'options' => $status
             ],
             'autre' => [
-                'title' => 'Autre',
+                'title' => Lang::get('message.other'),
                 'field' => 'textarea'
             ],
         ];

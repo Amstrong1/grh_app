@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Enums\UserRoleEnum;
 use App\Models\DepartmentUser;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -70,7 +71,7 @@ class AdminController extends Controller
             Alert::toast("Nouveau superviseur enregistré", 'success');
             return redirect()->route('admin.index');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -138,10 +139,10 @@ class AdminController extends Controller
             ]);
 
         if ($delete && $user) {
-            Alert::toast("Superviseur supprimé", 'success');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect()->route('admin.index');
         } else {
-            Alert::toast("Une erreur est survenue", 'error');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'),);
             return back();
         }
     }
@@ -149,10 +150,10 @@ class AdminController extends Controller
     private function user_columns()
     {
         $columns = (object) [
-            'name' => 'Nom',
-            'firstname' => 'Prenom',
-            'email' => 'Email du compte',
-            'department_list' => 'Départements',
+            'name' => Lang::get('message.name'),
+            'firstname' => Lang::get('message.firstname'),
+            'email' => 'Email',
+            'department_list' => Lang::get('message.department'),
         ];
         return $columns;
     }
@@ -170,14 +171,14 @@ class AdminController extends Controller
     {
         $fields = [
             'user' => [
-                'title' => 'Choisir une option',
+                'title' => Lang::get('message.choose'),
                 'field' => 'model',
                 'options' => User::where('structure_id', Auth::user()->structure->id)
                     ->where('role', 'user')
                     ->get(),
             ],
             'departments' => [
-                'title' => 'Département(s) à suivre',
+                'title' => Lang::get('message.department'),
                 'field' => 'multiple-select',
                 'options' => Department::where('structure_id', Auth::user()->structure->id)->get(),
             ],
@@ -189,7 +190,7 @@ class AdminController extends Controller
     {
         $fields = [
             'departments' => [
-                'title' => 'Département(s) à suivre',
+                'title' => Lang::get('message.department'),
                 'field' => 'multiple-select',
                 'options' => Department::where('structure_id', Auth::user()->structure->id)->get(),
             ],

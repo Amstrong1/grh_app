@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Leave;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use App\Http\Requests\StoreLeaveRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\UpdateLeaveRequest;
@@ -82,7 +83,7 @@ class LeaveController extends Controller
         $leave->temp_worker = $request->temp_worker;
 
         if ($leave->save()) {
-            Alert::toast("Données enregistrées", 'success');
+            Alert::toast(Lang::get('message.success'), 'success');
             $user = User::find($leave->user_id);
             $temp_worker = User::find($leave->temp_worker);
 
@@ -93,7 +94,7 @@ class LeaveController extends Controller
             $temp_worker->notify(new NewTempWorkNotification($post, $period));
             return redirect('leave');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -134,10 +135,10 @@ class LeaveController extends Controller
         $leave->temp_worker = $request->temp_worker;
 
         if ($leave->save()) {
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.edited'), 'success');
             return redirect('leave');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -149,10 +150,10 @@ class LeaveController extends Controller
     {
         try {
             $leave = $leave->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('leave');
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
             return redirect()->back();
         }
     }

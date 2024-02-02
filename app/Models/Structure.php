@@ -115,8 +115,14 @@ class Structure extends Model
     {
         return $this->hasMany(Material::class);
     }
+    
     public function materialsUsers(): HasMany
     {
         return $this->hasMany(MaterialUser::class);
+    }
+    
+    public function notices(): HasMany
+    {
+        return $this->hasMany(Notice::class);
     }
 }

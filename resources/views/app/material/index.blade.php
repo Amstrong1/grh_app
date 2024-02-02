@@ -5,11 +5,11 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">
-                            Liste des matériels
+                            {{ __('message.list') }}
                         </h1>
                         <a href="{{ route('material.create') }}">
                             <x-primary-button>
-                                    Nouveau
+                                {{ __('message.create') }}
                                 </x-primary-button>
                             </a>
 

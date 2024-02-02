@@ -4,11 +4,11 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
-                        <h1 class="font-bold text-lg my-2">Emploi du temps</h1>
+                        <h1 class="font-bold text-lg my-2">{{ __('message.attendance_schedule') }}</h1>
                         @if (Auth::user()->role === 'admin' || Auth::user()->role === 'superviseur')
                             <a href="{{ route('attendance_schedule.create') }}">
                                 <x-primary-button>
-                                    Nouveau
+                                    {{ __('message.create') }}
                                 </x-primary-button>
                             </a>
                         @endif

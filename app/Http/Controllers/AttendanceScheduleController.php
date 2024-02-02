@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Day;
 use App\Models\AttendanceSchedule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreAttendanceScheduleRequest;
 use App\Http\Requests\UpdateAttendanceScheduleRequest;
@@ -60,10 +61,10 @@ class AttendanceScheduleController extends Controller
         }
 
         if ($attendanceSchedule->save()) {
-            Alert::toast('Les données ont été enregistrées', 'success');
+            Alert::toast(Lang::get('message.success'), 'success');
             return redirect('attendance_schedule');
         } else {
-            Alert::toast('Les données ont été enregistrées', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -102,10 +103,10 @@ class AttendanceScheduleController extends Controller
         $attendanceSchedule->save();
 
         if ($attendanceSchedule->save()) {
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.edited'), 'success');
             return redirect('attendance_schedule');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -117,10 +118,10 @@ class AttendanceScheduleController extends Controller
     {
         try {
             $attendanceSchedule = $attendanceSchedule->delete();
-            Alert::success('Opération effectuée', 'Suppression éffectué');
+            Alert::success(Lang::get('message.del_success1'), Lang::get('message.del_success2'));
             return redirect('attendance_schedule');
         } catch (\Exception $e) {
-            Alert::error('Erreur', 'Element introuvable');
+            Alert::error(Lang::get('message.del_error1'), Lang::get('message.del_error2'), );
             return redirect()->back();
         }
     }
@@ -128,11 +129,11 @@ class AttendanceScheduleController extends Controller
     private function attendanceSchedule_columns()
     {
         $columns = (object) [
-            'day' => 'Jour',
-            'hour_start' => 'Début de journée',
-            'break_start' => 'Début de pause',
-            'break_end' => 'Fin de pause',
-            'hour_end' => 'Fin de journée',
+            'day' => Lang::get('message.day'),
+            'hour_start' => Lang::get('message.day_start'),
+            'break_start' => Lang::get('message.break_start'),
+            'break_end' => Lang::get('message.break_end'),
+            'hour_end' => Lang::get('message.day_end'),
         ];
         return $columns;
     }
@@ -155,43 +156,43 @@ class AttendanceScheduleController extends Controller
         if (request()->routeIs('attendance_schedule.create')) {
             $fields = [
                 'days' => [
-                    'title' => 'Jour',
+                    'title' => Lang::get('message.day'),
                     'field' => 'multiple-select',
                     'options' => Day::all('id', 'name'),
                 ],
                 'hour_start' => [
-                    'title' => 'Début de journée',
+                    'title' => Lang::get('message.day_start'),
                     'field' => 'time',
                 ],
                 'break_start' => [
-                    'title' => 'Début de pause',
+                    'title' => Lang::get('message.break_start'),
                     'field' => 'time',
                 ],
                 'break_end' => [
-                    'title' => 'Fin de pause',
+                    'title' => Lang::get('message.break_end'),
                     'field' => 'time',
                 ],
                 'hour_end' => [
-                    'title' => 'Fin de journée',
+                    'title' => Lang::get('message.day_end'),
                     'field' => 'time',
                 ],
             ];
         } else {
             $fields = [
                 'hour_start' => [
-                    'title' => 'Début de journée',
+                    'title' => Lang::get('message.day_start'),
                     'field' => 'time',
                 ],
                 'break_start' => [
-                    'title' => 'Début de pause',
+                    'title' => Lang::get('message.break_start'),
                     'field' => 'time',
                 ],
                 'break_end' => [
-                    'title' => 'Fin de pause',
+                    'title' => Lang::get('message.break_end'),
                     'field' => 'time',
                 ],
                 'hour_end' => [
-                    'title' => 'Fin de journée',
+                    'title' => Lang::get('message.day_end'),
                     'field' => 'time',
                 ],
             ];

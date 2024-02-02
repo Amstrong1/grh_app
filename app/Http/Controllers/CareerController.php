@@ -13,6 +13,7 @@ use App\Http\Requests\UpdateCareerRequest;
 use App\Notifications\NewUserNotification;
 use App\Notifications\UpdateUserNotification;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Facades\Lang;
 
 class CareerController extends Controller
 {
@@ -107,11 +108,11 @@ class CareerController extends Controller
             ]);
 
             if ($career) {
-                Alert::toast("Données enregistrées", 'success');
+                Alert::toast(Lang::get('message.success'), 'success');
                 $user->notify(new NewUserNotification());
                 return redirect('career');
             } else {
-                Alert::toast('Une erreur est survenue', 'error');
+                Alert::toast(Lang::get('message.error'), 'error');
                 $get_user = User::where('email', $request->email)->first();
                 $get_user->delete();
             }
@@ -171,12 +172,12 @@ class CareerController extends Controller
             ]);
 
         if ($career_update && $user_update) {
-            Alert::toast('Les informations ont été modifiées', 'success');
+            Alert::toast(Lang::get('message.edited'), 'success');
             $user = User::find($career->user_id);
             $user->notify(new UpdateUserNotification());
             return redirect('career');
         } else {
-            Alert::toast('Une erreur est survenue', 'error');
+            Alert::toast(Lang::get('message.error'), 'error');
             return redirect()->back()->withInput($request->input());
         }
     }
@@ -191,12 +192,12 @@ class CareerController extends Controller
     private function user_columns()
     {
         $columns = (object) [
-            'user_name' => 'Nom',
-            'user_firstname' => 'Prenom',
+            'user_name' => Lang::get('message.name'),
+            'user_firstname' => Lang::get('message.firstname'),
             'user_email' => 'Email',
-            'contact' => 'Contact',
-            'department_name' => 'Département',
-            'post_name' => 'Poste',
+            'contact' => 'Tel',
+            'department_name' => Lang::get('message.department'),
+            'post_name' => Lang::get('message.job'),
         ];
         return $columns;
     }
@@ -215,14 +216,14 @@ class CareerController extends Controller
     {
 
         $sex = [
-            'Féminin' => 'Féminin',
-            'Masculin' => 'Masculin'
+            'F' => 'F',
+            'M' => 'M'
         ];
         $ms = [
-            'Célibataire' => 'Célibataire',
-            'Marié(e)' => 'Marié(e)',
-            'Divorcé(e)' => 'Divorcé(e)',
-            'Veuf(ve)' => 'Veuf(ve)'
+            Lang::get('message.single') => Lang::get('message.single'),
+            Lang::get('message.married') => Lang::get('message.married'),
+            Lang::get('message.divorce') => Lang::get('message.divorce'),
+            Lang::get('message.widow') => Lang::get('message.widow')
         ];
         $contract = [
             'CDD' => 'CDD',

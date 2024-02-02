@@ -9,13 +9,13 @@
                         <div class="flex">
                             <a class="m-1" href="{{ route('notification.markAsRead') }}">
                                 <x-primary-button class="w-full">
-                                    Tout marquer comme lu
+                                    {{ __('message.as_read') }}
                                 </x-primary-button>
                             </a>
 
                             <a class="m-1" href="{{ route('notification.remove') }}">
                                 <x-danger-button class="w-full">
-                                    Tout supprimer
+                                    {{ __('message.delete') }}
                                 </x-danger-button>
                             </a>
                         </div>

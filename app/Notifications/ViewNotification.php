@@ -38,7 +38,7 @@ class ViewNotification extends Notification
         return (new MailMessage)
                     ->line($message)
                     ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Merci d\'utiliser notre application!');
     }
 
     /**
