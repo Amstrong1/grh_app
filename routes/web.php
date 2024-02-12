@@ -52,7 +52,7 @@ Route::middleware('setLocale')->group(function () {
     Route::get('state', [StateController::class, 'indexstate'])->name('state.index');
     Route::resource('notice', NoticeController::class);
 
-    Route::post('lang', [UserLangController::class, 'store'])->name('user_lang.store');
+    Route::post('language', [UserLangController::class, 'store'])->name('user_lang.store');
 
     Route::get('coming-soon', function () {
         return view('coming-soon');

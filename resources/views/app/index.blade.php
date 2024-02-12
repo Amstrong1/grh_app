@@ -69,14 +69,14 @@
                                 </div>
                                 <div>
                                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                        Newsletter {{ __('message.subscribers') }} : {{ $subscribers }}
+                                        Newsletter : {{ $subscribers }}
                                     </p>
                                     <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-200">
                                     </p>
                                     <hr>
-                                    {{-- <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                                    <p class="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">
                                         <a href="">{{ __('message.more') }}</a>
-                                    </p> --}}
+                                    </p>
                                 </div>
                             </div>
                         </div>

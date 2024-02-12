@@ -1,7 +1,7 @@
 <ul class="mr-auto flex flex-row" data-te-navbar-nav-ref>
     <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
-            class="block py-2 pr-2 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-black dark:focus:text-black lg:px-2"
+            class="block py-2 pr-2 transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('dashboard')" :active="request()->routeIs('dashboard')" data-te-ripple-init data-te-ripple-color="light">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
@@ -14,7 +14,7 @@
 
     <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
-            class="text-black block py-2 pr-2 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
+            class="text-white block py-2 pr-2 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('career.show', [Auth::user()->career->id])" :active="request()->routeIs('career.*')" data-te-ripple-init data-te-ripple-color="light">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-6 h-6">
@@ -27,7 +27,7 @@
 
     <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
-            class="text-black block py-2 pr-2 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
+            class="text-white block py-2 pr-2 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('attendance_log.index')" :active="request()->routeIs('attendance_log.*')" data-te-ripple-init data-te-ripple-color="light">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-5 h-5">
@@ -41,7 +41,7 @@
     <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
 
         <x-nav-link :active="request()->routeIs('absence.*')"
-            class="text-black flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
+            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -65,49 +65,49 @@
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('absence.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.create_permission') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('absence.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.permissions_pending') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('absence.allowed') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.permissions_allowed') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('absence.denied') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.permissions_denied') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('temptation.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.permissions_received') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('temptation.sent') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.permissions_sent') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('temptation_back.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.responses_received') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('temptation_back.sent') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.responses_sent') }}
                         </x-nav-link>
                     </div>
@@ -118,7 +118,7 @@
 
     <li class="static mx-2" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('task.*')"
-            class="text-black flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
+            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -142,31 +142,31 @@
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('task.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.create') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('task.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.tasks') }} {{ __('message.to_do') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('task.pending') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.tasks') }} {{ __('message.pending') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('task.finished') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.tasks') }} {{ __('message.done') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('regular_task.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.tasks') }} {{ __('message.regular') }}
                         </x-nav-link>
                     </div>
@@ -178,7 +178,7 @@
      {{-- vacation --}}
      <li class="mx-1 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('leave.*')"
-            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
+            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -196,19 +196,19 @@
             </span>
         </x-nav-link>
 
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('leave.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.view_agenda') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('leave.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.plan') }}
                         </x-nav-link>
                     </div>
@@ -219,7 +219,7 @@
 
     {{-- <li class="mx-2" data-te-nav-item-ref>
         <x-nav-link
-            class="text-black block py-2 pr-2 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
+            class="text-white block py-2 pr-2 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             :href="route('dashboard')" :active="request()->routeIs('absence')" data-te-ripple-init data-te-ripple-color="light">
             Evaluations
         </x-nav-link>
@@ -227,7 +227,7 @@
 
     <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link
-            class="text-black flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
+            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -251,13 +251,13 @@
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('career.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.employee_list') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('career.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.employee_add') }}
                         </x-nav-link>
                     </div>
@@ -268,7 +268,7 @@
 
     <li class="static mx-2" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('conflict.*')"
-            class="text-black flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
+            class="text-white flex items-center whitespace-nowrap py-2 pr-2  transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -292,13 +292,13 @@
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('conflict.create') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.report') }}
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('conflict.index') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             {{ __('message.list') }}
                         </x-nav-link>
                     </div>
@@ -310,7 +310,7 @@
     {{-- recruitment --}}
     {{-- <li class="mx-2 static" data-te-nav-item-ref data-te-dropdown-ref>
         <x-nav-link :active="request()->routeIs('conflict.*')"
-            class="text-black flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-black focus:text-black dark:hover:text-black dark:focus:text-black lg:px-2"
+            class="text-white flex items-center whitespace-nowrap py-1 transition duration-150 ease-in-out hover:text-white focus:text-white dark:hover:text-white dark:focus:text-white lg:px-2"
             href="#" data-te-ripple-init data-te-ripple-color="light" type="button" id="dropdownMenuButtonX"
             data-te-dropdown-toggle-ref aria-expanded="false" data-te-nav-link-ref>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -329,19 +329,19 @@
             </span>
         </x-nav-link>
 
-        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-black shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
+        <div class="absolute left-0 right-0 top-full z-[1000] mt-0 hidden w-full border-none bg-white bg-clip-padding text-white shadow-lg dark:bg-neutral-700 dark:text-neutral-200 [&[data-te-dropdown-show]]:block"
             aria-labelledby="dropdownMenuButtonX" data-te-dropdown-menu-ref>
             <div class="px-6 py-5 lg:px-8">
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                     <div>
                         <x-nav-link href="{{ route('coming-soon') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             Interne
                         </x-nav-link>
                     </div>
                     <div>
                         <x-nav-link href="{{ route('coming-soon') }}" aria-current="true"
-                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-black">
+                            class="block w-full border-b border-neutral-200 px-6 py-2 transition duration-150 ease-in-out hover:bg-neutral-50 hover:text-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-white">
                             Externe
                         </x-nav-link>
                     </div>
