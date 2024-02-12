@@ -19,7 +19,7 @@ class SetLocale
         $user = $request->user();
 
         // Use the user's preferred locale if available, otherwise use a default
-        $locale = $user->locale ? $user->locale->lang : 'fr';
+        $locale = $user !== null && $user->locale ? $user->locale->lang : 'fr';
 
         app()->setLocale($locale);
 
