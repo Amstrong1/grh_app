@@ -352,19 +352,19 @@ class AbsenceController extends Controller
         if (Auth::user()->role == 'user') {
             $fields = [
                 'start_date' => [
-                    'title' => Lang::get('message.formatted_start_date'),
+                    'title' => Lang::get('message.formatted_departure_date'),
                     'field' => 'date'
                 ],
                 'start_hour' => [
-                    'title' => Lang::get('message.start_hour'),
+                    'title' => Lang::get('message.departure_hour'),
                     'field' => 'time'
                 ],
                 'end_date' => [
-                    'title' => Lang::get('message.formatted_end_date'),
+                    'title' => Lang::get('message.formatted_arrival_date'),
                     'field' => 'date'
                 ],
                 'end_hour' => [
-                    'title' => Lang::get('message.end_hour'),
+                    'title' => Lang::get('message.arrival_hour'),
                     'field' => 'time'
                 ],
                 'cause' => [
