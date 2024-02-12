@@ -319,10 +319,10 @@ class AbsenceController extends Controller
         $columns = (object) [
             'reference' => Lang::get('message.reference'),
             'user_fullname' => Lang::get('message.user_fullname'),
-            'formatted_departure_date' => Lang::get('message.formatted_start_date'),
-            'departure_hour' => Lang::get('message.start_hour'),
-            'formatted_arrival_date' => Lang::get('message.formatted_end_date'),
-            'arrival_hour' => Lang::get('message.end_hour'),
+            'formatted_departure_date' => Lang::get('message.formatted_departure_date'),
+            'departure_hour' => Lang::get('message.departure_hour'),
+            'formatted_arrival_date' => Lang::get('message.formatted_arrival_date'),
+            'arrival_hour' => Lang::get('message.arrival_hour'),
             // 'cause' => 'Motif',
             // 'status' => 'Statut',
         ];
