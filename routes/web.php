@@ -48,6 +48,9 @@ use App\Http\Controllers\NewsletterSubscriberController;
 */
 
 Route::middleware('setLocale')->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
     Route::get('state', [StateController::class, 'indexstate'])->name('state.index');
     Route::resource('notice', NoticeController::class);
@@ -67,7 +70,6 @@ Route::middleware('setLocale')->group(function () {
     Route::post('password/first/update/{user}', [PasswordController::class, 'update'])->name('password.first.update');
 
     Route::middleware('auth')->group(function () {
-        Route::get('/', HomeController::class);
         Route::get('/dashboard', HomeController::class)->name('dashboard');
         Route::post('/dashboard/filter', HomeController::class)->name('dashboard.filter');
 
